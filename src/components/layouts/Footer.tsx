@@ -1,16 +1,12 @@
 import { navLinks } from "@/data/landing";
+import { BrandMark } from "@/components/layouts/BrandMark";
 
 export function Footer() {
   return (
     <footer className="relative z-10 border-t border-white/5 bg-proefex-navy-deep/60">
       <div className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-16 md:flex-row md:items-start md:justify-between">
         <div className="flex max-w-sm flex-col gap-4">
-          <div className="flex items-center gap-2.5 font-semibold tracking-[0.28em] text-white">
-            <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-proefex-orange text-sm font-extrabold text-proefex-navy">
-              P
-            </span>
-            <span className="text-sm">PROEFEX</span>
-          </div>
+          <BrandMark />
           <p className="text-sm leading-relaxed text-white/60">
             Plataforma corporativa de aprendizaje: LMS, CMS y analítica de progreso en una sola
             experiencia fluida.

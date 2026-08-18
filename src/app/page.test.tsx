@@ -6,7 +6,7 @@ import Page from "@/app/page";
 describe("Landing page", () => {
   it("renders without crashing", () => {
     render(<Page />);
-    expect(screen.getByLabelText("PROEFEX - inicio")).toBeInTheDocument();
+    expect(screen.getAllByLabelText("PROEFEX - inicio").length).toBeGreaterThan(0);
   });
 
   it("muestra el hero con la propuesta de valor", () => {

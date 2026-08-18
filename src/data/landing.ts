@@ -1,10 +1,10 @@
 import type { BlogPost, Course, Service } from "@/types/landing";
 
 export const navLinks = [
-  { label: "Servicios", href: "#servicios" },
-  { label: "Cursos", href: "#cursos" },
-  { label: "Blog", href: "#blog" },
-  { label: "Contacto", href: "#contacto" },
+  { label: "Servicios", href: "/servicios" },
+  { label: "Cursos", href: "/cursos" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contacto", href: "/contacto" },
 ] as const;
 
 export const heroCopy = {
@@ -72,6 +72,17 @@ export const courses: Course[] = [
     durationHours: 32,
     priceUsd: 159,
     image: "/images/courses/curso-ciberseguridad.png",
+    featured: true,
+  },
+  {
+    id: "gestion-agil",
+    title: "Gestión ágil de proyectos",
+    category: "Productividad",
+    level: "Intermedio",
+    instructor: "Santiago Molina",
+    durationHours: 12,
+    priceUsd: 89,
+    image: "/images/courses/curso-gestion-agil.webp",
     featured: true,
   },
 ];

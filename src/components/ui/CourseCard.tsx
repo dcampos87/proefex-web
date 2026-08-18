@@ -18,7 +18,7 @@ export function CourseCard({
   image,
 }: CourseCardProps) {
   return (
-    <article className="group flex cursor-pointer flex-col overflow-hidden rounded-3xl bg-white/[0.04] shadow-[0_20px_60px_rgba(0,34,84,0.45)] backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:bg-white/[0.07] hover:shadow-[0_30px_80px_rgba(247,147,30,0.25)]">
+    <article className="group flex cursor-pointer flex-col overflow-hidden rounded-[1.35rem] bg-gradient-to-b from-proefex-azure/25 to-proefex-navy-deep/70 shadow-[0_20px_60px_rgba(0,34,84,0.45)] ring-1 ring-proefex-azure/50 backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(247,147,30,0.25)]">
       <div className="relative aspect-[4/3] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element -- static export: next/image no optimiza sin servidor */}
         <img
@@ -28,11 +28,11 @@ export function CourseCard({
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-proefex-navy/70 via-transparent to-transparent" />
-        <span className="absolute left-4 top-4 rounded-full bg-proefex-navy/70 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-proefex-amber backdrop-blur-sm">
+        <span className="absolute left-4 top-4 rounded-full bg-proefex-navy/75 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-proefex-amber backdrop-blur-sm">
           {level}
         </span>
       </div>
-      <div className="flex flex-1 flex-col gap-3 p-6">
+      <div className="flex flex-1 flex-col gap-3 p-5">
         <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-proefex-azure">
           {category}
         </span>

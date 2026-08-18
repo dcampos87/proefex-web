@@ -42,6 +42,40 @@ body {
     radial-gradient(42% 36% at 22% 18%, rgba(247, 147, 30, 0.16) 0%, rgba(0, 34, 84, 0) 100%);
 }
 
+.wave-divider {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  height: 18rem;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wave-divider::before,
+.wave-divider::after {
+  position: absolute;
+  content: "";
+  left: -5%;
+  width: 110%;
+  height: 100%;
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
+
+.wave-divider::before {
+  top: 25%;
+  border-top: 1px solid rgba(0, 145, 234, 0.8);
+  background: linear-gradient(175deg, rgba(0, 90, 158, 0.45), rgba(0, 34, 84, 0));
+  box-shadow: 0 -20px 55px rgba(0, 90, 158, 0.28);
+  transform: rotate(-3deg);
+}
+
+.wave-divider::after {
+  top: 42%;
+  border-top: 1px solid rgba(0, 90, 158, 0.42);
+  background: linear-gradient(175deg, rgba(0, 90, 158, 0.18), rgba(0, 34, 84, 0));
+  transform: rotate(3deg);
+}
+
 .golden-edge {
   background: linear-gradient(
     135deg,

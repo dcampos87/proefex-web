@@ -2,23 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 
 import { navLinks } from "@/data/landing";
-
-function Wordmark() {
-  return (
-    <a
-      href="#inicio"
-      className="flex items-center gap-2.5 font-semibold tracking-[0.28em] text-white"
-      aria-label="PROEFEX - inicio"
-    >
-      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-proefex-orange text-sm font-extrabold text-proefex-navy shadow-[0_6px_20px_rgba(247,147,30,0.45)]">
-        P
-      </span>
-      <span className="text-sm">PROEFEX</span>
-    </a>
-  );
-}
+import { BrandMark } from "@/components/layouts/BrandMark";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -46,28 +33,34 @@ export function Header() {
         className="mx-auto flex h-18 max-w-7xl items-center justify-between px-6"
         aria-label="Navegación principal"
       >
-        <Wordmark />
+        <BrandMark />
 
         <ul className="hidden items-center gap-9 md:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="text-sm font-medium text-white/75 transition-colors duration-300 hover:text-proefex-amber"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         <div className="hidden md:block">
-          <a
-            href="#contacto"
+          <Link
+            href="/contacto"
             className="inline-flex items-center rounded-full bg-proefex-orange px-5 py-2.5 text-sm font-semibold text-proefex-navy shadow-[0_8px_25px_rgba(247,147,30,0.4)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110"
           >
             Solicitar demo
-          </a>
+          </Link>
+          <Link
+            href="/login"
+            className="ml-3 inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white/85 transition-colors hover:border-proefex-amber hover:text-proefex-amber"
+          >
+            Iniciar sesión
+          </Link>
         </div>
 
         <button
@@ -109,23 +102,30 @@ export function Header() {
             <ul className="flex flex-col gap-1 px-6 pb-6 pt-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className="block rounded-xl px-4 py-3 text-base font-medium text-white/85 transition-colors hover:bg-white/5 hover:text-proefex-amber"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <li className="pt-3">
-                <a
-                  href="#contacto"
+                <Link
+                  href="/contacto"
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-proefex-orange px-5 py-3 text-center text-sm font-semibold text-proefex-navy"
                 >
                   Solicitar demo
-                </a>
+                </Link>
+                <Link
+                  href="/login"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 block rounded-full border border-white/20 px-5 py-3 text-center text-sm font-semibold text-white/85"
+                >
+                  Iniciar sesión
+                </Link>
               </li>
             </ul>
           </motion.div>
