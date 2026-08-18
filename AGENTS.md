@@ -64,7 +64,6 @@ Implementaremos una estrategia de observabilidad integral y recuperación rápid
 | :--- | :--- | :--- |
 | **Frontend UI** | Next.js Error Boundaries (`error.tsx`) | Aislamiento de errores por segmento. Muestra una UI de *fallback* amigable sin romper el layout global ni bloquear los contextos de GSAP/Three.js activos. |
 | **Peticiones HTTP** | React Query / Axios Interceptors | Manejo global de códigos 4xx y 5xx. Configuración de reintentos automáticos (Retries) con *exponential backoff* para fallos de red esporádicos al consumir Supabase. |
-| **Monitoreo APM** | Sentry (Browser & Edge) | Captura de excepciones no controladas en tiempo real. Configurado para monitorear Core Web Vitals y caídas de *framerate* provocadas por animaciones complejas. |
 | **Base de Datos** | PostgreSQL Triggers / Supabase Logs | Auditoría automatizada de operaciones críticas (ej. cambios de roles, publicación en CMS) utilizando *triggers* nativos para trazar el ciclo de vida del dato. |
 
 ## 5. Pruebas y Calidad
