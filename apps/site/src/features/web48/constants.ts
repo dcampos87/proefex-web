@@ -1,0 +1,51 @@
+import type { Country, LeadIntent } from "./types";
+
+export const LANDING_SLUG = "landing_web_48horas";
+export const THANKS_PATH = "/thanks_web_48horas";
+
+export const PRICE_LABEL = "S/1199.00";
+export const OFFER_HOURS = 48;
+export const COUNTDOWN_STORAGE_KEY = "proefex_web48_deadline";
+
+export const WHATSAPP_ASESOR_NUMBER = "51989551657";
+export const WHATSAPP_ASESOR_MESSAGE =
+  "Hola, acabo de registrarme en la oferta de la página web (48 horas) y quiero validar mi bono antes de que expire el contador.";
+export const WHATSAPP_ASESOR_URL = `https://wa.me/${WHATSAPP_ASESOR_NUMBER}?text=${encodeURIComponent(
+  WHATSAPP_ASESOR_MESSAGE
+)}`;
+
+export const HEADLINE =
+  "Lanza la página web de tu empresa hoy y llévate facturación electrónica y libro de reclamaciones gratis el primer mes";
+export const SUBTITLE =
+  "Solo 10 cupos disponibles a nivel nacional. Deja tus datos y nuestro equipo te contactará.";
+
+export const DEFAULT_COUNTRY_CODE = "PE";
+
+export const COUNTRIES: Country[] = [
+  { code: "PE", dialCode: "+51", label: "Perú" },
+  { code: "CO", dialCode: "+57", label: "Colombia" },
+  { code: "MX", dialCode: "+52", label: "México" },
+  { code: "EC", dialCode: "+593", label: "Ecuador" },
+  { code: "BO", dialCode: "+591", label: "Bolivia" },
+  { code: "CL", dialCode: "+56", label: "Chile" },
+  { code: "AR", dialCode: "+54", label: "Argentina" },
+  { code: "US", dialCode: "+1", label: "Estados Unidos" },
+];
+
+export interface IntentOption {
+  value: LeadIntent;
+  label: string;
+}
+
+export const INTENT_OPTIONS: IntentOption[] = [
+  { value: "hot", label: `Tengo el presupuesto (${PRICE_LABEL}) y quiero empezar hoy` },
+  { value: "cold", label: "Solo estoy investigando precios" },
+];
+
+export const UTM_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+] as const;
