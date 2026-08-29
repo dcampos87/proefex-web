@@ -9,6 +9,7 @@ import {
   DEFAULT_COUNTRY_CODE,
   INTENT_OPTIONS,
   LANDING_SLUG,
+  PRICE_LABEL,
   THANKS_PATH,
 } from "./constants";
 import { buildLeadPayload, validateLeadForm } from "./leadUtils";
@@ -25,7 +26,9 @@ const INITIAL_VALUES: LeadFormValues = {
 };
 
 const inputClass =
-  "w-full rounded-2xl border border-proefex-navy/15 bg-white px-4 py-3 text-sm text-proefex-navy outline-none transition focus:border-proefex-orange focus:ring-4 focus:ring-proefex-orange/15";
+  "w-full rounded-xl border border-proefex-navy/15 bg-white px-3.5 py-2.5 text-sm text-proefex-navy outline-none transition focus:border-proefex-orange focus:ring-4 focus:ring-proefex-orange/15";
+
+const labelClass = "flex flex-col gap-1 text-xs font-semibold text-proefex-navy/80";
 
 export function LeadForm48() {
   const router = useRouter();
@@ -79,14 +82,10 @@ export function LeadForm48() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[2rem] bg-white p-6 text-proefex-navy shadow-[0_30px_80px_rgba(0,0,0,0.35)] sm:p-8"
+      className="rounded-3xl bg-white p-4 text-proefex-navy shadow-[0_28px_70px_rgba(0,0,0,0.4)] sm:p-6"
     >
-      <p className="text-center text-sm font-semibold text-proefex-red">
-        Quedan 10 cupos — completa tus datos
-      </p>
-
-      <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <label className="flex flex-col gap-1.5 text-sm font-medium">
+      <div className="grid grid-cols-2 gap-2">
+        <label className={labelClass}>
           Nombres
           <input
             name="firstName"
@@ -98,13 +97,13 @@ export function LeadForm48() {
             className={inputClass}
           />
           {errors.firstName && (
-            <span role="alert" className="text-xs font-normal text-proefex-red">
+            <span role="alert" className="text-[11px] font-normal text-proefex-red">
               {errors.firstName}
             </span>
           )}
         </label>
 
-        <label className="flex flex-col gap-1.5 text-sm font-medium">
+        <label className={labelClass}>
           Apellidos
           <input
             name="lastName"
@@ -116,16 +115,16 @@ export function LeadForm48() {
             className={inputClass}
           />
           {errors.lastName && (
-            <span role="alert" className="text-xs font-normal text-proefex-red">
+            <span role="alert" className="text-[11px] font-normal text-proefex-red">
               {errors.lastName}
             </span>
           )}
         </label>
       </div>
 
-      <div className="mt-4">
-        <span className="text-sm font-medium">Número de WhatsApp</span>
-        <div className="mt-1.5 flex gap-2">
+      <div className="mt-3">
+        <span className={labelClass}>Número de WhatsApp</span>
+        <div className="mt-1 flex gap-2">
           <label className="sr-only" htmlFor="country">
             País y código telefónico
           </label>
@@ -134,7 +133,7 @@ export function LeadForm48() {
             name="country"
             value={values.countryCode}
             onChange={update("countryCode")}
-            className="w-40 shrink-0 rounded-2xl border border-proefex-navy/15 bg-white px-3 py-3 text-sm text-proefex-navy outline-none transition focus:border-proefex-orange focus:ring-4 focus:ring-proefex-orange/15"
+            className="w-28 shrink-0 rounded-xl border border-proefex-navy/15 bg-white px-2.5 py-2.5 text-xs text-proefex-navy outline-none transition focus:border-proefex-orange focus:ring-4 focus:ring-proefex-orange/15 sm:w-40 sm:px-3 sm:text-sm"
           >
             {COUNTRIES.map((country) => (
               <option key={country.code} value={country.code}>
@@ -155,24 +154,24 @@ export function LeadForm48() {
           />
         </div>
         {errors.phone && (
-          <span role="alert" className="mt-1 block text-xs text-proefex-red">
+          <span role="alert" className="mt-1 block text-[11px] text-proefex-red">
             {errors.phone}
           </span>
         )}
       </div>
 
-      <fieldset className="mt-5 rounded-2xl bg-proefex-cream px-4 py-4">
-        <legend className="px-1 text-sm font-semibold">
-          Para reservar tu cupo, sé honesto con nosotros:
+      <fieldset className="mt-3">
+        <legend className="text-xs font-semibold text-proefex-navy/80">
+          ¿Ya tienes el presupuesto ({PRICE_LABEL})?
         </legend>
-        <div className="mt-2 space-y-2">
+        <div className="mt-1.5 grid grid-cols-2 gap-2">
           {INTENT_OPTIONS.map((option) => (
             <label
               key={option.value}
-              className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm transition ${
+              className={`flex min-h-10 cursor-pointer items-center justify-center rounded-xl border px-2 py-2 text-center text-xs font-semibold transition has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-proefex-orange/25 sm:text-[13px] ${
                 values.intent === option.value
-                  ? "border-proefex-orange bg-white font-semibold shadow-sm"
-                  : "border-proefex-navy/10 bg-white/60 hover:border-proefex-orange/50"
+                  ? "border-proefex-orange bg-proefex-orange/10 text-proefex-navy shadow-sm"
+                  : "border-proefex-navy/15 bg-white text-proefex-navy/60 hover:border-proefex-orange/50"
               }`}
             >
               <input
@@ -181,9 +180,9 @@ export function LeadForm48() {
                 value={option.value}
                 checked={values.intent === option.value}
                 onChange={update("intent")}
-                className="mt-0.5 accent-proefex-orange"
+                className="sr-only"
               />
-              <span>{option.label}</span>
+              {option.label}
             </label>
           ))}
         </div>
@@ -192,12 +191,12 @@ export function LeadForm48() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-6 w-full rounded-2xl bg-proefex-orange px-6 py-4 text-base font-bold uppercase tracking-wide text-proefex-navy transition hover:bg-proefex-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-proefex-orange disabled:cursor-wait disabled:opacity-60"
+        className="mt-4 w-full rounded-2xl bg-proefex-orange px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-proefex-navy transition hover:bg-proefex-amber active:scale-[0.99] disabled:cursor-wait disabled:opacity-60 sm:text-base"
       >
         {submitting ? "Enviando..." : "Reclamar mi bono y contratar web"}
       </button>
 
-      <p className="mt-3 text-center text-xs text-proefex-navy/55">
+      <p className="mt-2 text-center text-[11px] text-proefex-navy/55">
         Tus datos solo se usarán para contactarte sobre esta oferta.
       </p>
     </form>

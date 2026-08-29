@@ -14,10 +14,10 @@ export const WHATSAPP_ASESOR_URL = `https://wa.me/${WHATSAPP_ASESOR_NUMBER}?text
   WHATSAPP_ASESOR_MESSAGE
 )}`;
 
-export const HEADLINE =
-  "Lanza la página web de tu empresa hoy y llévate facturación electrónica y libro de reclamaciones gratis el primer mes";
-export const SUBTITLE =
-  "Solo 10 cupos disponibles a nivel nacional. Deja tus datos y nuestro equipo te contactará.";
+export const HEADLINE = "Lanza la página web de tu empresa hoy";
+export const BONUS_LINE =
+  "Llévate facturación electrónica y libro de reclamaciones gratis el primer mes";
+export const SUBTITLE = "Solo 10 cupos disponibles a nivel nacional.";
 
 export const DEFAULT_COUNTRY_CODE = "PE";
 
@@ -38,8 +38,8 @@ export interface IntentOption {
 }
 
 export const INTENT_OPTIONS: IntentOption[] = [
-  { value: "hot", label: `Tengo el presupuesto (${PRICE_LABEL}) y quiero empezar hoy` },
-  { value: "cold", label: "Solo estoy investigando precios" },
+  { value: "hot", label: "Sí, empiezo hoy" },
+  { value: "cold", label: "Solo estoy mirando" },
 ];
 
 export const UTM_KEYS = [

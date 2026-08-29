@@ -49,9 +49,10 @@ function getServerSnapshot(): number {
 }
 
 /**
- * Contador regresivo de 48 horas por visitante. El deadline se calcula en la
- * primera visita y se persiste en localStorage; si ya expiró se mantiene en
- * 00:00:00 sin renovarse.
+ * Contador regresivo de 48 horas por visitante en formato de franja compacta:
+ * cabe en una sola línea para no obligar a hacer scroll en mobile. El deadline
+ * se calcula en la primera visita y se persiste en localStorage; si ya expiró
+ * se mantiene en 00:00:00 sin renovarse.
  */
 export function Countdown48h() {
   const remainingSeconds = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
@@ -60,20 +61,29 @@ export function Countdown48h() {
   const display = formatCountdown(remainingSeconds * 1000);
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-proefex-red/40 bg-proefex-navy-deep/80 px-6 py-5 text-center shadow-[0_18px_50px_rgba(214,64,34,0.18)]">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-proefex-amber">
-        {expired ? "La oferta ha expirado" : "Tu bono expira en"}
-      </p>
+    <div className="flex items-center justify-between gap-4 rounded-2xl border border-proefex-red/40 bg-proefex-navy-deep/85 px-4 py-2.5 shadow-[0_16px_44px_rgba(214,64,34,0.18)] sm:px-5 sm:py-3">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <span aria-hidden className="relative flex h-2 w-2 shrink-0">
+          {!expired && (
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-proefex-red opacity-70 motion-reduce:hidden" />
+          )}
+          <span
+            className={`relative inline-flex h-2 w-2 rounded-full ${
+              expired ? "bg-white/30" : "bg-proefex-red"
+            }`}
+          />
+        </span>
+        <p className="truncate text-[10px] font-bold uppercase tracking-[0.18em] text-proefex-amber sm:text-[11px]">
+          {expired ? "La oferta ha expirado" : "Tu bono expira en"}
+        </p>
+      </div>
       <p
         role="timer"
         aria-live="off"
-        className="mt-2 font-mono text-4xl font-bold tabular-nums text-white sm:text-5xl"
+        className="font-mono text-[26px] font-bold leading-none tabular-nums text-white sm:text-3xl"
       >
         {display}
       </p>
-      {!expired && (
-        <p className="mt-2 text-xs text-white/60">Horas : minutos : segundos — cupos limitados</p>
-      )}
     </div>
   );
 }

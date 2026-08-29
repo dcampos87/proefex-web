@@ -21,6 +21,9 @@ node_modules/
 .next/
 out/
 
+# local static preview server
+serve-static.cjs
+
 # production
 /build
 
