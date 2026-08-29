@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 
-import { MetaPixel } from "@/features/web48/MetaPixel";
 import { ThanksContent } from "@/features/web48/ThanksContent";
 
 export const metadata: Metadata = {
@@ -14,8 +13,6 @@ export const metadata: Metadata = {
 export default function ThanksWeb48HorasPage() {
   return (
     <div className="hero-glow relative flex min-h-screen flex-col bg-proefex-navy text-white">
-      <MetaPixel trackLead />
-
       <header className="flex items-center justify-center px-6 pt-6">
         <span className="text-sm font-bold uppercase tracking-[0.35em] text-white/85">PROEFEX</span>
       </header>

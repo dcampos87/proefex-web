@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Countdown48h } from "@/features/web48/Countdown48h";
 import { BONUS_LINE, HEADLINE, PRICE_LABEL, SUBTITLE } from "@/features/web48/constants";
 import { LeadForm48 } from "@/features/web48/LeadForm48";
-import { MetaPixel } from "@/features/web48/MetaPixel";
 import { MockupVisual } from "@/features/web48/MockupVisual";
 
 export const metadata: Metadata = {
@@ -22,8 +21,6 @@ const OFFER_BULLETS = [
 export default function LandingWeb48HorasPage() {
   return (
     <div className="hero-glow relative flex min-h-dvh flex-col bg-proefex-navy text-white">
-      <MetaPixel />
-
       {/* Anti-header: marca + urgencia en una sola línea, cero navegación */}
       <header className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-6 lg:px-10 lg:pt-6">
         <span className="text-xs font-bold uppercase tracking-[0.3em] text-white/85 sm:text-sm">
