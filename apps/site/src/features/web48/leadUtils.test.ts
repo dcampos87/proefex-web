@@ -1,0 +1,190 @@
+import { describe, expect, it } from "vitest";
+
+import { COUNTDOWN_STORAGE_KEY, LANDING_SLUG } from "./constants";
+import {
+  OFFER_MILLISECONDS,
+  buildLeadPayload,
+  collectUtm,
+  formatCountdown,
+  getOrCreateDeadline,
+  getRemainingMs,
+  isValidName,
+  isValidPhone,
+  normalizePhone,
+  readStoredDeadline,
+  validateLeadForm,
+} from "./leadUtils";
+import type { LeadFormValues } from "./types";
+
+const BASE_NOW = 1_700_000_000_000;
+
+const validValues: LeadFormValues = {
+  firstName: "Ana María",
+  lastName: "Torres Paz",
+  countryCode: "PE",
+  phone: "999 888-777",
+  intent: "hot",
+};
+
+describe("normalizePhone", () => {
+  it("elimina todo lo que no sea dígito", () => {
+    expect(normalizePhone("+51 999-888.777")).toBe("51999888777");
+  });
+
+  it("devuelve cadena vacía si no hay dígitos", () => {
+    expect(normalizePhone("abc ()")).toBe("");
+  });
+});
+
+describe("isValidName", () => {
+  it("acepta nombres de 2+ caracteres", () => {
+    expect(isValidName("Ana")).toBe(true);
+    expect(isValidName(" An ")).toBe(true);
+  });
+
+  it("rechaza nombres vacíos o de 1 carácter", () => {
+    expect(isValidName("")).toBe(false);
+    expect(isValidName("A")).toBe(false);
+    expect(isValidName("   ")).toBe(false);
+  });
+});
+
+describe("isValidPhone", () => {
+  it("acepta entre 6 y 15 dígitos", () => {
+    expect(isValidPhone("987654")).toBe(true);
+    expect(isValidPhone("987654321")).toBe(true);
+    expect(isValidPhone("123456789012345")).toBe(true);
+  });
+
+  it("rechaza menos de 6 o más de 15 dígitos", () => {
+    expect(isValidPhone("12345")).toBe(false);
+    expect(isValidPhone("1234567890123456")).toBe(false);
+    expect(isValidPhone("")).toBe(false);
+  });
+});
+
+describe("validateLeadForm", () => {
+  it("no devuelve errores con datos válidos", () => {
+    expect(validateLeadForm(validValues)).toEqual({});
+  });
+
+  it("devuelve un error por campo inválido", () => {
+    const errors = validateLeadForm({
+      firstName: "",
+      lastName: "X",
+      countryCode: "PE",
+      phone: "123",
+      intent: "hot",
+    });
+    expect(errors.firstName).toBeDefined();
+    expect(errors.lastName).toBeDefined();
+    expect(errors.phone).toBeDefined();
+  });
+});
+
+describe("getOrCreateDeadline", () => {
+  it("crea un deadline de 48h si no hay valor almacenado", () => {
+    expect(getOrCreateDeadline(BASE_NOW, null)).toBe(BASE_NOW + OFFER_MILLISECONDS);
+  });
+
+  it("crea un deadline nuevo si el valor almacenado no es numérico", () => {
+    expect(getOrCreateDeadline(BASE_NOW, Number.NaN)).toBe(BASE_NOW + OFFER_MILLISECONDS);
+  });
+
+  it("conserva el deadline vigente", () => {
+    const stored = BASE_NOW + 1000;
+    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(stored);
+  });
+
+  it("no renueva un deadline expirado", () => {
+    const stored = BASE_NOW - 1000;
+    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(stored);
+  });
+});
+
+describe("readStoredDeadline", () => {
+  it("devuelve null si no hay valor", () => {
+    const storage = { getItem: () => null };
+    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBeNull();
+  });
+
+  it("devuelve null si el valor no es numérico", () => {
+    const storage = { getItem: () => "abc" };
+    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBeNull();
+  });
+
+  it("parsea un deadline válido", () => {
+    const storage = { getItem: () => String(BASE_NOW) };
+    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBe(BASE_NOW);
+  });
+});
+
+describe("getRemainingMs", () => {
+  it("devuelve la diferencia cuando falta tiempo", () => {
+    expect(getRemainingMs(BASE_NOW + 5000, BASE_NOW)).toBe(5000);
+  });
+
+  it("devuelve 0 cuando el deadline ya pasó", () => {
+    expect(getRemainingMs(BASE_NOW - 5000, BASE_NOW)).toBe(0);
+  });
+});
+
+describe("formatCountdown", () => {
+  it("formatea 48 horas exactas", () => {
+    expect(formatCountdown(OFFER_MILLISECONDS)).toBe("48:00:00");
+  });
+
+  it("formatea horas, minutos y segundos mixtos", () => {
+    const ms = (7 * 3600 + 9 * 60 + 5) * 1000;
+    expect(formatCountdown(ms)).toBe("07:09:05");
+  });
+
+  it("muestra 00:00:00 al expirar", () => {
+    expect(formatCountdown(0)).toBe("00:00:00");
+    expect(formatCountdown(-123)).toBe("00:00:00");
+  });
+});
+
+describe("collectUtm", () => {
+  it("devuelve null si no hay parámetros UTM", () => {
+    expect(collectUtm("")).toBeNull();
+    expect(collectUtm("?foo=bar")).toBeNull();
+  });
+
+  it("extrae solo las claves UTM presentes", () => {
+    expect(collectUtm("?utm_source=fb&utm_campaign=web48&other=1")).toEqual({
+      utm_source: "fb",
+      utm_campaign: "web48",
+    });
+  });
+});
+
+describe("buildLeadPayload", () => {
+  it("construye el payload completo con UTMs", () => {
+    const payload = buildLeadPayload(validValues, {
+      dialCode: "+51",
+      source: LANDING_SLUG,
+      now: BASE_NOW,
+      search: "?utm_source=facebook",
+    });
+
+    expect(payload).toEqual({
+      first_name: "Ana María",
+      last_name: "Torres Paz",
+      country: "PE",
+      dial_code: "+51",
+      whatsapp: "999888777",
+      intent: "hot",
+      source: "landing_web_48horas",
+      utm: { utm_source: "facebook" },
+      created_at: new Date(BASE_NOW).toISOString(),
+    });
+  });
+
+  it("deja utm en null sin parámetros y usa la fecha actual por defecto", () => {
+    const payload = buildLeadPayload(validValues, { dialCode: "+57", source: LANDING_SLUG });
+    expect(payload.utm).toBeNull();
+    expect(payload.dial_code).toBe("+57");
+    expect(payload.created_at).toBeTruthy();
+  });
+});

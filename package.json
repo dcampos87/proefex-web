@@ -1,0 +1,38 @@
+{
+  "name": "proefex-web",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @proefex/site",
+    "dev:learn": "npm run dev --workspace @proefex/learn",
+    "dev:admin": "npm run dev --workspace @proefex/admin",
+    "build": "npm run build --workspace @proefex/site",
+    "build:learn": "npm run build --workspace @proefex/learn",
+    "build:admin": "npm run build --workspace @proefex/admin",
+    "build:all": "npm run build --workspaces --if-present",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspace @proefex/site",
+    "test:watch": "npm run test:watch --workspace @proefex/site",
+    "test:e2e": "playwright test",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6"
+  },
+  "allowScripts": {
+    "unrs-resolver@1.12.2": true
+  }
+}
