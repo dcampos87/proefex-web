@@ -61,9 +61,9 @@ Para enlaces entre dominios en producción:
 
 ```bash
 # En cada app
-NEXT_PUBLIC_SITE_URL=https://proefex.com
-NEXT_PUBLIC_LEARN_URL=https://learn.proefex.com
-NEXT_PUBLIC_ADMIN_URL=https://admin.proefex.com
+NEXT_PUBLIC_SITE_URL=https://proefexperu.com
+NEXT_PUBLIC_LEARN_URL=https://learn.proefexperu.com
+NEXT_PUBLIC_ADMIN_URL=https://admin.proefexperu.com
 ```
 
 ## Scripts globales
@@ -85,6 +85,19 @@ npm run test:e2e         # Tests E2E con Playwright
 - **Testing**: Vitest, Playwright
 - **Linting**: ESLint, Prettier, Husky
 - **Despliegue**: Cloudflare Pages (SSG)
+
+## Despliegue
+
+Proyecto en Cloudflare Pages: `proefex-web` (integración Git con este repositorio).
+
+| Entorno        | Rama      | URL                                                                |
+| :------------- | :-------- | :----------------------------------------------------------------- |
+| **Producción** | `main`    | **https://proefexperu.com** (alias: https://proefex-web.pages.dev) |
+| Staging        | `develop` | https://develop.proefex-web.pages.dev                              |
+
+- **Dominio de producción del sitio público: `proefexperu.com`.**
+- Solo la app `site` está desplegada actualmente. Los proyectos `admin` y `learn` existen en Cloudflare pero aún no tienen despliegues; cuando se desplieguen, cada uno debe apuntar a su subdirectorio (`apps/admin/out`, `apps/learn/out`).
+- Google Tag Manager (`GTM-PH6SHS9X`) está instalado en el sitio: snippet inline en el `<head>` de `apps/site/src/app/layout.tsx` (debe mantenerse como `<script>` plano, no `next/script`, o Google no lo detecta).
 
 ## Arquitectura
 

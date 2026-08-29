@@ -19,7 +19,7 @@ export function ContactCta() {
             {contactCopy.subtitle}
           </p>
           <div className="mt-10 flex justify-center">
-            <ButtonLink href="mailto:hola@proefex.com" variant="primary">
+            <ButtonLink href="mailto:hola@proefexperu.com" variant="primary">
               {contactCopy.cta}
             </ButtonLink>
           </div>

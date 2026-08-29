@@ -20,8 +20,8 @@ export default function ContactPage() {
             <h2 className="mt-7 text-3xl font-bold">Estamos para escucharte.</h2>
             <p className="mt-5 leading-relaxed text-proefex-navy/70">
               Agenda una sesión de 30 minutos o escríbenos a{" "}
-              <a className="font-semibold underline" href="mailto:hola@proefex.com">
-                hola@proefex.com
+              <a className="font-semibold underline" href="mailto:hola@proefexperu.com">
+                hola@proefexperu.com
               </a>
               .
             </p>
