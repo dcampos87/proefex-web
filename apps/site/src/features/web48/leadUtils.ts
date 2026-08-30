@@ -16,6 +16,14 @@ export function isValidPhone(value: string): boolean {
   return digits.length >= 6 && digits.length <= 15;
 }
 
+export function normalizeEmail(raw: string): string {
+  return raw.trim().toLowerCase();
+}
+
+export function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(normalizeEmail(value));
+}
+
 export function validateLeadForm(values: LeadFormValues): LeadValidationErrors {
   const errors: LeadValidationErrors = {};
   if (!isValidName(values.firstName)) {
@@ -23,6 +31,9 @@ export function validateLeadForm(values: LeadFormValues): LeadValidationErrors {
   }
   if (!isValidName(values.lastName)) {
     errors.lastName = "Ingresa tus apellidos (mínimo 2 caracteres).";
+  }
+  if (!isValidEmail(values.email)) {
+    errors.email = "Ingresa un correo electrónico válido.";
   }
   if (!isValidPhone(values.phone)) {
     errors.phone = "Ingresa un número de WhatsApp válido (6 a 15 dígitos).";
@@ -85,6 +96,7 @@ export function buildLeadPayload(
   return {
     first_name: values.firstName.trim(),
     last_name: values.lastName.trim(),
+    email: normalizeEmail(values.email),
     country: values.countryCode,
     dial_code: options.dialCode,
     whatsapp: normalizePhone(values.phone),

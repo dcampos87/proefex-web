@@ -9,6 +9,7 @@ export interface Country {
 export interface LeadFormValues {
   firstName: string;
   lastName: string;
+  email: string;
   countryCode: string;
   phone: string;
   intent: LeadIntent;
@@ -17,6 +18,7 @@ export interface LeadFormValues {
 export interface LeadPayload {
   first_name: string;
   last_name: string;
+  email: string;
   country: string;
   dial_code: string;
   whatsapp: string;
@@ -29,5 +31,6 @@ export interface LeadPayload {
 export interface LeadValidationErrors {
   firstName?: string;
   lastName?: string;
+  email?: string;
   phone?: string;
 }

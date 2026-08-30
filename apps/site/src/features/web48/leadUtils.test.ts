@@ -8,8 +8,10 @@ import {
   formatCountdown,
   getOrCreateDeadline,
   getRemainingMs,
+  isValidEmail,
   isValidName,
   isValidPhone,
+  normalizeEmail,
   normalizePhone,
   readStoredDeadline,
   validateLeadForm,
@@ -21,6 +23,7 @@ const BASE_NOW = 1_700_000_000_000;
 const validValues: LeadFormValues = {
   firstName: "Ana María",
   lastName: "Torres Paz",
+  email: "ana.torres@empresa.com",
   countryCode: "PE",
   phone: "999 888-777",
   intent: "hot",
@@ -63,6 +66,29 @@ describe("isValidPhone", () => {
   });
 });
 
+describe("normalizeEmail", () => {
+  it("recorta espacios y convierte a minúsculas", () => {
+    expect(normalizeEmail("  Ana@Empresa.COM ")).toBe("ana@empresa.com");
+  });
+});
+
+describe("isValidEmail", () => {
+  it("acepta correos con formato válido", () => {
+    expect(isValidEmail("ana@empresa.com")).toBe(true);
+    expect(isValidEmail(" Ana.Torres@sub.empresa.com.pe ")).toBe(true);
+    expect(isValidEmail("usuario+tag@dominio.co")).toBe(true);
+  });
+
+  it("rechaza correos vacíos o mal formados", () => {
+    expect(isValidEmail("")).toBe(false);
+    expect(isValidEmail("ana@empresa")).toBe(false);
+    expect(isValidEmail("ana@empresa.")).toBe(false);
+    expect(isValidEmail("ana empresa.com")).toBe(false);
+    expect(isValidEmail("@empresa.com")).toBe(false);
+    expect(isValidEmail("ana@.com")).toBe(false);
+  });
+});
+
 describe("validateLeadForm", () => {
   it("no devuelve errores con datos válidos", () => {
     expect(validateLeadForm(validValues)).toEqual({});
@@ -72,12 +98,14 @@ describe("validateLeadForm", () => {
     const errors = validateLeadForm({
       firstName: "",
       lastName: "X",
+      email: "correo-invalido",
       countryCode: "PE",
       phone: "123",
       intent: "hot",
     });
     expect(errors.firstName).toBeDefined();
     expect(errors.lastName).toBeDefined();
+    expect(errors.email).toBeDefined();
     expect(errors.phone).toBeDefined();
   });
 });
@@ -171,6 +199,7 @@ describe("buildLeadPayload", () => {
     expect(payload).toEqual({
       first_name: "Ana María",
       last_name: "Torres Paz",
+      email: "ana.torres@empresa.com",
       country: "PE",
       dial_code: "+51",
       whatsapp: "999888777",
@@ -186,5 +215,13 @@ describe("buildLeadPayload", () => {
     expect(payload.utm).toBeNull();
     expect(payload.dial_code).toBe("+57");
     expect(payload.created_at).toBeTruthy();
+  });
+
+  it("normaliza el correo a minúsculas y sin espacios", () => {
+    const payload = buildLeadPayload(
+      { ...validValues, email: "  Ana.Torres@Empresa.COM " },
+      { dialCode: "+51", source: LANDING_SLUG, now: BASE_NOW }
+    );
+    expect(payload.email).toBe("ana.torres@empresa.com");
   });
 });

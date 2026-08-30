@@ -20,6 +20,7 @@ const LEADS_API_URL = "/api/leads";
 const INITIAL_VALUES: LeadFormValues = {
   firstName: "",
   lastName: "",
+  email: "",
   countryCode: DEFAULT_COUNTRY_CODE,
   phone: "",
   intent: "hot",
@@ -119,6 +120,28 @@ export function LeadForm48() {
           {errors.lastName && (
             <span role="alert" className="text-[11px] font-normal text-proefex-red">
               {errors.lastName}
+            </span>
+          )}
+        </label>
+      </div>
+
+      <div className="mt-3">
+        <label className={labelClass}>
+          Correo electrónico
+          <input
+            name="email"
+            type="email"
+            inputMode="email"
+            value={values.email}
+            onChange={update("email")}
+            placeholder="tucorreo@empresa.com"
+            autoComplete="email"
+            aria-invalid={Boolean(errors.email)}
+            className={inputClass}
+          />
+          {errors.email && (
+            <span role="alert" className="text-[11px] font-normal text-proefex-red">
+              {errors.email}
             </span>
           )}
         </label>
