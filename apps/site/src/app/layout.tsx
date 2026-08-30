@@ -6,22 +6,6 @@ import "./globals.css";
 const GTM_ID = "GTM-PH6SHS9X";
 
 /**
- * Variables de entorno que deben estar disponibles en runtime (navegador)
- * sin necesidad de reconstruir el sitio. Se inyectan como `window.__ENV__`
- * porque el proyecto usa `output: "export"` (SSG) y `process.env.NEXT_PUBLIC_*`
- * se quema en build time.
- */
-const RUNTIME_ENV_KEYS = ["NEXT_PUBLIC_LEADS_WEBHOOK_URL"] as const;
-
-function buildRuntimeEnvScript(): string {
-  const entries = RUNTIME_ENV_KEYS.map((key) => {
-    const value = process.env[key];
-    return `"${key}":${JSON.stringify(value ?? "")}`;
-  });
-  return `window.__ENV__={${entries.join(",")}};`;
-}
-
-/**
  * Snippet oficial de Google Tag Manager. Se inyecta como `<script>` plano
  * dentro del `<head>` (y no con `next/script`) para que quede presente en el
  * HTML estático: Next.js 16 serializa los `next/script` en `self.__next_s` y
@@ -50,8 +34,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       <head>
-        {/* Runtime env: disponible en el navegador sin reconstruir el sitio. */}
-        <script dangerouslySetInnerHTML={{ __html: buildRuntimeEnvScript() }} />
         {/* Google Tag Manager: script plano en el HTML estático para que Google lo detecte. */}
         <script dangerouslySetInnerHTML={{ __html: GTM_SCRIPT }} />
       </head>

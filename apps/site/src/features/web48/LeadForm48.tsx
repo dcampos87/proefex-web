@@ -15,22 +15,7 @@ import {
 import { buildLeadPayload, validateLeadForm } from "./leadUtils";
 import type { LeadFormValues, LeadIntent, LeadValidationErrors } from "./types";
 
-declare global {
-  interface Window {
-    __ENV__?: Record<string, string>;
-  }
-}
-
-/**
- * Lee la URL del webhook desde runtime env (inyectado en layout.tsx) con
- * fallback al valor de build time. Esto permite cambiar la URL en Cloudflare
- * sin reconstruir el sitio.
- */
-function getWebhookUrl(): string | undefined {
-  const runtime =
-    typeof window !== "undefined" ? window.__ENV__?.NEXT_PUBLIC_LEADS_WEBHOOK_URL : undefined;
-  return runtime || process.env.NEXT_PUBLIC_LEADS_WEBHOOK_URL || undefined;
-}
+const LEADS_API_URL = "/api/leads";
 
 const INITIAL_VALUES: LeadFormValues = {
   firstName: "",
@@ -76,26 +61,19 @@ export function LeadForm48() {
       search: window.location.search,
     });
 
-    const webhookUrl = getWebhookUrl();
-
     // TODO: remover logging temporal tras confirmar que el webhook recibe datos.
-    console.info("[LeadForm48] WEBHOOK_URL:", webhookUrl);
     console.info("[LeadForm48] payload:", payload);
 
-    if (webhookUrl) {
-      try {
-        const response = await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          keepalive: true,
-        });
-        console.info("[LeadForm48] webhook response status:", response.status);
-      } catch (error) {
-        console.error("[LeadForm48] webhook fetch error:", error);
-      }
-    } else {
-      console.warn("[LeadForm48] WEBHOOK_URL no está configurada. El lead NO se envió.");
+    try {
+      const response = await fetch(LEADS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      });
+      console.info("[LeadForm48] /api/leads response status:", response.status);
+    } catch (error) {
+      console.error("[LeadForm48] /api/leads fetch error:", error);
     }
 
     const intentParam: LeadIntent = values.intent;
