@@ -15,7 +15,22 @@ import {
 import { buildLeadPayload, validateLeadForm } from "./leadUtils";
 import type { LeadFormValues, LeadIntent, LeadValidationErrors } from "./types";
 
-const WEBHOOK_URL = process.env.NEXT_PUBLIC_LEADS_WEBHOOK_URL;
+declare global {
+  interface Window {
+    __ENV__?: Record<string, string>;
+  }
+}
+
+/**
+ * Lee la URL del webhook desde runtime env (inyectado en layout.tsx) con
+ * fallback al valor de build time. Esto permite cambiar la URL en Cloudflare
+ * sin reconstruir el sitio.
+ */
+function getWebhookUrl(): string | undefined {
+  const runtime =
+    typeof window !== "undefined" ? window.__ENV__?.NEXT_PUBLIC_LEADS_WEBHOOK_URL : undefined;
+  return runtime || process.env.NEXT_PUBLIC_LEADS_WEBHOOK_URL || undefined;
+}
 
 const INITIAL_VALUES: LeadFormValues = {
   firstName: "",
@@ -61,17 +76,26 @@ export function LeadForm48() {
       search: window.location.search,
     });
 
-    if (WEBHOOK_URL) {
+    const webhookUrl = getWebhookUrl();
+
+    // TODO: remover logging temporal tras confirmar que el webhook recibe datos.
+    console.info("[LeadForm48] WEBHOOK_URL:", webhookUrl);
+    console.info("[LeadForm48] payload:", payload);
+
+    if (webhookUrl) {
       try {
-        await fetch(WEBHOOK_URL, {
+        const response = await fetch(webhookUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
           keepalive: true,
         });
-      } catch {
-        // El flujo de conversión no se detiene si el webhook falla.
+        console.info("[LeadForm48] webhook response status:", response.status);
+      } catch (error) {
+        console.error("[LeadForm48] webhook fetch error:", error);
       }
+    } else {
+      console.warn("[LeadForm48] WEBHOOK_URL no está configurada. El lead NO se envió.");
     }
 
     const intentParam: LeadIntent = values.intent;
