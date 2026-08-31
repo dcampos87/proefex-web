@@ -49,9 +49,10 @@ function getServerSnapshot(): number {
 }
 
 /**
- * Contador regresivo de 48 horas por visitante en formato de franja compacta:
+ * Contador regresivo de 24 horas por visitante en formato de franja compacta:
  * cabe en una sola línea para no obligar a hacer scroll en mobile. El deadline
- * se calcula en la primera visita y se persiste en localStorage; si ya expiró
+ * se calcula en la primera visita y se persiste en localStorage, topado por el
+ * límite global de la campaña (31/08/2026 22:00 hora de Lima); si ya expiró
  * se mantiene en 00:00:00 sin renovarse.
  */
 export function Countdown48h() {

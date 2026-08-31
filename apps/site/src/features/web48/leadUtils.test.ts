@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { COUNTDOWN_STORAGE_KEY, LANDING_SLUG } from "./constants";
+import { COUNTDOWN_STORAGE_KEY, LANDING_SLUG, OFFER_HARD_DEADLINE } from "./constants";
 import {
   OFFER_MILLISECONDS,
   buildLeadPayload,
@@ -111,7 +111,7 @@ describe("validateLeadForm", () => {
 });
 
 describe("getOrCreateDeadline", () => {
-  it("crea un deadline de 48h si no hay valor almacenado", () => {
+  it("crea un deadline de 24h si no hay valor almacenado", () => {
     expect(getOrCreateDeadline(BASE_NOW, null)).toBe(BASE_NOW + OFFER_MILLISECONDS);
   });
 
@@ -127,6 +127,27 @@ describe("getOrCreateDeadline", () => {
   it("no renueva un deadline expirado", () => {
     const stored = BASE_NOW - 1000;
     expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(stored);
+  });
+
+  it("topa el deadline nuevo en el límite global de la campaña", () => {
+    const now = OFFER_HARD_DEADLINE - 60 * 60 * 1000; // 1 hora antes del límite
+    expect(getOrCreateDeadline(now, null)).toBe(OFFER_HARD_DEADLINE);
+  });
+
+  it("devuelve un deadline ya vencido si se visita después del límite global", () => {
+    const now = OFFER_HARD_DEADLINE + 60 * 1000;
+    expect(getOrCreateDeadline(now, null)).toBe(OFFER_HARD_DEADLINE);
+  });
+
+  it("topa un deadline almacenado que supera el límite global", () => {
+    const now = OFFER_HARD_DEADLINE - 10 * 60 * 60 * 1000;
+    const stored = OFFER_HARD_DEADLINE + 24 * 60 * 60 * 1000;
+    expect(getOrCreateDeadline(now, stored)).toBe(OFFER_HARD_DEADLINE);
+  });
+
+  it("topa un deadline almacenado que supera la ventana de 24h", () => {
+    const stored = BASE_NOW + 48 * 60 * 60 * 1000; // ventana antigua de 48h
+    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(BASE_NOW + OFFER_MILLISECONDS);
   });
 });
 
@@ -158,8 +179,8 @@ describe("getRemainingMs", () => {
 });
 
 describe("formatCountdown", () => {
-  it("formatea 48 horas exactas", () => {
-    expect(formatCountdown(OFFER_MILLISECONDS)).toBe("48:00:00");
+  it("formatea 24 horas exactas", () => {
+    expect(formatCountdown(OFFER_MILLISECONDS)).toBe("24:00:00");
   });
 
   it("formatea horas, minutos y segundos mixtos", () => {

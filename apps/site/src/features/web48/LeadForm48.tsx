@@ -187,7 +187,8 @@ export function LeadForm48() {
 
       <fieldset className="mt-3">
         <legend className="text-xs font-semibold text-proefex-navy/80">
-          ¿Ya tienes el presupuesto ({PRICE_LABEL})?
+          ¿Ya tienes el presupuesto (
+          <strong className="font-extrabold text-proefex-orange">{PRICE_LABEL}</strong>)?
         </legend>
         <div className="mt-1.5 grid grid-cols-2 gap-2">
           {INTENT_OPTIONS.map((option) => (

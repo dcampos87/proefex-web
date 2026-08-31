@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 
 import { Countdown48h } from "@/features/web48/Countdown48h";
-import { BONUS_LINE, HEADLINE, PRICE_LABEL, SUBTITLE } from "@/features/web48/constants";
+import {
+  BONUS_LINE,
+  HEADLINE,
+  PRICE_DISPLAY_LABEL,
+  PRICE_LABEL,
+  SUBTITLE,
+} from "@/features/web48/constants";
 import { LeadForm48 } from "@/features/web48/LeadForm48";
 import { MockupVisual } from "@/features/web48/MockupVisual";
 
@@ -31,7 +37,7 @@ export default function LandingWeb48HorasPage() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-proefex-amber opacity-70 motion-reduce:hidden" />
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-proefex-amber" />
           </span>
-          Solo por 48 horas
+          Solo por 24 horas
         </span>
       </header>
 
@@ -55,6 +61,20 @@ export default function LandingWeb48HorasPage() {
             </p>
             <div className="animate-rise" style={{ animationDelay: "160ms" }}>
               <Countdown48h />
+            </div>
+
+            <div className="animate-rise" style={{ animationDelay: "190ms" }}>
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 rounded-2xl border border-proefex-amber/45 bg-gradient-to-r from-proefex-amber/15 via-proefex-amber/8 to-transparent px-4 py-3 shadow-[0_16px_44px_rgba(239,183,41,0.14)] sm:px-5 lg:justify-start">
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-white/65 sm:text-[11px]">
+                  Precio único
+                </span>
+                <span className="text-[34px] font-black leading-none tracking-tight text-proefex-amber sm:text-[40px]">
+                  {PRICE_DISPLAY_LABEL}
+                </span>
+                <span className="text-[11px] font-semibold text-white/65 sm:text-xs">
+                  un solo pago
+                </span>
+              </div>
             </div>
 
             <ul className="hidden space-y-2.5 lg:block" aria-label="Beneficios de la oferta">
