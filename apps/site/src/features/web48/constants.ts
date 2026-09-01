@@ -6,14 +6,14 @@ export const THANKS_PATH = "/thanks_web_48horas";
 export const PRICE_LABEL = "S/1199.00";
 export const PRICE_DISPLAY_LABEL = "S/ 1199";
 export const OFFER_HOURS = 24;
-export const COUNTDOWN_STORAGE_KEY = "proefex_web48_deadline";
 
 /**
- * Límite global e improrrogable de la campaña: 31/08/2026 a las 22:00,
- * hora de Lima (GMT-5). Ningún contador puede terminar después de este
- * instante, sin importar cuándo visite el usuario la landing.
+ * Hora UTC del reinicio diario del contador: las 22:00 de Lima (GMT-5, sin
+ * horario de verano) equivalen a las 03:00 UTC del día siguiente. La campaña
+ * es constante, así que el contador siempre cuenta hacia la próxima
+ * ocurrencia de esta hora.
  */
-export const OFFER_HARD_DEADLINE = Date.UTC(2026, 7, 31, 22, 0, 0) + 5 * 60 * 60 * 1000;
+export const DAILY_RESET_UTC_HOUR = 3;
 
 export const WHATSAPP_ASESOR_NUMBER = "51989551657";
 export const WHATSAPP_ASESOR_MESSAGE =

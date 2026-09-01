@@ -1,4 +1,4 @@
-import { OFFER_HARD_DEADLINE, OFFER_HOURS, UTM_KEYS } from "./constants";
+import { DAILY_RESET_UTC_HOUR, OFFER_HOURS, UTM_KEYS } from "./constants";
 import type { LeadFormValues, LeadPayload, LeadValidationErrors } from "./types";
 
 export const OFFER_MILLISECONDS = OFFER_HOURS * 60 * 60 * 1000;
@@ -42,28 +42,16 @@ export function validateLeadForm(values: LeadFormValues): LeadValidationErrors {
 }
 
 /**
- * Devuelve el deadline vigente de la oferta. Si el visitante ya tiene uno
- * almacenado (vigente o expirado) se conserva; la oferta expirada no se
- * renueva. En todos los casos el resultado queda topado por la ventana de
- * la oferta (OFFER_HOURS desde ahora) y por el límite global de la campaña
- * (OFFER_HARD_DEADLINE), de modo que ningún contador termina después del
- * 31/08/2026 22:00 (hora de Lima).
+ * Devuelve la próxima ocurrencia del cierre diario de la campaña (22:00 hora
+ * de Lima = DAILY_RESET_UTC_HOUR en UTC) estrictamente posterior a `now`.
+ * El cálculo es determinístico sobre UTC y no depende de la zona horaria del
+ * visitante: al llegar las 10 PM el contador se reinicia hacia las 10 PM del
+ * día siguiente.
  */
-export function getOrCreateDeadline(now: number, storedDeadline: number | null): number {
-  const freshDeadline = Math.min(now + OFFER_MILLISECONDS, OFFER_HARD_DEADLINE);
-  if (storedDeadline !== null && Number.isFinite(storedDeadline)) {
-    return Math.min(storedDeadline, freshDeadline);
-  }
-  return freshDeadline;
-}
-
-export function readStoredDeadline(storage: Pick<Storage, "getItem">, key: string): number | null {
-  const raw = storage.getItem(key);
-  if (!raw) {
-    return null;
-  }
-  const parsed = Number(raw);
-  return Number.isFinite(parsed) ? parsed : null;
+export function getNextDailyDeadline(now: number): number {
+  const base = Date.UTC(1970, 0, 1, DAILY_RESET_UTC_HOUR, 0, 0);
+  const days = Math.floor((now - base) / OFFER_MILLISECONDS) + 1;
+  return base + days * OFFER_MILLISECONDS;
 }
 
 export function getRemainingMs(deadline: number, now: number): number {

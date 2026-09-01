@@ -1,19 +1,18 @@
 import { describe, expect, it } from "vitest";
 
-import { COUNTDOWN_STORAGE_KEY, LANDING_SLUG, OFFER_HARD_DEADLINE } from "./constants";
+import { LANDING_SLUG } from "./constants";
 import {
   OFFER_MILLISECONDS,
   buildLeadPayload,
   collectUtm,
   formatCountdown,
-  getOrCreateDeadline,
+  getNextDailyDeadline,
   getRemainingMs,
   isValidEmail,
   isValidName,
   isValidPhone,
   normalizeEmail,
   normalizePhone,
-  readStoredDeadline,
   validateLeadForm,
 } from "./leadUtils";
 import type { LeadFormValues } from "./types";
@@ -110,61 +109,30 @@ describe("validateLeadForm", () => {
   });
 });
 
-describe("getOrCreateDeadline", () => {
-  it("crea un deadline de 24h si no hay valor almacenado", () => {
-    expect(getOrCreateDeadline(BASE_NOW, null)).toBe(BASE_NOW + OFFER_MILLISECONDS);
+describe("getNextDailyDeadline", () => {
+  it("antes de las 22:00 Lima devuelve las 22:00 Lima del mismo día", () => {
+    // 01/09/2026 15:00 Lima = 01/09/2026 20:00 UTC
+    const now = Date.UTC(2026, 8, 1, 20, 0, 0);
+    // 22:00 Lima del 01/09 = 03:00 UTC del 02/09
+    expect(getNextDailyDeadline(now)).toBe(Date.UTC(2026, 8, 2, 3, 0, 0));
   });
 
-  it("crea un deadline nuevo si el valor almacenado no es numérico", () => {
-    expect(getOrCreateDeadline(BASE_NOW, Number.NaN)).toBe(BASE_NOW + OFFER_MILLISECONDS);
+  it("después de las 22:00 Lima devuelve las 22:00 Lima del día siguiente", () => {
+    // 01/09/2026 23:00 Lima = 02/09/2026 04:00 UTC
+    const now = Date.UTC(2026, 8, 2, 4, 0, 0);
+    // 22:00 Lima del 02/09 = 03:00 UTC del 03/09
+    expect(getNextDailyDeadline(now)).toBe(Date.UTC(2026, 8, 3, 3, 0, 0));
   });
 
-  it("conserva el deadline vigente", () => {
-    const stored = BASE_NOW + 1000;
-    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(stored);
+  it("a las 22:00 Lima en punto se reinicia hacia el día siguiente", () => {
+    // 22:00 Lima del 01/09 = 03:00 UTC del 02/09
+    const now = Date.UTC(2026, 8, 2, 3, 0, 0);
+    expect(getNextDailyDeadline(now)).toBe(Date.UTC(2026, 8, 3, 3, 0, 0));
   });
 
-  it("no renueva un deadline expirado", () => {
-    const stored = BASE_NOW - 1000;
-    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(stored);
-  });
-
-  it("topa el deadline nuevo en el límite global de la campaña", () => {
-    const now = OFFER_HARD_DEADLINE - 60 * 60 * 1000; // 1 hora antes del límite
-    expect(getOrCreateDeadline(now, null)).toBe(OFFER_HARD_DEADLINE);
-  });
-
-  it("devuelve un deadline ya vencido si se visita después del límite global", () => {
-    const now = OFFER_HARD_DEADLINE + 60 * 1000;
-    expect(getOrCreateDeadline(now, null)).toBe(OFFER_HARD_DEADLINE);
-  });
-
-  it("topa un deadline almacenado que supera el límite global", () => {
-    const now = OFFER_HARD_DEADLINE - 10 * 60 * 60 * 1000;
-    const stored = OFFER_HARD_DEADLINE + 24 * 60 * 60 * 1000;
-    expect(getOrCreateDeadline(now, stored)).toBe(OFFER_HARD_DEADLINE);
-  });
-
-  it("topa un deadline almacenado que supera la ventana de 24h", () => {
-    const stored = BASE_NOW + 48 * 60 * 60 * 1000; // ventana antigua de 48h
-    expect(getOrCreateDeadline(BASE_NOW, stored)).toBe(BASE_NOW + OFFER_MILLISECONDS);
-  });
-});
-
-describe("readStoredDeadline", () => {
-  it("devuelve null si no hay valor", () => {
-    const storage = { getItem: () => null };
-    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBeNull();
-  });
-
-  it("devuelve null si el valor no es numérico", () => {
-    const storage = { getItem: () => "abc" };
-    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBeNull();
-  });
-
-  it("parsea un deadline válido", () => {
-    const storage = { getItem: () => String(BASE_NOW) };
-    expect(readStoredDeadline(storage, COUNTDOWN_STORAGE_KEY)).toBe(BASE_NOW);
+  it("un instante antes del cierre mantiene el cierre del día en curso", () => {
+    const now = Date.UTC(2026, 8, 2, 3, 0, 0) - 1;
+    expect(getNextDailyDeadline(now)).toBe(Date.UTC(2026, 8, 2, 3, 0, 0));
   });
 });
 
