@@ -29,6 +29,11 @@ Dominio principal: **proefexperu.com**
 | — | Inventario de contenido (D13) | [content-inventory.md](content-inventory.md) |
 | — | Registro de decisiones | [decision-register.md](decision-register.md) |
 | — | Preparación de Fase 1 + auditoría de consistencia | [phase-1-readiness.md](phase-1-readiness.md) |
+| — | **Fase 1 — estado de ejecución** | [phase-1-execution.md](phase-1-execution.md) |
+| — | Fase 1 — moodboards D7/D8 (TECH y Grow Up) | [fase-1/moodboards-tech-growup.md](fase-1/moodboards-tech-growup.md) |
+| — | Fase 1 — comparativa tipografía mono (D11) | [fase-1/comparativa-tipografia-mono.md](fase-1/comparativa-tipografia-mono.md) |
+| — | Fase 1 — copy: 10 titulares conceptuales (D12) | [fase-1/copy-titulares-conceptuales.md](fase-1/copy-titulares-conceptuales.md) |
+| — | Fase 1 — comparativa analytics (D18) | [fase-1/comparativa-analytics.md](fase-1/comparativa-analytics.md) |
 
 ## Lectura sugerida
 
