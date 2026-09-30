@@ -34,6 +34,15 @@ Dominio principal: **proefexperu.com**
 | — | Fase 1 — comparativa tipografía mono (D11) | [fase-1/comparativa-tipografia-mono.md](fase-1/comparativa-tipografia-mono.md) |
 | — | Fase 1 — copy: 10 titulares conceptuales (D12) | [fase-1/copy-titulares-conceptuales.md](fase-1/copy-titulares-conceptuales.md) |
 | — | Fase 1 — comparativa analytics (D18) | [fase-1/comparativa-analytics.md](fase-1/comparativa-analytics.md) |
+ — | **Fase 2 — estado de ejecución** | [phase-2-execution.md](phase-2-execution.md) |
+ — | Fase 2 — plan y auditoría | [fase-2/phase-2-plan.md](fase-2/phase-2-plan.md) |
+ — | Fase 2 — sistema visual | [fase-2/visual-system.md](fase-2/visual-system.md) |
+ — | Fase 2 — sistema UX | [fase-2/ux-system.md](fase-2/ux-system.md) |
+ — | Fase 2 — sistema de motion | [fase-2/motion-system.md](fase-2/motion-system.md) |
+ — | Fase 2 — inventario de componentes | [fase-2/component-inventory.md](fase-2/component-inventory.md) |
+ — | Fase 2 — especificación de homepage | [fase-2/homepage-spec.md](fase-2/homepage-spec.md) |
+ — | Fase 2 — especificación responsive | [fase-2/responsive-spec.md](fase-2/responsive-spec.md) |
+ — | Fase 2 — validación (QA) | [fase-2/phase-2-validation.md](fase-2/phase-2-validation.md) |
 
 ## Lectura sugerida
 
@@ -43,4 +52,4 @@ Dominio principal: **proefexperu.com**
 
 ## Estado
 
-FASE 0 completa — documentación lista para revisión. **No se ha construido ninguna aplicación**, conforme al alcance de esta fase. Siguiente paso: cierre de decisiones bloqueantes (Doc 19) antes de iniciar Fase 1.
+FASE 2 completa — `PHASE_2_COMPLETE — REQUIRES_PROEFEX_APPROVAL`. Design System, tres universos visuales (D7-A / D8-B), componentes, motion, navegación, homepage, formulario de contacto (UX), responsive, accesibilidad y documentación entregados. Ver [phase-2-execution.md](phase-2-execution.md). Fases 3–7 `NOT_AUTHORIZED`.

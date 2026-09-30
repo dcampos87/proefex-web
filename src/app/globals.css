@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 /*
- * PROEFEX Design System — Foundations (Fase 1)
- * Tokens según Doc 14. Los tokens semánticos son la única API para componentes.
- * Temas por universo vía [data-universe].
+ * PROEFEX Design System — Fase 2
+ * Tokens según Doc 14; universos según Docs 09/10/11; motion según Doc 12.
+ * Los tokens semánticos son la única API para componentes: nunca hex directo.
+ * Direcciones aprobadas (2026-09-30): D7 = A "Sistema Encendido" ·
+ * D8 = B "Grafismo Kinético" · D11 = Source Code Pro (mono restringido).
  */
 
 :root {
@@ -26,6 +28,7 @@
   --accent: var(--pfx-orange);
   --accent-contrast: var(--pfx-blue);
   --border: rgba(0, 34, 84, 0.12);
+  --border-strong: rgba(0, 34, 84, 0.28);
 
   /* Motion tokens (Doc 12 §2) */
   --motion-instant: 120ms;
@@ -36,12 +39,23 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-tech: cubic-bezier(0.4, 0, 0.2, 1);
-  /* spring se aplica por JS (Motion); documentado en tokens.ts */
+  --ease-current: var(--ease-out); /* firma por universo */
+  --stagger-current: 70ms;
 
-  /* Tipografía */
-  --font-sans: "Lexend Deca", system-ui, sans-serif;
-  --font-display: "Poppins", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "IBM Plex Mono", "Source Code Pro", monospace; /* D11: pendiente de elección */
+  /* Tipografía (D11: Source Code Pro aprobada — uso restringido, Doc 14 §3) */
+  --font-sans: var(--font-lexend), system-ui, sans-serif;
+  --font-display: var(--font-poppins), system-ui, sans-serif;
+  --font-mono: var(--font-source-code), "Courier New", monospace;
+
+  /* Escala tipográfica fluida (Doc 14 §3) */
+  --text-display-2xl: clamp(3.25rem, 9vw, 8.25rem);
+  --text-display-xl: clamp(2.6rem, 5.5vw, 4.5rem);
+  --text-display-lg: clamp(2.1rem, 4.5vw, 3.25rem);
+  --text-heading: clamp(1.4rem, 2.6vw, 2rem);
+  --text-body-lg: 1.125rem;
+  --text-body: 1rem;
+  --text-caption: 0.875rem;
+  --text-label-mono: 0.8125rem;
 
   /* Espaciado (escala Doc 14 §4) */
   --space-1: 4px;
@@ -56,45 +70,114 @@
   --space-14: 128px;
   --space-16: 160px;
 
-  /* Radios */
+  /* Radios — TECH tiende a esquinas rectas (ver tema tech) */
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
   --radius-full: 9999px;
+
+  /* Sombras minimalistas (y-negativa); TECH usa bordes 1px (Doc 14 §4) */
+  --shadow-sm: 0 1px 2px rgba(0, 34, 84, 0.08);
+  --shadow-md: 0 6px 16px -8px rgba(0, 34, 84, 0.18);
+  --shadow-lift: 0 10px 24px -12px rgba(0, 34, 84, 0.24);
+
+  /* Layout */
+  --container-max: 1280px;
+  --container-wide: 1440px;
+  --container-pad: clamp(20px, 5vw, 48px);
+  --header-h: 64px;
 }
 
-/* Universo TECH — fondo oscuro, acento naranja como señal (Doc 10) */
+/* ============================================================
+   UNIVERSO TECH — D7 dirección A "Sistema Encendido" (Doc 10)
+   Fondo profundo por capas; naranja solo como señal.
+   ============================================================ */
 [data-universe="tech"] {
-  --bg: #001233; /* a validar en moodboards (D7) */
+  --bg: #001233;
   --bg-sunken: #000d22;
   --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.07);
   --text: var(--pfx-white);
-  --text-body: rgba(255, 255, 255, 0.72);
+  --text-body: rgba(255, 255, 255, 0.75); /* AA sobre #001233 */
+  --text-muted: rgba(255, 255, 255, 0.6);
   --accent: var(--pfx-orange);
   --accent-contrast: #001233;
   --border: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.3);
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --shadow-md: none;
+  --shadow-lift: none;
   --ease-current: var(--ease-tech);
+  --stagger-current: 40ms;
+  color-scheme: dark;
 }
 
-/* Universo GROW UP — luminoso, colores secundarios protagonistas (Doc 11) */
+/* ============================================================
+   UNIVERSO GROW UP — D8 dirección B "Grafismo Kinético" (Doc 11)
+   Colores secundarios protagonistas; flat gráfico; nunca fondo oscuro.
+   ============================================================ */
 [data-universe="growup"] {
   --bg: var(--pfx-white);
-  --bg-sunken: #fdf6ec; /* a validar en moodboards (D8) */
+  --bg-sunken: #fdf6ec;
   --surface: var(--pfx-white);
+  --surface-hover: #fffdf8;
   --text: var(--pfx-blue);
   --text-body: var(--pfx-gray);
+  --text-muted: rgba(0, 34, 84, 0.65);
   --accent: var(--pfx-red);
+  --accent-contrast: var(--pfx-white);
   --accent-2: var(--pfx-yellow);
-  --border: rgba(0, 34, 84, 0.12);
+  --accent-3: var(--pfx-blue-light);
+  --border: rgba(0, 34, 84, 0.14);
+  --border-strong: rgba(0, 34, 84, 0.32);
   --ease-current: var(--ease-out);
+  --stagger-current: 110ms;
 }
 
 [data-universe="core"] {
+  --surface-hover: #fbfcfe;
+  --text-muted: rgba(65, 65, 65, 0.75);
   --ease-current: var(--ease-out);
+  --stagger-current: 70ms;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Todo contenedor de universo pinta su tema (secciones de la home,
+   landings de área, bloques con theme propio). */
+[data-universe] {
+  background-color: var(--bg);
+  color: var(--text-body);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text);
+  line-height: 1.1;
+  text-wrap: balance;
 }
 
 /* Accesibilidad global (A6/A7 aprobados) */
-:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+:where(a, button, input, select, textarea, [tabindex], summary):focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -103,7 +186,7 @@
   position: absolute;
   left: -9999px;
   top: 0;
-  z-index: 100;
+  z-index: 200;
   background: var(--pfx-blue);
   color: var(--pfx-white);
   padding: var(--space-3) var(--space-4);
@@ -115,12 +198,442 @@
 
 /* A7: reduced motion como parte del sistema global */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ============================================================
+   Utilidades de layout
+   ============================================================ */
+.container-pfx {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+.container-wide {
+  max-width: var(--container-wide);
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 160px);
+}
+.section-sm {
+  padding-block: clamp(48px, 7vw, 96px);
+}
+
+/* ============================================================
+   Componentes primitivos (Doc 14 §5)
+   ============================================================ */
+
+/* Botón — estados hover/focus/active/disabled; alto táctil ≥48px */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-body);
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background var(--motion-fast) var(--ease-current),
+    color var(--motion-fast) var(--ease-current),
+    border-color var(--motion-fast) var(--ease-current),
+    transform var(--motion-instant) var(--ease-current),
+    box-shadow var(--motion-fast) var(--ease-current);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+.btn-primary:hover {
+  box-shadow: var(--shadow-lift);
+  filter: brightness(1.05);
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+[data-universe="tech"] .btn-secondary:hover {
+  color: var(--pfx-white);
+  background: var(--surface-hover);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  padding-inline: var(--space-4);
+}
+.btn-ghost:hover {
+  color: var(--accent);
+}
+.btn-sm {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-caption);
+}
+/* Variante para fondos oscuros (CTA sobre azul de marca) */
+.on-dark.btn-secondary {
+  color: var(--pfx-white);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.on-dark.btn-secondary:hover {
+  color: var(--pfx-orange);
+  border-color: var(--pfx-orange);
+}
+
+/* Badge / chip */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* Etiqueta mono técnica (D11 — uso restringido: metadatos, numeración, datos) */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-mono);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+}
+
+/* Card base */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition:
+    transform var(--motion-fast) var(--ease-current),
+    box-shadow var(--motion-fast) var(--ease-current),
+    border-color var(--motion-fast) var(--ease-current),
+    background var(--motion-fast) var(--ease-current);
+}
+
+/* Texto placeholder de contenido — nunca debe llegar a producción */
+.content-required {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  display: inline-block;
+}
+/* Variante legible sobre fondos oscuros (footer TECH/azul de marca) */
+footer .content-required,
+[data-universe="tech"] .content-required {
+  color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+/* ============================================================
+   Motion (Doc 12) — solo transform/opacity/clip-path (GPU-friendly)
+   ============================================================ */
+
+/* Reveal genérico: fade + rise 24px, una vez, no reversible.
+   Gated por .js (script inline en layout): sin JS el contenido es visible. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--motion-slow) var(--ease-current),
+    transform var(--motion-slow) var(--ease-current);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Reveal por líneas (titulares) — máscara clip-path */
+.js .reveal-lines .line {
+  display: block;
+  clip-path: inset(0 0 110% 0);
+  transform: translateY(0.6em);
+  transition:
+    clip-path var(--motion-slow) var(--ease-current),
+    transform var(--motion-slow) var(--ease-current);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js .reveal-lines.is-visible .line {
+  clip-path: inset(-0.1em 0 -0.15em 0);
+  transform: none;
+}
+
+/* Firma TECH: módulos que "encienden" en secuencia */
+.js [data-universe="tech"] .ignite {
+  opacity: 0;
+  transform: translateY(12px);
+  border-color: transparent;
+  transition:
+    opacity var(--motion-base) var(--ease-tech),
+    transform var(--motion-base) var(--ease-tech),
+    border-color var(--motion-base) var(--ease-tech);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-universe="tech"] .ignite.is-visible {
+  opacity: 1;
+  transform: none;
+  border-color: var(--border);
+}
+
+/* Panel técnico con marcas de encuadre (Doc 10 §2.3) */
+.tech-panel {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color var(--motion-fast) var(--ease-tech), background var(--motion-fast) var(--ease-tech);
+}
+.tech-panel::before,
+.tech-panel::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  transition: border-color var(--motion-fast) var(--ease-tech);
+}
+.tech-panel::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--text-muted);
+  border-left: 2px solid var(--text-muted);
+}
+.tech-panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--text-muted);
+  border-right: 2px solid var(--text-muted);
+}
+.tech-panel:hover {
+  border-color: var(--accent);
+  background: var(--surface-hover);
+}
+.tech-panel:hover::before,
+.tech-panel:hover::after {
+  border-color: var(--accent);
+}
+
+/* Grid tecnológico de fondo, 3–6% opacidad (Doc 10 §2.3) */
+.tech-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 30%, transparent 75%);
+}
+
+/* Marquee Grow Up (Doc 11 §2.5) — velocidad legible, pausable */
+.marquee {
+  overflow: hidden;
+  user-select: none;
+}
+.marquee-track {
+  display: flex;
+  gap: var(--space-8);
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Subrayado animado (links de navegación, Grow Up) */
+.underline-anim {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: left 100%;
+  transition: background-size var(--motion-fast) var(--ease-current);
+  padding-bottom: 2px;
+}
+.underline-anim:hover,
+.underline-anim:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* Botones de icono (hamburger/cierre de menú) — táctil ≥44px.
+   El toggle se oculta en lg+ aquí (una clase inline `display` lo
+   sobrescribiría). */
+.icon-btn {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.icon-btn-lg-hide {
+  display: inline-flex;
+}
+@media (min-width: 1024px) {
+  .icon-btn-lg-hide {
+    display: none;
+  }
+}
+
+/* Header al hacer scroll: encoge y gana borde/blur (Doc 12 §3.8) */
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  background: transparent;
+  transition:
+    height var(--motion-fast) var(--ease-current),
+    background var(--motion-fast) var(--ease-current),
+    box-shadow var(--motion-fast) var(--ease-current);
+}
+.site-header.is-scrolled {
+  height: 56px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Menú móvil: overlay con stagger de ítems */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--header-h) + var(--space-5)) var(--container-pad) var(--space-8);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--motion-fast) var(--ease-current), visibility 0s linear var(--motion-fast);
+}
+.mobile-nav.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.mobile-nav .nav-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--motion-base) var(--ease-current), transform var(--motion-base) var(--ease-current);
+}
+.mobile-nav.is-open .nav-item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--i, 0) * 60ms + 60ms);
+}
+
+/* Formularios: labels flotantes se resuelven con labels visibles; estados */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.field-label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--text);
+}
+.field-input {
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  transition: border-color var(--motion-fast) var(--ease-current), box-shadow var(--motion-fast) var(--ease-current);
+  width: 100%;
+}
+/* Selector de código de país dentro de la fila de teléfono */
+.phone-code {
+  width: 38%;
+  min-width: 0;
+  flex: none;
+}
+.field-input:hover {
+  border-color: var(--accent);
+}
+.field-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+.field-input[aria-invalid="true"] {
+  border-color: var(--pfx-red);
+}
+.field-error {
+  font-size: var(--text-caption);
+  color: var(--pfx-red);
+}
+[data-universe="tech"] .field-input {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--pfx-white);
+}
+[data-universe="tech"] .field-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================
+   Tailwind v4: expone tokens como utilidades clave
+   ============================================ */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-body: var(--text-body);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
 }

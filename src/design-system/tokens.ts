@@ -1,6 +1,9 @@
 /**
  * Tokens del Design System PROEFEX — fuente de verdad TS (espejo de globals.css).
  * Los componentes consumen SOLO tokens semánticos, nunca hex directos (Doc 14 §2).
+ *
+ * Fase 2: D7 = A "Sistema Encendido" · D8 = B "Grafismo Kinético" ·
+ * D11 = Source Code Pro (aprobada; uso restringido a datos/etiquetas técnicas).
  */
 
 export const brand = {
@@ -17,7 +20,8 @@ export type Universe = "core" | "tech" | "growup";
 
 /**
  * Motion tokens (Doc 12 §2). Duraciones en ms.
- * `spring` se aplica por JS con la librería Motion; aquí solo valores declarativos.
+ * Fase 2: sin librería de animación — revelados CSS + IntersectionObserver.
+ * `spring` queda documentado para cuando se apruebe Motion (Doc 12 §4).
  */
 export const motionTokens = {
   duration: {
@@ -60,4 +64,16 @@ export type AnimationPreset = (typeof animationPresets)[number];
 export const spacing = [4, 8, 12, 16, 24, 32, 48, 64, 96, 128, 160] as const;
 
 /** Breakpoints Doc 15 §1. */
-export const breakpoints = { sm: 640, md: 1024, lg: 1024, xl: 1440, xxl: 1920 } as const;
+export const breakpoints = { sm: 640, md: 768, lg: 1024, xl: 1440, xxl: 1920 } as const;
+
+/** Escala tipográfica fluida (Doc 14 §3) — espejo de los tokens CSS. */
+export const typeScale = {
+  "display-2xl": "clamp(3.25rem, 9vw, 8.25rem)",
+  "display-xl": "clamp(2.6rem, 5.5vw, 4.5rem)",
+  "display-lg": "clamp(2.1rem, 4.5vw, 3.25rem)",
+  heading: "clamp(1.4rem, 2.6vw, 2rem)",
+  "body-lg": "1.125rem",
+  body: "1rem",
+  caption: "0.875rem",
+  "label-mono": "0.8125rem",
+} as const;

@@ -3,6 +3,8 @@
 Registro vivo de todas las decisiones. Estados: `APPROVED` (aprobada por humano) · `APPROVED_PENDING_HUMAN_CONFIRMATION` · `REQUIRES_PROEFEX_INPUT` · `PROPOSED` · `DEFERRED` · `REJECTED`.
 
 > **2026-09-30 — Aprobación humana formal de Fase 0.** Aprobadas: D1, D2, D3, D4, D6, D9, D10, D14 y A1–A8. Permanecen abiertas: D5, D7, D8, D11, D12, D13, D15, D16, D17, D18. Fase 1 `AUTHORIZED_TO_START`. Fases 2–7 `NOT_AUTHORIZED`.
+>
+> **2026-09-30 — Autorización de Fase 2.** La autorización formal de Fase 2 cerró decisiones: **D7 = dirección A "Sistema Encendido"**, **D8 = dirección B "Grafismo Kinético"**, **D11 = Source Code Pro**, **D12 = titulares aprobados como dirección conceptual** (no copy comercial final), **D16 = Certmind Partner Oficial**, **D17 = destino de leads Turu CRM con campos definidos** (integración en fase posterior), **D18 = GA4** (Fase 2 solo estrategia conceptual). Nuevas decisiones de Fase 2: D19–D23 (`PROPOSED`, ver abajo). Estado: `PHASE_2_COMPLETE — REQUIRES_PROEFEX_APPROVAL`.
 
 Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 
@@ -24,10 +26,10 @@ Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |
 |---|---|---|---|---|---|
-| D7 | Dirección visual TECH: 2 moodboards diferenciados (13 elementos c/u) | `REQUIRES_PROEFEX_INPUT` | Design Lead → PROEFEX elige | Alto | Moodboards A/B producidos en Fase 1 → PROEFEX elige |
-| D8 | Dirección visual Grow Up: 2 moodboards diferenciados | `REQUIRES_PROEFEX_INPUT` | Design Lead → PROEFEX elige | Alto | Moodboards A/B producidos en Fase 1 → PROEFEX elige |
-| D11 | Tipografía mono: muestras (JetBrains Mono, IBM Plex Mono, Source Code Pro) con uso restringido | `REQUIRES_PROEFEX_INPUT` | Design Lead → PROEFEX | Bajo | Comparativa entregada en Fase 1 → PROEFEX elige |
-| D12 | Copy: 10 titulares conceptuales para validar tono (Doc 19 §D12) | `REQUIRES_PROEFEX_INPUT` | Content + PROEFEX | Medio | Titulares entregados en Fase 1 → validar tono |
+| D7 | Dirección visual TECH: 2 moodboards diferenciados (13 elementos c/u) | `APPROVED` = dirección **A "Sistema Encendido"** (autorización Fase 2, 2026-09-30) · `IMPLEMENTED` en Fase 2 | Design Lead → PROEFEX | Alto | Ejecutada en HeroTech/TECH sections (`visual-system.md` §2) |
+| D8 | Dirección visual Grow Up: 2 moodboards diferenciados | `APPROVED` = dirección **B "Grafismo Kinético"** (autorización Fase 2, 2026-09-30) · `IMPLEMENTED` en Fase 2 | Design Lead → PROEFEX | Alto | Ejecutada en HeroCreative/Grow Up sections |
+| D11 | Tipografía mono: muestras (JetBrains Mono, IBM Plex Mono, Source Code Pro) | `APPROVED` = **Source Code Pro**, uso restringido (autorización Fase 2, 2026-09-30) · `IMPLEMENTED` | Design Lead → PROEFEX | Bajo | Reglas de uso en `visual-system.md` §1.2 |
+| D12 | Copy: 10 titulares conceptuales | `APPROVED` como **dirección conceptual** (no copy comercial final); en uso en la home | Content + PROEFEX | Medio | Copy definitivo con inventario completo (D13) |
 
 ## Decisiones de contenido y operación
 
@@ -35,9 +37,19 @@ Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 |---|---|---|---|---|---|
 | D13 | Inventario de contenido (`content-inventory.md`) | `REQUIRES_PROEFEX_INPUT` — **CRÍTICA** | PROEFEX | Crítico para F2; no bloquea infra F1 | Completar inventario |
 | D15 | Estado de productos SaaS (matriz Doc 19) | `REQUIRES_PROEFEX_INPUT` | PROEFEX | Medio — bloquea F3 | Completar matriz |
-| D16 | Learning/Certmind: checklist de información | `REQUIRES_PROEFEX_INPUT` | PROEFEX | Bajo — placeholder posible antes | Responder checklist |
-| D17 | Contacto y leads: formulario propuesto + destino/legal | `REQUIRES_PROEFEX_INPUT` | PROEFEX | Medio — bloquea formularios F2 | Definir destino de leads y textos legales |
-| D18 | Analítica y consentimiento: arquitectura propuesta, herramienta a evaluar | `REQUIRES_PROEFEX_INPUT` | Agent Master + PROEFEX | Medio | Comparativa entregada en Fase 1 → decisión antes de lanzar F2 |
+| D16 | Learning/Certmind: checklist de información | `APPROVED` (parcial): **Certmind es Partner Oficial** (autorización Fase 2) · `IMPLEMENTED` como banda UX en home | Agent Master | Bajo | Catálogo de cursos pendiente (`CONTENT_REQUIRED`); sin LMS |
+| D17 | Contacto y leads: formulario propuesto + destino/legal | `APPROVED` (parcial): destino **Turu CRM** + campos definidos (autorización Fase 2) · UX `IMPLEMENTED` en Fase 2 | PROEFEX | Medio | Integración real Turu CRM en fase posterior; textos legales pendientes |
+| D18 | Analítica y consentimiento: arquitectura propuesta, herramienta a evaluar | `APPROVED` = GA4 (autorización Fase 2, 2026-09-30); implementación y consentimiento en fase posterior | Agent Master + PROEFEX | Medio | Fase 2 documentó solo eventos conceptuales (`ux-system.md` §5) |
+
+## Decisiones nuevas de Fase 2 (PROPOSED — requieren confirmación humana para cerrar)
+
+| ID | Decisión | Estado | Responsable | Impacto | Notas |
+|---|---|---|---|---|---|
+| D19 | Motion sin librería en Fase 2: CSS + IntersectionObserver; Motion/GSAP diferidos hasta efecto que lo exija | `PROPOSED` (implementado así) | Agent Master | Positivo — 0 kB de animación, presupuesto protegido | Revertible a Motion (Doc 12 §4) si se aprueba |
+| D20 | Fuentes self-hosted: Lexend Deca variable + Poppins 600/700 + Source Code Pro 400 (3 familias; desviación justificada del presupuesto "≤2 familias × 2 pesos" por D11) | `PROPOSED` (implementado así) | Agent Master | Bajo (~40–60 KB woff2 totales) | Conformar o recortar pesos |
+| D21 | `next/font/local` en lugar de `next/font/google` (el loader de Google falla en el entorno de desarrollo; además es la recomendación del Doc 16 §2.4) | `PROPOSED` (implementado así) | Agent Master | Bajo | |
+| D22 | Transición entre universos en home = corte limpio de fondo + marquee como costura (en vez del wash de gradiente del Doc 12 §3.4) | `PROPOSED` (implementado así) | Design Lead | Bajo — refinable en Fase 3 | El cambio de universo ES el mensaje (D6) |
+| D23 | Navegación de Fase 2 con anclas a la home; rutas definitivas (Doc 03) al construir páginas en Fase 3 | `PROPOSED` (implementado así) | Agent Master | Bajo | |
 
 ## Decisiones arquitectónicas confirmadas
 
