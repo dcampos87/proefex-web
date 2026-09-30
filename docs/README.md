@@ -43,6 +43,7 @@ Dominio principal: **proefexperu.com**
  — | Fase 2 — especificación de homepage | [fase-2/homepage-spec.md](fase-2/homepage-spec.md) |
  — | Fase 2 — especificación responsive | [fase-2/responsive-spec.md](fase-2/responsive-spec.md) |
  — | Fase 2 — validación (QA) | [fase-2/phase-2-validation.md](fase-2/phase-2-validation.md) |
+ — | **Fase 2 — recalibración multipágina (megamenú + 5 líneas)** | [fase-2/recalibracion-multipage.md](fase-2/recalibracion-multipage.md) |
 
 ## Lectura sugerida
 
@@ -52,4 +53,4 @@ Dominio principal: **proefexperu.com**
 
 ## Estado
 
-FASE 2 completa — `PHASE_2_COMPLETE — REQUIRES_PROEFEX_APPROVAL`. Design System, tres universos visuales (D7-A / D8-B), componentes, motion, navegación, homepage, formulario de contacto (UX), responsive, accesibilidad y documentación entregados. Ver [phase-2-execution.md](phase-2-execution.md). Fases 3–7 `NOT_AUTHORIZED`.
+**FASE 2 RECALIBRADA** — `PHASE_2_RECALIBRATED — REQUIRES_PROEFEX_APPROVAL`. Fase 2 original (design system, componentes, motion) recalibrada a **experiencia multipágina**: 5 líneas de negocio (CREATE/GROW/LEARN/EXPERIENCE/SOLVE), megamenú, subnav, breadcrumbs, Home como entry point, 6 universos visuales, 38 rutas. Ver [fase-2/recalibracion-multipage.md](fase-2/recalibracion-multipage.md) y [phase-2-execution.md](phase-2-execution.md). Fases 3–7 `NOT_AUTHORIZED`.

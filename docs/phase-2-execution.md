@@ -1,7 +1,7 @@
 # Fase 2 — Design System + UX/UI + Dirección Creativa + Motion — Estado de Ejecución
 
-**Autorización:** Fase 2 `AUTHORIZED_TO_START` (aprobación humana 2026-09-30)
-**Estado al cierre de este bloque:** `PHASE_2_COMPLETE — REQUIRES_PROEFEX_APPROVAL`
+**Autorización:** Fase 2 `AUTHORIZED_TO_START` (aprobación humana 2026-09-30) + **Recalibración multipágina autorizada** (instrucción humana posterior)
+**Estado al cierre de este bloque:** `PHASE_2_RECALIBRATED — REQUIRES_PROEFEX_APPROVAL`
 **Fases 3–7:** `NOT_AUTHORIZED`
 
 ---
@@ -58,3 +58,24 @@ Ninguno fuera de alcance. Desviaciones documentadas como decisiones D19–D23 en
 
 - Home: `http://localhost:3000/` (`npm run dev`) o `next start`.
 - Showcase: `/showcase`.
+
+---
+
+# Recalibración Fase 2 — Multipágina + megamenú + 5 líneas
+
+> Documento autoritativo de la recalibración: **[`fase-2/recalibracion-multipage.md`](fase-2/recalibracion-multipage.md)** (arquitectura, navegación, universos, QA, matriz de contenido). Resumen de entregables:
+
+| Entregable | Estado | Detalle |
+|---|---|---|
+| Arquitectura multipágina (D24) | ✅ | 38 rutas: 5 landings de pilar + plantillas servicio/producto + `/contacto` + 25 stubs `CONTENT_REQUIRED` |
+| Megamenú desktop + drawer móvil (D26) | ✅ | Escape, focus trap, aria-expanded/controls verificados automatizadamente |
+| SubNav + Breadcrumbs (JSON-LD) | ✅ | `aria-current="page"`; fuente única `nav-data.ts` |
+| Home reducida (entry point) | ✅ | 8 secciones compactas que derivan tráfico a pilares; contacto a `/contacto` |
+| 6 universos visuales | ✅ | Core + TECH + Grow Up (**nueva paleta #22272E/#00FFE6 — D25**) + LEARNS + EQUIP + SOLVE; AA verificado |
+| Header universo-aware (D27) | ✅ | Fix de QA: tokens por ruta, contraste sobre héroes oscuros |
+| QA build/performance | ✅ | typecheck + build OK; First Load JS 107 kB ≤ 180 kB; overflow 320px = 0 en 10 rutas |
+| Decisiones y matriz de contenido | ✅ | D23 `DEPRECATED` → D24–D27 en `decision-register.md`; matriz en `recalibracion-multipage.md` §L |
+
+**NO hecho (conforme a la autorización):** sin CMS, sin contenido definitivo, sin Turu CRM, sin GA4 productivo, sin LMS, sin blog real, sin DNS/despliegue. Pendiente de decisión humana: mapa de URLs (conflicto D24 vs Doc 04).
+
+**Fase 3 requeriría:** resolución D24, contenido (D13/D15/D17), CMS + API, integraciones.

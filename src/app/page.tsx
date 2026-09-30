@@ -1,269 +1,183 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { HeroCore } from "@/components/heroes/HeroCore";
-import { HeroTech } from "@/components/heroes/HeroTech";
-import { HeroCreative } from "@/components/heroes/HeroCreative";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceGrid } from "@/components/blocks/ServiceGrid";
-import { SaaSShowcase } from "@/components/blocks/SaaSShowcase";
-import { SectorGrid } from "@/components/blocks/SectorGrid";
 import { BlogGrid } from "@/components/blocks/BlogGrid";
-import { CaseStudyCard } from "@/components/blocks/CaseStudyCard";
-import { Marquee } from "@/components/blocks/Marquee";
-import { ContactSection } from "@/components/forms/ContactSection";
 import { Reveal } from "@/components/motion/Reveal";
-import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { PILLARS, CONTACT_HREF } from "@/components/layout/nav-data";
+
+export const metadata: Metadata = {
+  title: "PROEFEX — Un solo ecosistema para construir, crecer y aprender",
+  description:
+    "Tecnología, marketing, formación, equipamiento y productos: cinco capacidades que funcionan como un sistema.",
+  alternates: { canonical: "/" },
+};
 
 /**
- * HOME — Fase 2 (D6: narrativa continua por universos).
- * Recorrido: Hero Core → Ecosistema → TECH → Grow Up → Learning →
- * SaaS/Productos → Sectores/Casos → Insights → Contacto.
- *
- * Copy: titulares conceptuales aprobados en D12 (no copy comercial final).
- * Sin cifras, clientes, casos ni testimonios inventados (Regla 29):
- * los bloques de evidencia se muestran con CONTENT_REQUIRED.
+ * HOME — recalibración (§13): ECOSYSTEM ENTRY POINT.
+ * Corta y orientadora: presenta el ecosistema, los cinco pilares y deriva
+ * tráfico a las landings. NO concentra servicios ni contenido (§2).
  */
-
 export default function Home() {
   return (
     <>
-      {/* 1. HERO CORE — apertura del ecosistema */}
+      {/* 1. HERO PROEFEX */}
       <HeroCore
         kicker="PROEFEX — ECOSISTEMA"
         title={"Un solo ecosistema para\nconstruir, crecer y aprender."}
         subtitle="Tecnología, ingeniería y creatividad, integradas."
-        primaryCta={{ label: "Iniciar conversación", href: "#contacto" }}
-        secondaryCta={{ label: "Explorar capacidades", href: "#tech" }}
+        primaryCta={{ label: "Solicitar asesoría", href: CONTACT_HREF }}
+        secondaryCta={{ label: "Explorar el ecosistema", href: "#pilares" }}
       />
 
-      {/* 2. PROEFEX CORE — el sistema que conecta */}
-      <section id="nosotros" data-universe="core" className="section" aria-labelledby="core-title">
-        <div className="container-pfx flex flex-col gap-12">
+      {/* 2+3. PRESENTACIÓN + CINCO PILARES (Nivel 2, §23) */}
+      <section id="pilares" data-universe="core" className="section-sm" aria-labelledby="pilares-title">
+        <div className="container-pfx flex flex-col gap-10">
           <SectionHeader
-            kicker="PROEFEX CORE"
-            title="Tecnología, ingeniería y creatividad, integradas."
-            intro="Lo que su empresa necesita, funcionando como un sistema: cada área del ecosistema resuelve una parte, y todas trabajan conectadas."
+            kicker="EL ECOSISTEMA"
+            title="Cinco capacidades, una sola propuesta."
+            intro="Cada línea tiene su equipo, su método y su experiencia propia. Juntas funcionan como un sistema: se conocen, se complementan y se integran en tu proyecto."
           />
-          <ServiceGrid
-            items={[
-              {
-                index: "A",
-                title: "PROEFEX TECH",
-                description: "Software, IA, automatización e ingeniería aplicada a su operación.",
-                href: "#tech",
-                meta: "CONSTRUIR",
-              },
-              {
-                index: "B",
-                title: "GROW UP",
-                description: "Estrategia, contenido y creatividad para hacer crecer marcas.",
-                href: "#grow-up",
-                meta: "CRECER",
-              },
-              {
-                index: "C",
-                title: "LEARNING",
-                description: "Capacitación y certificación para equipos. Certmind es Partner Oficial.",
-                href: "#learning",
-                meta: "APRENDER",
-              },
-              {
-                index: "D",
-                title: "PRODUCTOS Y SaaS",
-                description: "Equipamiento y software propio que materializa el ecosistema.",
-                href: "#saas",
-                meta: "ENTREGAR",
-              },
-            ]}
-          />
-        </div>
-      </section>
-
-      {/* 3. PROEFEX TECH — inmersión en el universo oscuro (D7-A "Sistema Encendido") */}
-      <section id="tech" aria-labelledby="tech-title">
-        <HeroTech
-          kicker="01 — PROEFEX TECH"
-          title={"Sistemas que se integran.\nNo herramientas que se acumulan."}
-          subtitle="Software, IA, automatización e ingeniería trabajando dentro de su negocio, no alrededor de él."
-          primaryCta={{ label: "Hablar con TECH", href: "#contacto" }}
-        />
-        <div data-universe="tech" className="pb-[clamp(72px,10vw,144px)]">
-          <div className="container-pfx">
-            <ServiceGrid
-              variant="tech"
-              items={[
-                {
-                  index: "01 / DESARROLLO",
-                  title: "Software hecho a la medida de su operación.",
-                  description: "Web, apps y software especializado construidos sobre su proceso real.",
-                },
-                {
-                  index: "02 / IA",
-                  title: "IA y automatización, dentro de su negocio.",
-                  description: "Modelos y flujos automatizados integrados a sus sistemas actuales.",
-                },
-                {
-                  index: "03 / INGENIERÍA",
-                  title: "Ingeniería con drones: el territorio, en datos.",
-                  description: "Geodesia, topografía e IoT con precisión de campo.",
-                },
-                {
-                  index: "04 / TRANSFORMACIÓN",
-                  title: "Transformación digital con criterio.",
-                  description: "Gestión empresarial y nube, sin acumular herramientas.",
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 4. GROW UP — cambio radical de universo (D8-B "Grafismo Kinético") */}
-      <section id="grow-up" data-universe="growup" aria-labelledby="growup-title">
-        <div className="pt-[clamp(48px,7vw,96px)]">
-          <Marquee
-            words={["ESTRATEGIA", "CONTENIDO", "GROWTH", "STORYTELLING", "CREATIVIDAD"]}
-            label="Palabras clave del estudio Grow Up: estrategia, contenido, growth, storytelling, creatividad"
-          />
-        </div>
-        <HeroCreative
-          kicker="02 — GROW UP"
-          title="Hacemos crecer marcas."
-          highlightWord="crecer"
-          subtitle="Estrategia, contenido y creatividad en movimiento. El marketing que se nota."
-          primaryCta={{ label: "Hablar con Grow Up", href: "#contacto" }}
-        />
-        <div className="pb-[clamp(72px,10vw,144px)]">
-          <div className="container-pfx">
-            <ServiceGrid
-              variant="growup"
-              items={[
-                {
-                  index: "01",
-                  title: "Marketing BPO",
-                  description: "Operamos el marketing de su empresa como un equipo propio, en sistema.",
-                },
-                {
-                  index: "02",
-                  title: "Growth Marketing",
-                  description: "Experimentación y canales, con el crecimiento como objetivo medible.",
-                },
-                {
-                  index: "03",
-                  title: "Consultoría de marketing",
-                  description: "Método y dirección para que su marca crezca con estrategia.",
-                },
-              ]}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* 5. LEARNING — banda breve (D16: Certmind Partner Oficial) */}
-      <section id="learning" data-universe="core" className="section-sm" aria-labelledby="learning-title">
-        <div className="container-pfx">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <Reveal className="flex flex-col gap-4">
-              <p className="label-mono">03 — LEARNING</p>
-              <h2 id="learning-title" style={{ fontSize: "var(--text-display-lg)" }}>
-                Capacitamos a los equipos que operan el cambio
-              </h2>
-              <p className="max-w-[56ch]">
-                Formación dentro del ecosistema PROEFEX, con la certificación de
-                nuestro partner oficial.
+          <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list" id="nosotros">
+            {PILLARS.map((p, i) => (
+              <Reveal as="li" key={p.pillar} delay={i * 70}>
+                <Link
+                  href={p.href}
+                  className="card flex h-full flex-col gap-3 p-6 no-underline hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
+                  aria-label={`${p.pillar} — ${p.name}: ${p.tagline}`}
+                >
+                  <p className="flex items-center gap-2">
+                    <span
+                      aria-hidden="true"
+                      className="inline-block h-2 w-2 rounded-full"
+                      style={{ background: p.accent }}
+                    />
+                    <span className="label-mono" style={{ color: p.accent }}>{p.pillar}</span>
+                  </p>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--text)" }}>
+                    {p.name}
+                  </h3>
+                  <p style={{ color: "var(--text-body)" }}>{p.tagline}</p>
+                  <p style={{ marginTop: "auto", fontSize: "var(--text-caption)", color: p.accent, fontWeight: 600 }}>
+                    Explorar →
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+            <Reveal as="li" delay={350} className="card flex h-full flex-col justify-center gap-3 p-6" style={{ background: "var(--pfx-blue)" }}>
+              <p className="label-mono" style={{ color: "rgba(255,255,255,0.6)" }}>PROEFEX CORE</p>
+              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--pfx-white)" }}>
+                La capa que conecta los cinco pilares.
               </p>
-              <p>
-                <Badge>Certmind — Partner Oficial</Badge>
-              </p>
-              <p style={{ color: "var(--text-muted)", fontSize: "var(--text-caption)" }}>
-                Catálogo de cursos: <span className="content-required">CONTENT_REQUIRED</span>
+              <p style={{ color: "rgba(255,255,255,0.78)", fontSize: "var(--text-caption)" }}>
+                Visión, integración y confianza: el lenguaje común del ecosistema.
               </p>
             </Reveal>
-            <Reveal delay={120}>
-              <div
-                className="flex aspect-[16/9] items-center justify-center border"
-                style={{
-                  borderRadius: "var(--radius-md)",
-                  background: "var(--bg-sunken)",
-                  borderStyle: "dashed",
-                  borderColor: "var(--border-strong)",
-                }}
-                role="img"
-                aria-label="Espacio reservado para imagen de Learning"
-              >
-                <span className="content-required">MEDIA — CONTENT_REQUIRED</span>
+          </ul>
+        </div>
+      </section>
+
+      {/* 5. CÓMO SE CONECTAN — breve, no catálogo */}
+      <section data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="conexion-title">
+        <div className="container-pfx grid items-center gap-10 lg:grid-cols-2">
+          <Reveal className="flex flex-col gap-4">
+            <p className="label-mono">INTEGRACIÓN</p>
+            <h2 id="conexion-title" style={{ fontSize: "var(--text-display-lg)" }}>
+              Lo que su empresa necesita, funcionando como un sistema.
+            </h2>
+            <p className="max-w-[56ch]">
+              No entregamos herramientas aisladas: entendemos la operación,
+              diseñamos la solución e integramos tecnología, marketing,
+              formación y producto cuando el proyecto lo requiere.
+            </p>
+            <p>
+              <Button href={CONTACT_HREF} variant="secondary">Conversar sobre su caso</Button>
+            </p>
+          </Reveal>
+          <Reveal delay={120} className="flex flex-col gap-3">
+            {[
+              { n: "01", t: "Entender", d: "Diagnóstico de la operación y el contexto." },
+              { n: "02", t: "Diseñar", d: "La solución como sistema, no como piezas sueltas." },
+              { n: "03", t: "Integrar", d: "Los pilares necesarios, trabajando conectados." },
+            ].map((s) => (
+              <div key={s.n} className="card flex items-baseline gap-4 p-5">
+                <span className="label-mono" style={{ color: "var(--accent)" }}>{s.n}</span>
+                <div>
+                  <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, color: "var(--text)" }}>{s.t}</p>
+                  <p style={{ fontSize: "var(--text-caption)", color: "var(--text-body)" }}>{s.d}</p>
+                </div>
               </div>
-            </Reveal>
-          </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 
-      {/* 6. SAAS + PRODUCTOS — lo tangible del ecosistema */}
-      <section id="saas" data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="saas-title">
-        <div className="container-pfx flex flex-col gap-12">
+      {/* 6. FEATURED SOLUTIONS — deriva a SOLVE */}
+      <section data-universe="solve" className="section-sm" aria-labelledby="featured-title">
+        <div className="container-pfx flex flex-col gap-8">
           <SectionHeader
-            kicker="04 — SAAS Y PRODUCTOS"
-            title="Software propio y equipamiento, parte del mismo sistema."
+            kicker="SOLVE — PRODUCTOS"
+            title="Soluciones listas para operar."
+            intro="Software propio del ecosistema, con página propia por producto."
           />
-          <SaaSShowcase
-            products={[
-              { name: "Turu CRM", domain: "turucrm.com", status: "announced" },
-              { name: "PROEFACT", domain: "proefact.com", status: "announced" },
-              { name: "My Bpass", domain: "mybpas.com", status: "announced" },
-              { name: "AtendiGo", domain: "atendigo.tech", status: "announced" },
-              { name: "Eleventto", domain: "eleventto.com", status: "announced" },
-              { name: "Klyra", status: "reserved" },
-            ]}
-          />
-          <ServiceGrid
-            columns={2}
-            items={[
-              { title: "Pantallas comerciales" },
-              { title: "Pizarras interactivas" },
-              { title: "Tótems" },
-              { title: "Alquiler de equipos" },
-            ]}
-          />
+          <ul className="grid gap-5 md:grid-cols-3" role="list">
+            {PILLARS[4].children.slice(0, 3).map((prod, i) => (
+              <Reveal as="li" key={prod.href} delay={i * 80}>
+                <Link href={prod.href} className="card flex h-full flex-col gap-2 p-6 no-underline hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]">
+                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--text)" }}>
+                    {prod.label}
+                  </h3>
+                  <span className="content-required w-fit">CONTENT_REQUIRED — descripción</span>
+                  <p style={{ marginTop: "auto", fontSize: "var(--text-caption)", color: "var(--accent)", fontWeight: 600 }}>
+                    Ver producto →
+                  </p>
+                </Link>
+              </Reveal>
+            ))}
+          </ul>
+          <Reveal>
+            <p>
+              <Button href="/solutions" variant="secondary">Ver todas las soluciones</Button>
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* 7. SECTORES × CASOS — evidencia aplicada (casos solo con contenido real) */}
-      <section id="sectores" data-universe="core" className="section-sm" aria-labelledby="sectores-title">
-        <div className="container-pfx flex flex-col gap-12">
+      {/* 7. INSIGHTS — teaser, deriva a /insights */}
+      <section data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="insights-title">
+        <div className="container-pfx flex flex-col gap-8">
           <SectionHeader
-            kicker="05 — SECTORES Y CASOS"
-            title="Experiencia aplicada al sector de su empresa."
-          />
-          <SectorGrid
-            items={[
-              { name: "Industria" },
-              { name: "Salud" },
-              { name: "Retail" },
-              { name: "Educación" },
-              { name: "Servicios" },
-              { name: "Minería" },
-              { name: "Restaurantes" },
-              { name: "Banca y seguros" },
-            ]}
-          />
-          <CaseStudyCard />
-        </div>
-      </section>
-
-      {/* 8. INSIGHTS — perspectiva (estructura lista, sin contenido inventado) */}
-      <section id="insights" data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="insights-title">
-        <div className="container-pfx flex flex-col gap-12">
-          <SectionHeader
-            kicker="06 — INSIGHTS"
+            kicker="INSIGHTS"
             title="Pensamiento del ecosistema."
-            intro="Artículos y notas sobre tecnología, marketing y gestión."
           />
           <BlogGrid />
+          <Reveal>
+            <p>
+              <Button href="/insights" variant="secondary">Explorar Insights</Button>
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* 9. CONTACTO — cierre (D17: formulario diseñado, integración posterior) */}
-      <section id="contacto" className="section">
-        <ContactSection />
+      {/* 8. CTA FINAL */}
+      <section data-universe="core" className="section-sm" aria-label="Llamado a la acción final">
+        <Reveal className="container-pfx">
+          <div
+            className="flex flex-col items-center gap-5 p-8 text-center sm:p-12"
+            style={{ borderRadius: "var(--radius-lg)", background: "var(--pfx-blue)" }}
+          >
+            <h2 className="max-w-[24ch]" style={{ fontSize: "var(--text-display-lg)", fontFamily: "var(--font-display)", color: "var(--pfx-white)" }}>
+              Empecemos por su operación, no por la herramienta.
+            </h2>
+            <p className="max-w-[52ch]" style={{ color: "rgba(255,255,255,0.8)" }}>
+              Cuéntenos su necesidad y derivamos la conversación al equipo correcto del ecosistema.
+            </p>
+            <p>
+              <Button href={CONTACT_HREF} variant="primary">Solicitar asesoría</Button>
+            </p>
+          </div>
+        </Reveal>
       </section>
     </>
   );

@@ -16,7 +16,26 @@ export const brand = {
   gray: "#414141",
 } as const;
 
-export type Universe = "core" | "tech" | "growup";
+export type Universe =
+  | "core"
+  | "tech"
+  | "growup"
+  | "learns"
+  | "equip"
+  | "solve";
+
+/**
+ * Recalibración: acento por pilar (megamenú/home sobre tema core).
+ * CREATE #F7931E (tech) · GROW #00FFE6 (growup) · LEARN #0A7A52 (learns) ·
+ * EXPERIENCE #D64022 (equip) · SOLVE #005A9E (solve).
+ */
+export const pillarAccents: Record<Exclude<Universe, "core">, string> = {
+  tech: "#F7931E",
+  growup: "#00FFE6",
+  learns: "#0A7A52",
+  equip: "#D64022",
+  solve: "#005A9E",
+};
 
 /**
  * Motion tokens (Doc 12 §2). Duraciones en ms.
@@ -40,11 +59,14 @@ export const motionTokens = {
   stagger: { tight: 40, base: 70, loose: 110 },
 } as const;
 
-/** Firma de motion por universo (Doc 12 §5). */
+/** Firma de motion por universo (Doc 12 §5 + recalibración D25). */
 export const universeMotion: Record<Universe, { easing: string; stagger: number }> = {
   core: { easing: motionTokens.easing.out, stagger: motionTokens.stagger.base },
   tech: { easing: motionTokens.easing.tech, stagger: motionTokens.stagger.tight },
   growup: { easing: "spring", stagger: motionTokens.stagger.loose },
+  learns: { easing: motionTokens.easing.out, stagger: 90 },
+  equip: { easing: motionTokens.easing.out, stagger: 90 },
+  solve: { easing: motionTokens.easing.out, stagger: 90 },
 };
 
 /** Presets de animación referenciables desde el CMS (BlockProps.animation). */

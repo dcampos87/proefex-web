@@ -114,25 +114,99 @@
 }
 
 /* ============================================================
-   UNIVERSO GROW UP — D8 dirección B "Grafismo Kinético" (Doc 11)
-   Colores secundarios protagonistas; flat gráfico; nunca fondo oscuro.
+   UNIVERSO GROW UP — recalibración: paleta nueva obligatoria
+   #22272E (grafito) + #00FFE6 (cian, acento fuerte).
+   Reemplaza la paleta coral/amarillo anterior (D8 revisada).
+   Contraste AA: cian s/ grafito 11.8:1 · blanco s/ grafito 15:1 ·
+   grafito s/ cian 11.8:1 · blanco-78% s/ grafito 12.2:1.
+   Documentado en docs/fase-2/visual-system.md §2.
    ============================================================ */
 [data-universe="growup"] {
-  --bg: var(--pfx-white);
-  --bg-sunken: #fdf6ec;
-  --surface: var(--pfx-white);
-  --surface-hover: #fffdf8;
+  --bg: #22272e;
+  --bg-sunken: #1b2027;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.09);
+  --text: #ffffff;
+  --text-body: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.62); /* ≥7:1 s/ #22272E */
+  --accent: #00ffe6;
+  --accent-contrast: #0d1117;
+  --accent-2: #00cfc0;
+  --accent-3: #005a9e;
+  --border: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.3);
+  --ease-current: var(--ease-out);
+  --stagger-current: 110ms;
+  color-scheme: dark;
+}
+
+/* ============================================================
+   UNIVERSO LEARNS — dirección propuesta (D25): conocimiento,
+   progreso y certificación. Claro, superficies menta, acento verde.
+   Verde #0A7A52 s/ blanco 4.9:1 (AA texto pequeño).
+   ============================================================ */
+[data-universe="learns"] {
+  --bg: #ffffff;
+  --bg-sunken: #eaf4ef;
+  --surface: #ffffff;
+  --surface-hover: #f3faf6;
   --text: var(--pfx-blue);
   --text-body: var(--pfx-gray);
-  --text-muted: rgba(0, 34, 84, 0.65);
-  --accent: var(--pfx-red);
-  --accent-contrast: var(--pfx-white);
-  --accent-2: var(--pfx-yellow);
+  --text-muted: rgba(65, 65, 65, 0.75);
+  --accent: #0a7a52;
+  --accent-contrast: #ffffff;
+  --accent-2: #2fae7f;
   --accent-3: var(--pfx-blue-light);
   --border: rgba(0, 34, 84, 0.14);
   --border-strong: rgba(0, 34, 84, 0.32);
   --ease-current: var(--ease-out);
-  --stagger-current: 110ms;
+  --stagger-current: 90ms;
+}
+
+/* ============================================================
+   UNIVERSO EQUIP — dirección propuesta (D25): tecnología física
+   y tangible. Superficies cálidas, acento rojo de marca.
+   Rojo #D64022 s/ blanco 4.6:1 (AA texto pequeño).
+   ============================================================ */
+[data-universe="equip"] {
+  --bg: #fbf8f3;
+  --bg-sunken: #f3ede2;
+  --surface: #ffffff;
+  --surface-hover: #fdfbf7;
+  --text: var(--pfx-blue);
+  --text-body: var(--pfx-gray);
+  --text-muted: rgba(65, 65, 65, 0.75);
+  --accent: var(--pfx-red);
+  --accent-contrast: #ffffff;
+  --accent-2: var(--pfx-orange);
+  --accent-3: var(--pfx-blue-light);
+  --border: rgba(0, 34, 84, 0.14);
+  --border-strong: rgba(0, 34, 84, 0.32);
+  --ease-current: var(--ease-out);
+  --stagger-current: 90ms;
+}
+
+/* ============================================================
+   UNIVERSO SOLVE — dirección propuesta (D25): productos y
+   soluciones digitales listas. Superficies frías azuladas,
+   acento azul claro #005A9E (7.1:1 s/ blanco).
+   ============================================================ */
+[data-universe="solve"] {
+  --bg: #f5f8fc;
+  --bg-sunken: #eaf1f8;
+  --surface: #ffffff;
+  --surface-hover: #fbfdff;
+  --text: var(--pfx-blue);
+  --text-body: var(--pfx-gray);
+  --text-muted: rgba(65, 65, 65, 0.75);
+  --accent: var(--pfx-blue-light);
+  --accent-contrast: #ffffff;
+  --accent-2: var(--pfx-orange);
+  --accent-3: #0a7a52;
+  --border: rgba(0, 34, 84, 0.14);
+  --border-strong: rgba(0, 34, 84, 0.32);
+  --ease-current: var(--ease-out);
+  --stagger-current: 90ms;
 }
 
 [data-universe="core"] {
@@ -285,9 +359,12 @@ h1, h2, h3, h4 {
   border-color: var(--accent);
   color: var(--accent);
 }
-[data-universe="tech"] .btn-secondary:hover {
+/* Universos oscuros: el hover secundario usa superficie, no acento */
+[data-universe="tech"] .btn-secondary:hover,
+[data-universe="growup"] .btn-secondary:hover {
   color: var(--pfx-white);
   background: var(--surface-hover);
+  border-color: var(--border-strong);
 }
 .btn-ghost {
   background: transparent;
@@ -360,9 +437,10 @@ h1, h2, h3, h4 {
   padding: 2px 8px;
   display: inline-block;
 }
-/* Variante legible sobre fondos oscuros (footer TECH/azul de marca) */
+/* Variante legible sobre fondos oscuros (footer, TECH, GROW UP) */
 footer .content-required,
-[data-universe="tech"] .content-required {
+[data-universe="tech"] .content-required,
+[data-universe="growup"] .content-required {
   color: rgba(255, 255, 255, 0.8);
   border-color: rgba(255, 255, 255, 0.45);
 }
@@ -570,6 +648,166 @@ footer .content-required,
   opacity: 1;
   transform: none;
   transition-delay: calc(var(--i, 0) * 60ms + 60ms);
+}
+
+/* ============================================================
+   MEGAMENÚ (recalibración) — panel global bajo el header.
+   Solo desktop (lg+). Apertura rápida (180ms), jerárquica.
+   El panel es chrome global: siempre tema core.
+   ============================================================ */
+.mega-panel {
+  position: fixed;
+  inset-inline: 0;
+  top: var(--header-h);
+  z-index: 90;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition:
+    opacity var(--motion-instant) var(--ease-out),
+    transform 180ms var(--ease-out),
+    visibility 0s linear 180ms;
+  max-height: calc(100vh - var(--header-h));
+  overflow-y: auto;
+}
+.mega-panel.is-open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+.mega-pillar {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  transition: border-color var(--motion-fast) var(--ease-out), background var(--motion-fast) var(--ease-out);
+}
+.mega-pillar:hover,
+.mega-pillar:focus-within {
+  border-color: var(--pillar-accent, var(--border-strong));
+  background: var(--surface-hover);
+}
+.mega-pillar-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--pillar-accent, var(--accent));
+}
+.mega-link {
+  display: block;
+  padding: var(--space-1) 0;
+  min-height: 32px;
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: var(--text-caption);
+}
+.mega-link:hover,
+.mega-link:focus-visible {
+  color: var(--pillar-accent, var(--accent));
+}
+
+/* Acordeón de pilares en el drawer móvil (details/summary nativos) */
+.mobile-nav details.pillar-group > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--text);
+}
+.mobile-nav details.pillar-group > summary::-webkit-details-marker {
+  display: none;
+}
+.mobile-nav details.pillar-group > summary .chev {
+  transition: transform var(--motion-fast) var(--ease-current);
+}
+.mobile-nav details.pillar-group[open] > summary .chev {
+  transform: rotate(180deg);
+}
+.mobile-nav details.pillar-group .pillar-links {
+  padding-bottom: var(--space-3);
+}
+
+/* ============================================================
+   SUBNAV — navegación contextual por universo (bajo el hero).
+   Scroll horizontal en móvil; pills con aria-current.
+   ============================================================ */
+.subnav {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.subnav::-webkit-scrollbar {
+  display: none;
+}
+.subnav a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-body);
+  text-decoration: none;
+  background: var(--surface);
+  transition:
+    color var(--motion-fast) var(--ease-current),
+    border-color var(--motion-fast) var(--ease-current),
+    background var(--motion-fast) var(--ease-current);
+}
+.subnav a:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.subnav a[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-contrast);
+}
+
+/* ============================================================
+   BREADCRUMBS — orientación en páginas internas (§20) + JSON-LD.
+   ============================================================ */
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.breadcrumbs li:not(:last-child)::after {
+  content: "→";
+  margin-left: var(--space-2);
+  opacity: 0.6;
+}
+.breadcrumbs a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.breadcrumbs [aria-current="page"] {
+  color: var(--text);
+  font-weight: 500;
 }
 
 /* Formularios: labels flotantes se resuelven con labels visibles; estados */

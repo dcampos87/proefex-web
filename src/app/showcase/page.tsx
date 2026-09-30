@@ -1,51 +1,180 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { HeroCore } from "@/components/heroes/HeroCore";
-import { HeroTech } from "@/components/heroes/HeroTech";
-import { HeroCreative } from "@/components/heroes/HeroCreative";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ServiceGrid } from "@/components/blocks/ServiceGrid";
-import { StatsSection } from "@/components/blocks/StatsSection";
-import { Process } from "@/components/blocks/Process";
-import { Timeline } from "@/components/blocks/Timeline";
-import { FAQBlock } from "@/components/blocks/FAQBlock";
-import { Testimonial } from "@/components/blocks/Testimonial";
-import { VideoSection } from "@/components/blocks/VideoSection";
-import { ImageTextSplit } from "@/components/blocks/ImageTextSplit";
-import { LogoWall } from "@/components/blocks/LogoWall";
-import { Marquee } from "@/components/blocks/Marquee";
+import { SubNav } from "@/components/nav/SubNav";
+import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
+import { Reveal } from "@/components/motion/Reveal";
+import { PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "Showcase — Design System Fase 2",
+  title: "Showcase — Design System recalibrado",
   robots: { index: false, follow: false },
 };
 
 /**
- * SHOWCASE FASE 2 — catálogo de diseño (no indexable).
- * Componentes, variantes por universo, motion y estados de contenido
- * pendiente (CONTENT_REQUIRED). Consumir solo tokens semánticos.
+ * SHOWCASE — recalibración (§25): herramienta de evaluación del sistema
+ * multipágina: 6 universos, navegación (megamenú en header real, subnav,
+ * breadcrumbs), heroes, primitivas, bloques y estados CONTENT_REQUIRED.
+ * noindex.
  */
 export default function ShowcasePage() {
   return (
     <>
       <section className="section-sm" style={{ paddingTop: "calc(var(--header-h) + 48px)" }}>
         <div className="container-pfx flex flex-col gap-6">
-          <p className="label-mono">SHOWCASE — DESIGN SYSTEM FASE 2</p>
+          <p className="label-mono">SHOWCASE — SISTEMA MULTIPÁGINA (RECALIBRACIÓN)</p>
           <h1 style={{ fontSize: "var(--text-display-lg)" }}>
-            Catálogo de componentes y universos
+            Catálogo de universos y navegación
           </h1>
           <p className="max-w-[65ch]">
-            Vista de verificación visual: primitivas, bloques, motion y temas de
-            universo (core / tech / growup). Página de trabajo — no indexable.
+            El megamenú vive en el header real de esta página (&quot;Ecosistema&quot;,
+            lg+; drawer en &lt;lg). Este catálogo revisa tokens por universo,
+            navegación contextual y componentes.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/tech", label: "Tech" },
+              { href: "/grow-up", label: "Grow Up" },
+              { href: "/learns", label: "Learns" },
+              { href: "/equip", label: "Equip" },
+              { href: "/solutions", label: "Solutions" },
+              { href: "/contacto", label: "Contacto" },
+              { href: "/tech/desarrollo-de-software", label: "Página de servicio" },
+              { href: "/solutions/turu-crm", label: "Página de producto" },
+              { href: "/tech/ingenieria/drones", label: "Página stub" },
+            ].map((l) => (
+              <Link key={l.href} href={l.href} className="badge no-underline">
+                {l.label} →
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Navegación contextual ===== */}
+      <section className="section-sm" style={{ background: "var(--bg-sunken)" }}>
+        <div className="container-pfx flex flex-col gap-10">
+          <h2 style={{ fontSize: "var(--text-heading)" }}>Navegación contextual</h2>
+          <div className="flex flex-col gap-4">
+            <p className="label-mono">SUBNAV (pillars reales en cada landing)</p>
+            <SubNav
+              items={[
+                { label: "Overview", href: "#" },
+                ...PILLARS[0].children.map((c) => ({ label: c.label, href: c.href })),
+              ]}
+              ariaLabel="Demo subnav"
+              currentHref="#"
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="label-mono">BREADCRUMBS (con JSON-LD)</p>
+            <Breadcrumbs
+              items={[
+                { label: "PROEFEX", href: "/" },
+                { label: "PROEFEX TECH", href: "/tech" },
+                { label: "Ingeniería", href: "/tech/ingenieria" },
+                { label: "Drones" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Universos ===== */}
+      <section className="section-sm">
+        <div className="container-pfx flex flex-col gap-10">
+          <h2 style={{ fontSize: "var(--text-heading)" }}>
+            Los seis universos (Core + cinco pilares)
+          </h2>
+          <p className="max-w-[65ch]">
+            Cada universo demuestra su paleta, tipografía y firma de motion con
+            el mismo bloque de capacidades. Detail completo en{" "}
+            <code style={{ fontFamily: "var(--font-mono)" }}>docs/fase-2/visual-system.md</code>.
           </p>
         </div>
       </section>
 
-      {/* Primitivas */}
-      <section className="section-sm" style={{ background: "var(--bg-sunken)" }}>
+      {/* TECH */}
+      <section data-universe="tech" className="section-sm">
+        <div className="container-pfx flex flex-col gap-10">
+          <p className="label-mono" style={{ color: "var(--accent)" }}>CREATE — TECH · Sistema Encendido (D7-A)</p>
+          <ServiceGrid
+            variant="tech"
+            items={[
+              { index: "01 / MÓDULO", title: "Panel técnico", description: "Bordes 1px, marcas de encuadre, hover que enciende.", meta: "ESTADO: ACTIVO" },
+              { index: "02 / MÓDULO", title: "Acento naranja como señal", description: "Nunca superficie grande.", meta: "COLOR: #F7931E" },
+              { index: "03 / MÓDULO", title: "Grid de fondo", description: "Retícula 5% con máscara radial.", meta: "TEXTURA: GRID" },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* GROW UP — nueva paleta */}
+      <section data-universe="growup" className="section-sm">
+        <div className="container-pfx flex flex-col gap-10">
+          <p className="label-mono" style={{ color: "var(--accent)" }}>GROW — GROW UP · Editorial digital (D8 recalibrado: #22272E + #00FFE6)</p>
+          <ServiceGrid
+            variant="growup"
+            items={[
+              { index: "01", title: "Cian sobre grafito", description: "Acento #00FFE6 sobre fondo #22272E; contraste 11.8:1 (AA)." },
+              { index: "02", title: "Editorial, no gamer", description: "Tipografía como grafismo; sin neón decorativo sin función." },
+              { index: "03", title: "Stagger loose", description: "Entradas expresivas moderadas; 110ms entre elementos." },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* LEARNS */}
+      <section data-universe="learns" className="section-sm" style={{ background: "var(--bg-sunken)" }}>
+        <div className="container-pfx flex flex-col gap-10">
+          <p className="label-mono" style={{ color: "var(--accent)" }}>LEARN — PROEFEX LEARNS · Conocimiento y progreso (D25)</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Badge>Certmind — Partner Oficial</Badge>
+          </div>
+          <ServiceGrid
+            items={[
+              { index: "01 / CURSOS", title: "Cursos", description: "Superficies menta; acento verde de certificación.", href: "#" },
+              { index: "02 / CERTIFICACIÓN", title: "Certificación", description: "Ritmo ordenado y confiable; nada escolar.", href: "#" },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* EQUIP */}
+      <section data-universe="equip" className="section-sm">
+        <div className="container-pfx flex flex-col gap-10">
+          <p className="label-mono" style={{ color: "var(--accent)" }}>EXPERIENCE — PROEFEX EQUIP · Tecnología tangible (D25)</p>
+          <ServiceGrid
+            items={[
+              { index: "01 / DISPLAYS", title: "Pantallas", description: "Superficies cálidas; acento rojo de marca para interacción.", href: "#" },
+              { index: "02 / TÓTEMS", title: "Tótems", description: "Físico, robusto, comercial.", href: "#" },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* SOLVE */}
+      <section data-universe="solve" className="section-sm" style={{ background: "var(--bg-sunken)" }}>
+        <div className="container-pfx flex flex-col gap-10">
+          <p className="label-mono" style={{ color: "var(--accent)" }}>SOLVE — PROEFEX SOLUTIONS · Productos y soluciones (D25)</p>
+          <ServiceGrid
+            items={[
+              { index: "01 / PRODUCTO", title: "Turu CRM", description: "Superficies frías azuladas; acento azul claro.", href: "/solutions/turu-crm" },
+              { index: "02 / PRODUCTO", title: "Klyra", description: "Reservado: badge 'Próximamente', sin datos.", href: "/solutions/klyra" },
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* Primitivas + referencia de heroes */}
+      <section className="section-sm">
         <div className="container-pfx flex flex-col gap-8">
-          <h2 style={{ fontSize: "var(--text-heading)" }}>Primitivas</h2>
+          <h2 style={{ fontSize: "var(--text-heading)" }}>Primitivas (tema core)</h2>
           <div className="flex flex-wrap items-center gap-4">
             <Button variant="primary">Primary</Button>
             <Button variant="secondary">Secondary</Button>
@@ -53,126 +182,11 @@ export default function ShowcasePage() {
             <Button variant="primary" size="sm">Small</Button>
             <Button variant="primary" disabled>Disabled</Button>
           </div>
-          <div className="flex flex-wrap items-center gap-4">
-            <Badge>Badge</Badge>
-            <span className="content-required">CONTENT_REQUIRED</span>
-            <span className="label-mono">ETIQUETA MONO (D11)</span>
-          </div>
-          <div className="flex flex-wrap items-baseline gap-6" style={{ color: "var(--text)" }}>
-            <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "var(--text-display-xl)" }}>Poppins 700</span>
-            <span style={{ fontFamily: "var(--font-sans)", fontSize: "var(--text-body-lg)" }}>Lexend Deca 400</span>
-            <span style={{ fontFamily: "var(--font-mono)" }}>Source Code Pro 400 — v2.0</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Universo TECH */}
-      <section data-universe="tech" className="section-sm">
-        <div className="container-pfx flex flex-col gap-10">
-          <h2 style={{ fontSize: "var(--text-heading)", color: "var(--text)" }}>
-            Universo TECH — módulos-instrumento (D7-A)
-          </h2>
-          <ServiceGrid
-            variant="tech"
-            items={[
-              { index: "01 / MÓDULO", title: "Panel técnico", description: "Bordes 1px, marcas de encuadre y hover que enciende el módulo.", meta: "ESTADO: ACTIVO" },
-              { index: "02 / MÓDULO", title: "Easing técnico", description: "cubic-bezier(0.4, 0, 0.2, 1) · stagger tight (40ms).", meta: "MOTION: IGNITE" },
-              { index: "03 / MÓDULO", title: "Grid de fondo", description: "Retícula al 5% con máscara radial.", meta: "TEXTURA: GRID" },
-            ]}
-          />
-        </div>
-      </section>
-
-      {/* Universo GROW UP */}
-      <section data-universe="growup" className="section-sm">
-        <div className="container-pfx flex flex-col gap-10">
-          <h2 style={{ fontSize: "var(--text-heading)" }}>Universo GROW UP — grafismo kinético (D8-B)</h2>
-          <Marquee words={["CREATIVIDAD", "MOVIMIENTO", "MARCA"]} label="Demo de marquee" />
-          <ServiceGrid
-            variant="growup"
-            items={[
-              { index: "01", title: "Acento coral", description: "El rojo #D64022 lidera; amarillo como segundo acento." },
-              { index: "02", title: "Stagger loose", description: "Entradas elásticas moderadas; 110ms entre elementos." },
-              { index: "03", title: "Flat gráfico", description: "Formas geométricas sin sombras realistas." },
-            ]}
-          />
-        </div>
-      </section>
-
-      {/* Bloques de contenido */}
-      <section className="section-sm">
-        <div className="container-pfx flex flex-col gap-16">
-          <h2 style={{ fontSize: "var(--text-heading)" }}>Bloques</h2>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>StatsSection — sin datos reales</h3>
-            <StatsSection />
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>Process</h3>
-            <Process
-              steps={[
-                { index: "01", title: "Diagnóstico", description: "Entendemos la operación." },
-                { index: "02", title: "Diseño", description: "Diseñamos la solución como sistema." },
-                { index: "03", title: "Implementación", description: "Construimos e integramos." },
-              ]}
-            />
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>Timeline</h3>
-            <Timeline
-              items={[
-                { period: "HITO 1", title: "Primer hito", description: "Descripción del hito (CONTENT_REQUIRED en producción)." },
-              ]}
-            />
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>FAQ</h3>
-            <FAQBlock
-              items={[
-                { question: "¿Cómo se comporta este acordeón sin JavaScript?", answer: "Es HTML nativo (details/summary): funciona sin JS y es accesible por teclado." },
-              ]}
-            />
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>Testimonial (bloqueado sin consentimiento)</h3>
-            <Testimonial />
-          </div>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>VideoSection — facade (D5 diferido)</h3>
-            <VideoSection />
-          </div>
-
-          <ImageTextSplit
-            title="ImageTextSplit"
-            cta={{ label: "CTA secundario", href: "#" }}
-          >
-            <p>Split con media en placeholder; en móvil la media va primero.</p>
-          </ImageTextSplit>
-
-          <div className="flex flex-col gap-6">
-            <h3 style={{ color: "var(--text)" }}>LogoWall — sin alianzas entregadas</h3>
-            <LogoWall />
-          </div>
-        </div>
-      </section>
-
-      {/* Heroes aislados */}
-      <section className="section-sm" style={{ background: "var(--bg-sunken)" }}>
-        <div className="container-pfx flex flex-col gap-6">
-          <h2 style={{ fontSize: "var(--text-heading)" }}>Heroes (variantes de universo)</h2>
-          <p>Los tres heroes completos viven en la home y en las rutas de universo; aquí se referencian:</p>
-          <ul className="flex flex-col gap-2" style={{ color: "var(--text)" }}>
-            <li>HeroCore — institucional claro/azul (usado en la home).</li>
-            <li>HeroTech — D7-A “Sistema Encendido” (usado en la home, sección TECH).</li>
-            <li>HeroCreative — D8-B “Grafismo Kinético” (usado en la home, sección Grow Up).</li>
-          </ul>
-          <SectionHeader kicker="SECCIÓN HEADER" title="SectionHeader con kicker e intro" intro="Kicker mono + titular display + intro de apoyo." />
+          <p className="max-w-[65ch]" style={{ color: "var(--text-body)", fontSize: "var(--text-caption)" }}>
+            Heroes: HeroCore (home), HeroTech (/tech), HeroCreative (/grow-up);
+            LEARNS/EQUIP/SOLUTIONS usan hero inline con reveal-lines y subnav
+            (ver cada landing).
+          </p>
         </div>
       </section>
     </>
