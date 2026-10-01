@@ -18,6 +18,7 @@ export default function Page() {
       requires="descripción del sector y capacidades aplicables"
       backHref="/sectores"
       backLabel="Volver a Sectores"
+      universe="core"
     />
   );
 }

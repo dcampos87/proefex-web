@@ -18,6 +18,7 @@ export default function Page() {
       requires="rutas de certificación (Certmind)"
       backHref="/learns"
       backLabel="Volver a PROEFEX LEARNS"
+      universe="learns"
     />
   );
 }

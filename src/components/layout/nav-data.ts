@@ -138,3 +138,13 @@ export const CORE_LINKS = [
 ] as const;
 
 export const CONTACT_HREF = "/contacto";
+
+/** Universo de la ruta actual: header y footer heredan sus tokens
+ * (D27/D34) para que todo el chrome pertenezca al mismo universo. */
+export function universeForPath(path: string | null): Universe {
+  if (!path) return "core";
+  for (const p of PILLARS) {
+    if (path === p.href || path.startsWith(p.href + "/")) return p.universe;
+  }
+  return "core";
+}

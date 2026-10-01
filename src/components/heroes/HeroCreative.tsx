@@ -12,9 +12,10 @@ export interface HeroCreativeProps {
 }
 
 /**
- * HeroCreative — D8 dirección B "Grafismo Kinético" (Doc 11).
+ * HeroCreative — D8 dirección B "Grafismo Kinético" (Doc 11, revisada D33).
  * Tipografía XXL como grafismo, rotaciones leves, formas geométricas flat
- * (coral/amarillo/azul), texto cinético por líneas con offsets.
+ * (derivadas de la paleta Grow Up: cian #00FFE6 + derivados), texto
+ * cinético por líneas con offsets.
  * En móvil la cinética se reduce: rotaciones ≤ 2deg, sin cursor-reactive.
  * La sección define data-universe="growup".
  */

@@ -18,6 +18,7 @@ export default function Page() {
       requires="producto reservado/futuro: sin información pública"
       backHref="/solutions"
       backLabel="Volver a PROEFEX SOLUTIONS"
+      universe="solve"
     />
   );
 }

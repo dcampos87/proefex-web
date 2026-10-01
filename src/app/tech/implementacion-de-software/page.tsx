@@ -18,6 +18,7 @@ export default function Page() {
       requires="propuesta y alcance"
       backHref="/tech"
       backLabel="Volver a PROEFEX TECH"
+      universe="tech"
     />
   );
 }

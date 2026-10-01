@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroCore } from "@/components/heroes/HeroCore";
-import { BlogGrid } from "@/components/blocks/BlogGrid";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
 import { EditorialRows } from "@/components/ui/EditorialRows";
@@ -37,9 +36,11 @@ export default function Home() {
         subtitle="Tecnología, ingeniería y creatividad, integradas."
         primaryCta={{ label: "Solicitar asesoría", href: CONTACT_HREF }}
         secondaryCta={{ label: "Explorar el ecosistema", href: "#pilares" }}
+        ghostIndex="05"
+        rail="CREATE / GROW / LEARN / EXPERIENCE / SOLVE"
       />
 
-      {/* 02 — ECOSISTEMA: cinco pilares como filas editoriales */}
+      {/* 02 — ECOSISTEMA: cinco puertas, una por universo (Fase 2.1 §6) */}
       <section id="pilares" data-universe="core" className="section-sm" aria-labelledby="pilares-title">
         <div className="container-pfx flex flex-col gap-8">
           <Reveal className="flex flex-col gap-4" id="nosotros">
@@ -54,11 +55,14 @@ export default function Home() {
           </Reveal>
           <Reveal delay={100}>
             <EditorialRows
+              variant="door"
               ariaLabel="Los cinco pilares del ecosistema PROEFEX"
               items={PILLARS.map((p, i) => ({
                 index: `0${i + 1}`,
                 label: p.name,
-                desc: `${p.pillar} · ${p.tagline}`,
+                desc: p.tagline,
+                meta: p.pillar,
+                accent: p.accent,
                 href: p.href,
               }))}
             />
@@ -124,7 +128,7 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal delay={100}>
-            <ol className="ed-rows" role="list" style={{ listStyle: "none", margin: 0, padding: 0 }}>
+            <ol className="ed-rows method-rows" role="list" style={{ listStyle: "none", margin: 0, padding: 0 }}>
               {METHOD.map((s) => (
                 <li key={s.n} className="ed-row" style={{ cursor: "default" }}>
                   <span className="ed-row-idx">{s.n}</span>
@@ -139,7 +143,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06 — INSIGHTS */}
+      {/* 06 — INSIGHTS: índice editorial por categorías, no grid de cards */}
       <section data-universe="core" className="section-sm" aria-labelledby="insights-title">
         <div className="container-pfx flex flex-col gap-8">
           <Reveal className="flex flex-col gap-4">
@@ -147,8 +151,21 @@ export default function Home() {
             <h2 id="insights-title" className="max-w-[24ch]" style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-display-lg)", color: "var(--text)" }}>
               Pensamiento del ecosistema.
             </h2>
+            <p className="content-required w-fit">
+              CONTENT_REQUIRED — artículos reales (Fase 3, D3: sin CMS en esta etapa)
+            </p>
           </Reveal>
-          <BlogGrid />
+          <Reveal delay={100}>
+            <EditorialRows
+              ariaLabel="Categorías de Insights"
+              items={[
+                { index: "01", label: "Tecnología", desc: "Software, IA, automatización e ingeniería.", href: "/insights/tecnologia" },
+                { index: "02", label: "Marketing", desc: "Growth, BPO de marketing y consultoría.", href: "/insights/marketing" },
+                { index: "03", label: "Innovación", desc: "Transformación digital y nuevos modelos.", href: "/insights/innovacion" },
+                { index: "04", label: "Formación", desc: "Capacitación y certificación de equipos.", href: "/insights/formacion" },
+              ]}
+            />
+          </Reveal>
           <Reveal>
             <p>
               <Button href="/insights" variant="ghost">Explorar Insights →</Button>

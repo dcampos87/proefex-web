@@ -18,6 +18,7 @@ export default function Page() {
       requires="catálogo y condiciones"
       backHref="/equip"
       backLabel="Volver a PROEFEX EQUIP"
+      universe="equip"
     />
   );
 }

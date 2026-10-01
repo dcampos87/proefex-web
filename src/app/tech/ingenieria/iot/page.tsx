@@ -18,6 +18,7 @@ export default function Page() {
       requires="propuesta y evidencia"
       backHref="/tech/ingenieria"
       backLabel="Volver a Ingeniería"
+      universe="tech"
     />
   );
 }

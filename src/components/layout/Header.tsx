@@ -3,17 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { CORE_LINKS, CONTACT_HREF, PILLARS, type Universe } from "./nav-data";
-
-/** Universo de la ruta actual: el header hereda sus tokens (texto/superficie)
- * para no perder contraste sobre héroes oscuros (QA recalibración). */
-function universeForPath(path: string | null): Universe {
-  if (!path) return "core";
-  for (const p of PILLARS) {
-    if (path === p.href || path.startsWith(p.href + "/")) return p.universe;
-  }
-  return "core";
-}
+import { CORE_LINKS, CONTACT_HREF, PILLARS, universeForPath } from "./nav-data";
 
 /**
  * MEGAMENÚ + navegación global (recalibración, §11/§12/§23/§31).

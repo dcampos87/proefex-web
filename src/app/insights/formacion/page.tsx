@@ -18,6 +18,7 @@ export default function Page() {
       requires="artículos de la categoría"
       backHref="/insights"
       backLabel="Volver a Insights"
+      universe="core"
     />
   );
 }

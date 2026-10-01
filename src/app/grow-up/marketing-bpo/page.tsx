@@ -18,6 +18,7 @@ export default function Page() {
       requires="propuesta y método"
       backHref="/grow-up"
       backLabel="Volver a Grow Up"
+      universe="growup"
     />
   );
 }

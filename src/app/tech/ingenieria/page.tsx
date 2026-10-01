@@ -18,6 +18,7 @@ export default function Page() {
       requires="propuesta, alcance y subpáginas (Drones/IoT)"
       backHref="/tech"
       backLabel="Volver a PROEFEX TECH"
+      universe="tech"
     />
   );
 }

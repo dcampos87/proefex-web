@@ -8,6 +8,10 @@ export interface HeroCoreProps {
   subtitle?: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  /** Índice editorial fantasma de fondo (solo decorativo, Fase 2.1 §5). */
+  ghostIndex?: string;
+  /** Metadata vertical del rail derecho (solo lg+, decorativa). */
+  rail?: string;
 }
 
 /**
@@ -21,6 +25,8 @@ export function HeroCore({
   subtitle,
   primaryCta,
   secondaryCta,
+  ghostIndex,
+  rail,
 }: HeroCoreProps) {
   return (
     <section
@@ -33,6 +39,19 @@ export function HeroCore({
       }}
       aria-labelledby="hero-core-title"
     >
+      {ghostIndex ? (
+        <span className="hero-ghost-index" aria-hidden="true">
+          {ghostIndex}
+        </span>
+      ) : null}
+      {rail ? (
+        <span
+          className="hero-rail absolute right-6 top-1/2 hidden -translate-y-1/2 lg:block"
+          aria-hidden="true"
+        >
+          {rail}
+        </span>
+      ) : null}
       <div className="container-pfx relative">
         {kicker ? (
           <Reveal delay={0}>

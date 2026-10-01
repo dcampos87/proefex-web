@@ -66,16 +66,16 @@ export default function GrowUpPage() {
         </div>
       </section>
 
-      <section data-universe="core" className="section-sm" aria-label="Contacto Grow Up">
+      <section data-universe="growup" className="section-sm" aria-label="Contacto Grow Up">
         <Reveal className="container-pfx">
           <div
             className="flex flex-col items-start gap-5 p-8 sm:p-10"
-            style={{ borderRadius: "var(--radius-lg)", background: "var(--pfx-blue)" }}
+            style={{ borderRadius: "var(--radius-lg)", background: "var(--grow-surface)", border: "1px solid var(--grow-border)" }}
           >
-            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--pfx-white)", maxWidth: "30ch" }}>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--grow-text)", maxWidth: "30ch" }}>
               ¿Lista su marca para crecer con estrategia?
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.8)", maxWidth: "56ch" }}>
+            <p style={{ color: "var(--grow-text-muted)", maxWidth: "56ch" }}>
               Cuéntenos el momento de su negocio y derivamos la conversación al equipo correcto de Grow Up.
             </p>
             <p>

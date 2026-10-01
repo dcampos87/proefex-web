@@ -111,6 +111,8 @@
   --ease-current: var(--ease-tech);
   --stagger-current: 40ms;
   color-scheme: dark;
+  --footer-bg: var(--bg-sunken);
+  --footer-accent: var(--pfx-orange);
 }
 
 /* ============================================================
@@ -138,6 +140,24 @@
   --ease-current: var(--ease-out);
   --stagger-current: 110ms;
   color-scheme: dark;
+
+  /* Tokens semánticos Grow Up (D33): derivados de #22272E + #00FFE6.
+     Los componentes del universo consumen estos alias, no colores sueltos. */
+  --grow-bg: #22272e;
+  --grow-surface: #262c35;
+  --grow-surface-elevated: #2d3440;
+  --grow-text: #ffffff;
+  --grow-text-muted: rgba(255, 255, 255, 0.62);
+  --grow-accent: #00ffe6;
+  --grow-accent-contrast: #0d1117; /* texto s/ cian */
+  --grow-border: rgba(255, 255, 255, 0.14);
+  --grow-focus: #00ffe6;
+  --grow-hover: rgba(0, 255, 230, 0.08);
+  --grow-footer-bg: #1b2027;
+
+  /* Footer del universo (D34): chrome oscuro propio, no el azul TECH. */
+  --footer-bg: var(--grow-footer-bg);
+  --footer-accent: var(--grow-accent);
 }
 
 /* ============================================================
@@ -214,6 +234,36 @@
   --text-muted: rgba(65, 65, 65, 0.75);
   --ease-current: var(--ease-out);
   --stagger-current: 70ms;
+}
+
+/* Footer universo-aware (D34): chrome oscuro PROEFEX; cada universo
+   oscuro define --footer-bg/--footer-accent. Universos claros comparten
+   el azul profundo de marca con su acento. */
+:root {
+  --footer-bg: var(--pfx-blue);
+  --footer-accent: var(--pfx-orange);
+}
+[data-universe="learns"],
+[data-universe="equip"],
+[data-universe="solve"] {
+  --footer-bg: var(--pfx-blue);
+}
+
+/* Chrome del footer: siempre oscuro (superficie inversa), con texto
+   blanco independiente del universo; --footer-bg/--footer-accent vienen
+   del universo de la ruta (D34). */
+.site-footer {
+  --text: var(--pfx-white);
+  --text-body: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --border: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(255, 255, 255, 0.3);
+  color: var(--text-body);
+}
+.site-footer .content-required {
+  color: rgba(255, 255, 255, 0.75);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: transparent;
 }
 
 /* ============================================================
@@ -963,6 +1013,13 @@ footer .content-required,
   font-size: var(--text-caption);
   color: var(--text-body);
 }
+.ed-row-meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-mono);
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
 .ed-row-arrow {
   font-family: var(--font-display);
   font-weight: 600;
@@ -973,9 +1030,86 @@ footer .content-required,
 .ed-row:focus-visible .ed-row-arrow {
   transform: translateX(6px);
 }
+
+/* Puertas de pilar (Home, Acto 02): número grande + acento del universo */
+.ed-row--door {
+  padding-block: var(--space-6);
+  grid-template-columns: 4.6rem 1fr auto;
+}
+.ed-row--door .ed-row-idx {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  letter-spacing: 0.06em;
+}
+.ed-row--door .ed-row-title {
+  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+}
+.ed-row--door:hover,
+.ed-row--door:focus-visible {
+  background: color-mix(in srgb, var(--row-accent, var(--accent)) 6%, transparent);
+}
+
+/* Metodología (Acto 05): número protagonista y fileo de progresión */
+.method-rows .ed-row {
+  grid-template-columns: 6.5rem 1fr;
+  padding-block: var(--space-6);
+}
+.method-rows .ed-row-idx {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  color: var(--border-strong);
+  font-weight: 600;
+  transition: color var(--motion-base) var(--ease-out);
+}
+.method-rows .ed-row:hover .ed-row-idx,
+.method-rows .ed-row:focus-visible .ed-row-idx {
+  color: var(--accent);
+}
+
+/* Rail de metadata vertical del hero (solo lg+, decorativo) */
+.hero-rail {
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono);
+  font-size: var(--text-label-mono);
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+/* Índice fantasma del hero: número editorial de fondo */
+.hero-ghost-index {
+  position: absolute;
+  right: -0.04em;
+  bottom: -0.18em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(10rem, 24vw, 22rem);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--border);
+  pointer-events: none;
+  user-select: none;
+}
+
 @media (max-width: 640px) {
   .ed-row {
     grid-template-columns: 2.2rem 1fr auto;
+  }
+  .ed-row--door {
+    grid-template-columns: 3rem 1fr auto;
+  }
+  .method-rows .ed-row {
+    grid-template-columns: 3.6rem 1fr;
+  }
+  .ed-row-meta {
+    display: none;
+  }
+  .hero-rail {
+    display: none;
+  }
+  /* Índice fantasma: reducido en móvil para no invadir los CTAs */
+  .hero-ghost-index {
+    font-size: 6.5rem;
+    bottom: -0.1em;
+    opacity: 0.6;
   }
 }
 

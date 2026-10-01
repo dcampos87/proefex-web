@@ -18,6 +18,7 @@ export default function Page() {
       requires="catálogo (D16: no inventar)"
       backHref="/learns"
       backLabel="Volver a PROEFEX LEARNS"
+      universe="learns"
     />
   );
 }

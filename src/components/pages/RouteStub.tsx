@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs, type Crumb } from "@/components/nav/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
+import type { Universe } from "@/components/layout/nav-data";
 
 interface RouteStubProps {
   /** Etiqueta mono del pilar: CREATE, GROW… */
@@ -12,16 +13,19 @@ interface RouteStubProps {
   /** Enlace de retorno a la landing del pilar. */
   backHref: string;
   backLabel: string;
+  /** Universo visual del árbol de rutas al que pertenece (D33/D34). */
+  universe?: Universe;
 }
 
 /**
  * RouteStub — stub de arquitectura (recalibración §26/§32).
  * Página de navegación real pero sin contenido: marca explícitamente
  * CONTENT_REQUIRED. "Arquitectura primero, contenido después."
+ * Hereda el universo visual de su árbol (header/footer/coherencia cromática).
  */
-export function RouteStub({ pillar, title, crumbs, requires, backHref, backLabel }: RouteStubProps) {
+export function RouteStub({ pillar, title, crumbs, requires, backHref, backLabel, universe = "core" }: RouteStubProps) {
   return (
-    <>
+    <div data-universe={universe}>
       <section
         className="relative"
         style={{
@@ -60,6 +64,6 @@ export function RouteStub({ pillar, title, crumbs, requires, backHref, backLabel
           </p>
         </div>
       </section>
-    </>
+    </div>
   );
 }
