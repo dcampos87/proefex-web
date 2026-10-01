@@ -102,3 +102,53 @@ D38 (recalibración 9 actos) · D39 (theme system sin flash) · D40 (theme ≠ u
 ## 13. Aprobación
 
 La aprobación visual final corresponde a PROEFEX. Tras aprobación → Fase 3 (no iniciada).
+
+---
+
+# ANEXO FASE 2.4 — Real Media Validation (sobre este documento, commit `76d8f13`)
+
+**Estado: `PHASE_2_4_CONTENT_BLOCKED — REQUIRES_PROEFEX_INPUT`** · Ver `media-validation-inventory.md` y `visual-benchmark-gap-v5.md`.
+
+## Hallazgo principal
+
+No existe media real de PROEFEX en el repositorio (búsqueda exhaustiva de todos los formatos + revisión de `content-inventory.md`, que registra los assets como `UNKNOWN`). No se fabricó ni se sustituyó con stock (mandato §2). El sistema de media queda **listo y probado** para integrar material real vía props CMS sin cambios de arquitectura.
+
+## Assets en el repo (únicos 3, provisionales D42)
+
+`hero-ecosistema.webp` 1600×896 / 1002 kB · `capacidades-ingenieria.webp` 1600×896 / 1419 kB · `productos-solutions.webp` 1600×896 / 854 kB — todos `AVAILABLE_BUT_NEEDS_OPTIMIZATION` (peso > recomendado; re-optimizar al reemplazar por media real) y con tag visible `VISUAL PROVISIONAL`.
+
+## Assessment de los 9 actos (con placeholders, light+dark)
+
+| Acto | Evaluación | Nota |
+|---|---|---|
+| 01 IMPACTO | Cumple con placeholder | Fuerte en composición; el impacto "premium" definitivo requiere hero video real → `HERO_VIDEO_REQUIRED` |
+| 02 EXPERIENCIA (12+) | Cumple | Cifra dominante + timeline; funciona como elemento de confianza; hitos `CONTENT_REQUIRED` (nada inventado) |
+| 03 ECOSISTEMA | Cumple | Cinco puertas con identidad por universo; se perciben como mundos, no cards |
+| 04 CAPACIDAD | Cumple | Media editorial + metodología 01–04; capacidad tecnológica visible |
+| 05 INDUSTRIAS | Cumple con observación | Filas editoriales correctas; descripciones honestas `CONTENT_REQUIRED` — la presencia sectorial ganará con casos reales |
+| 06 PROYECTOS | Estructura lista | `media-case` 21/9 + tag `CASO REAL — PENDIENTE`; sin evidencia aún → `CONTENT_REQUIRED` |
+| 07 SOLUTIONS | Cumple con observación | 6 productos como filas; solo Turu CRM tiene descripción real; product shots convertirán el índice en vitrina |
+| 08 INSIGHTS | Cumple | Índice editorial con carácter propio |
+| 09 CTA | Cumple | Cierre directo con CTA principal |
+
+## 12+ años
+
+`12+` y `2012 → 2026` se mantienen. La composición comunica trayectoria/madurez/continuidad. No existen hitos históricos verificables en el repo → no se proponen (mandato §6).
+
+## Validación técnica (build `76d8f13` + QA Puppeteer/Edge)
+
+- Build limpio, 50 rutas, First Load JS **103 kB** compartido (límite 180 kB). 0 dependencias nuevas.
+- Overflow **0 px** en 375/768/1440/1920 × 8 rutas (32 checks).
+- Media system en runtime: 3 frames en Home, `alt` en 3/3 imágenes, `sizes` responsive en 3/3, hero eager (`loading` ausente + `complete:true` bajo `priority`) y resto lazy — verificado a nivel de atributos DOM (la heurística inicial de la suite marcó falso positivo por propiedad `loading`="auto" del navegador).
+- Theme light/dark/system: persistencia y ausencia de flash re-verificadas en 2.3 con toggles reales; en 2.4 los falsos negativos de la suite (localStorage reinyectado por `evaluateOnNewDocument` en cada navegación) se identificaron como artefactos del script, no de la app. Computed backgrounds por tema: light `#FFF/#F4F6F9`, dark `#0B1120/#070D19`.
+- Foco visible en toggle; favicon 404 preexistente sigue registrado como pendiente separado.
+
+## Decisiones nuevas
+
+- **D45** `PROPOSED`: Media real de PROEFEX requerida para el cierre visual — el gap restante es de contenido, no de sistema. Ver `decision-register.md`.
+
+## Riesgos
+
+1. Los placeholders, siendo IA-generados y etiquetados, comunican honestidad pero limitan la percepción premium hasta su reemplazo.
+2. Peso de placeholders (0.85–1.4 MB) — irrelevante para producción si se reemplazan; si se mantuvieran, optimizar.
+3. Sin video real, el slot `MediaHeroVideo` permanece sin demostrar en producción (solo QA de fallback).
