@@ -79,6 +79,22 @@ Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 | D44 | View Transitions progresivas: `@view-transition { navigation: auto }` nativo, fallback instantáneo, anulado con `prefers-reduced-motion`; sin sistema de transiciones complejo (queda para Fase 3 si se aprueba) | `PROPOSED` — implementado (Fase 2.3) | Agent Master | Bajo (sensación de producto) | |
 | D45 | Media real de PROEFEX requerida para el cierre visual: el repo no contiene fotografía/video/logo reales (inventario en `fase-2/media-validation-inventory.md`); el sistema de media (D41) está listo y probado para integrarlos vía props CMS sin cambios de arquitectura. Requerimientos: hero video (`HERO_VIDEO_REQUIRED`), banco fotográfico, product shots SOLVE, casos autorizables, logo vectorial/favicon | `PROPOSED` — validación 2.4 completa; integración bloqueada por activos (`CONTENT_REQUIRED`) | PROEFEX (entrega de activos) → Agent Master (integración) | Alto — determina el impacto visual final | Estado 2.4: `PHASE_2_4_CONTENT_BLOCKED — REQUIRES_PROEFEX_INPUT` |
 
+## Decisiones nuevas de Fase 3.1 (PROPOSED — requieren aprobación de PROEFEX)
+
+Arquitectura de contenido documentada en `docs/fase-3/` (content-architecture / cms-schema / content-governance). Solo definición de modelo: sin CMS UI, sin API completa, sin contenido ni cambios visuales (mandato §39).
+
+| ID | Decisión | Estado | Responsable | Impacto | Notas |
+|---|---|---|---|---|---|
+| D46 | Modelo CONTENT≠PRESENTATION ratificado para F3: entidades estructuradas + bloques tipados validados con `@proefex/blocks-schema` como única vía de contenido (sin HTML arbitrario, sin page builder); catálogo de bloques extendido mapeado 1:1 a componentes F2 existentes (EditorialRows, MediaGallery, InsightGrid, ProductShowcase…) | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Alto — define todo el CMS | Extiende D1 y Doc 05 §1; Fase 2 congelada |
+| D47 | `Universe` como entidad CMS de exactamente 5 códigos (CREATE/GROW/LEARN/EXPERIENCE/SOLVE); `accent`/`theme` por referencia a tokens del frontend, el CMS no permite editar colores/temas estructurales (D25/D26/D33/D39/D40 intactos) | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Alto — protección de identidad visual | |
+| D48 | `MediaAsset` como biblioteca central obligatoria (contenido referencia media, nunca inline); variantes de imagen por transformación automática cuando la infraestructura lo permita (no manuales); video con defaults seguros (autoplay solo en hero con a11y/perf, D41/A7) | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Alto — desbloquea F2.4/D45 | |
+| D49 | `SEO` como entidad reutilizable embebida en toda entidad indexable, con gate: schema JSON-LD solo si el `schemaType` tiene todos sus datos obligatorios (incl. `LocalBusiness` solo con datos reales) | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Medio (SEO/GEO) | |
+| D50 | `Page` con exactamente 7 templates (`CORE/UNIVERSE/SERVICE/PRODUCT/SECTOR/CASE_STUDY/INSIGHT`) y bloques validados por discriminated union; navegación administrable solo en labels/URLs/visibilidad/orden/featured (no page builder) | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Medio | Respeta D24/D26/D35 |
+| D51 | Estrategia multilingüe: idioma único `es` hoy; `en` futuro vía campos locale-keyed o tablas `<entity>_translations` (sin duplicar tablas), fallback `es`, URLs `/en/` | `PROPOSED` — solo estrategia documentada | Agent Master → PROEFEX | Medio (futuro) | D4 vigente; no implementar |
+| D52 | Consentimiento triple independiente y versionado (`privacy`/`analytics`/`marketing`) registrado por envío de formulario; GA4 (D18) nunca se activa sin consentimiento/configuración definida; textos legales `CONTENT_REQUIRED` | `PROPOSED` (mandato de F3.1) | Agent Master → PROEFEX | Medio (legal/a11y) | |
+
+Nuevas entradas requeridas a PROEFEX (`REQUIRES_PROEFEX_INPUT`, no cierran F3.1): lista final de categorías de insights (`/insights/[categoria]/[slug]`, D3), autores reales para `Author` (authorship GEO), personas por rol RBAC (D14). Heredadas: D13 (crítica), D15, D5, D17 (legal/contacto), D45 (media).
+
 ## Decisiones arquitectónicas confirmadas
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |

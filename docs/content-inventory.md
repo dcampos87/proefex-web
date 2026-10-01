@@ -117,3 +117,22 @@
 1. El equipo PROEFEX reemplaza cada `UNKNOWN` por el estado real y adjunta material (o indica `MISSING`).
 2. Todo ítem `LICENSE_REQUIRED` debe resolverse **antes** de publicarse en la plataforma.
 3. El inventario completado desbloquea: D7/D8 (moodboards con material real), D5 (arquitectura de vídeo), D15 (matriz SaaS), D16 (Learning), y el contenido de Fase 2.
+
+---
+
+## Matriz de contenido por entidad — Fase 3.1
+
+Estado de disponibilidad de contenido por entidad del modelo CMS (`docs/fase-3/content-architecture.md`). Gobernanza y detalle: `docs/fase-3/content-governance.md` §8. Sin contenido inventado para completar la matriz.
+
+| Entidad | Contenido disponible | Estado |
+|---|---|---|
+| Home | Parcial | IN_REVIEW |
+| TECH | Parcial | IN_REVIEW |
+| Grow Up | Parcial | IN_REVIEW |
+| Learns | CONTENT_REQUIRED | DRAFT |
+| Equip | CONTENT_REQUIRED | DRAFT |
+| Solutions | Parcial | IN_REVIEW |
+| Sectors | Parcial | DRAFT |
+| Cases | CONTENT_REQUIRED | DRAFT |
+| Insights | CONTENT_REQUIRED | DRAFT |
+| Media | CONTENT_REQUIRED | BLOCKED |
