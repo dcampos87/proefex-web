@@ -1,0 +1,66 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Categorías de Insights: siguen PROPOSED (D55). El dataset las usa solo para probar el routing /insights/[categoria]/[slug]; no crea el enum definitivo.",
+  "entity": "InsightCategory",
+  "records": [
+    {
+      "id": "cat-tecnologia",
+      "name": "Tecnología y digitalización",
+      "slug": "tecnologia",
+      "description": "[MOCK] Contenido del universo CREATE (PROEFEX TECH).",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    },
+    {
+      "id": "cat-marketing",
+      "name": "Marketing y growth",
+      "slug": "marketing",
+      "description": "[MOCK] Contenido del universo GROW (Grow Up).",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    },
+    {
+      "id": "cat-formacion",
+      "name": "Formación y certificación",
+      "slug": "formacion",
+      "description": "[MOCK] Contenido del universo LEARN (PROEFEX LEARNS).",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    },
+    {
+      "id": "cat-equipamiento",
+      "name": "Tecnología y equipamiento",
+      "slug": "equipamiento",
+      "description": "[MOCK] Contenido del universo EXPERIENCE (PROEFEX EQUIP).",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    },
+    {
+      "id": "cat-soluciones",
+      "name": "Productos y soluciones",
+      "slug": "soluciones",
+      "description": "[MOCK] Contenido del universo SOLVE (PROEFEX Solutions).",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    },
+    {
+      "id": "cat-empresa",
+      "name": "Empresa",
+      "slug": "empresa",
+      "description": "[MOCK] Contenido corporativo transversal: trayectoria, cultura, anuncios.",
+      "status": "proposed",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["name", "description"]
+    }
+  ]
+}

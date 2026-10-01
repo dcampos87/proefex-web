@@ -1,0 +1,193 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Páginas MOCK usando exactamente los 7 templates de F3.1 y SOLO bloques del registro aprobado @proefex/blocks-schema (sin page builder, sin HTML libre). Composiciones distintas por template.",
+  "entity": "Page",
+  "templates": ["CORE", "UNIVERSE", "SERVICE", "PRODUCT", "SECTOR", "CASE_STUDY", "INSIGHT"],
+  "records": [
+    {
+      "id": "pg-home",
+      "title": "[MOCK] Home — composición de prueba",
+      "slug": "",
+      "universe": null,
+      "template": "CORE",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Tecnología que mueve el negocio", "subtitle": "[MOCK] Subtítulo de prueba del hero core.", "layout": "default", "theme": "core", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Contactar (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } },
+        { "type": "ServiceGrid", "props": { "items": [ { "index": "01", "title": "[MOCK] Desarrollo de software", "description": "[MOCK] Item de prueba.", "href": "/tech/desarrollo-de-software" }, { "index": "02", "title": "[MOCK] Growth marketing", "description": "[MOCK] Item de prueba.", "href": "/grow-up/growth-marketing" }, { "index": "03", "title": "[MOCK] Alquiler de equipos", "description": "[MOCK] Item de prueba.", "href": "/equip/alquiler" } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "SectorGrid", "props": { "items": [ { "name": "[MOCK] Industria", "href": "/sectores/industria" }, { "name": "[MOCK] Salud", "href": "/sectores/salud" }, { "name": "[MOCK] Retail", "href": "/sectores/retail" } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "SaaSShowcase", "props": { "products": [ { "name": "Turu CRM", "status": "announced" }, { "name": "PROEFACT", "status": "announced" }, { "name": "Klyra", "status": "reserved" } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "BlogGrid", "props": { "posts": [ { "title": "[MOCK] Digitalización en plantas", "category": "tecnologia", "href": "/insights/tecnologia/mock-transformacion-digital-en-plantas" }, { "title": "[MOCK] Adopción SaaS", "category": "soluciones", "href": "/insights/soluciones/mock-adopcion-saas" } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CTA", "props": { "title": "[MOCK] Hablemos de tu proyecto", "description": "[MOCK] Descripción de prueba del bloque CTA.", "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Contactar (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] PROEFEX — Tecnología, marketing y soluciones",
+        "metaDescription": "[MOCK] Texto de prueba de la home para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] PROEFEX",
+        "ogDescription": "[MOCK] Home de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "WebSite"
+      }
+    },
+    {
+      "id": "pg-tech",
+      "title": "[MOCK] Universo TECH — composición de prueba",
+      "slug": "tech",
+      "universe": "unv-create",
+      "template": "UNIVERSE",
+      "blocks": [
+        { "type": "HeroTech", "props": { "title": "[MOCK] Sistema encendido", "subtitle": "[MOCK] Subtítulo de prueba del hero tech.", "kicker": "MOCK/CREATE", "enableParticles": true, "layout": "overlay", "theme": "tech", "background": "grid", "animation": "panel-ignite", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "Process", "props": { "steps": [ { "index": "01", "title": "[MOCK] Entender", "description": "[MOCK] Paso de prueba." }, { "index": "02", "title": "[MOCK] Diseñar", "description": "[MOCK] Paso de prueba." }, { "index": "03", "title": "[MOCK] Integrar", "description": "[MOCK] Paso de prueba." }, { "index": "04", "title": "[MOCK] Evolucionar", "description": "[MOCK] Paso de prueba." } ], "layout": "default", "theme": "tech", "background": "solid", "animation": "draw-on-scroll", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "FAQ", "props": { "items": [ { "question": "[MOCK] ¿Pregunta de prueba?", "answer": "[MOCK] Respuesta de prueba para validar schema FAQPage." } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CTA", "props": { "title": "[MOCK] Conversemos", "description": "[MOCK] Descripción de prueba.", "layout": "default", "theme": "tech", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Solicitar información (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] PROEFEX TECH — Universo CREATE",
+        "metaDescription": "[MOCK] Texto de prueba de la página del universo TECH.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] PROEFEX TECH",
+        "ogDescription": "[MOCK] Universo de prueba.",
+        "ogImage": "med-tech-hero-poster",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    },
+    {
+      "id": "pg-svc-software",
+      "title": "[MOCK] Servicio Desarrollo de software — página de prueba",
+      "slug": "tech/desarrollo-de-software",
+      "universe": "unv-create",
+      "template": "SERVICE",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Desarrollo de software", "subtitle": "[MOCK] Subtítulo de prueba.", "layout": "default", "theme": "tech", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Solicitar información (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } },
+        { "type": "ImageTextSplit", "props": { "title": "[MOCK] Qué incluye el servicio", "body": "[MOCK] Cuerpo de prueba para validar el bloque ImageTextSplit.", "image": { "id": "med-editorial-01", "type": "image", "altText": "[MOCK MEDIA] Imagen editorial 01" }, "mediaSide": "right", "layout": "split", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "VideoSection", "props": { "title": "[MOCK] Video del servicio", "poster": { "id": "med-tech-hero-poster", "type": "image", "altText": "[MOCK MEDIA] Poster de video de prueba" }, "layout": "full", "theme": "tech", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] Desarrollo de software — Servicio de prueba",
+        "metaDescription": "[MOCK] Texto de prueba de la página de servicio.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Desarrollo de software",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-editorial-01",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "pg-prd-turu-crm",
+      "title": "[MOCK] Producto Turu CRM — página de prueba",
+      "slug": "solutions/turu-crm",
+      "universe": "unv-solve",
+      "template": "PRODUCT",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Turu CRM", "subtitle": "[MOCK] Subtítulo de prueba del producto.", "layout": "default", "theme": "solve", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Conocer la solución (MOCK)", "url": "/solutions/turu-crm", "style": "primary" }], "responsive": { "hideOn": [] } } },
+        { "type": "ImageTextSplit", "props": { "title": "[MOCK] Casos de uso", "body": "[MOCK] Cuerpo de prueba.", "image": { "id": "med-product-turu", "type": "image", "altText": "[MOCK MEDIA] Product shot de Turu CRM" }, "mediaSide": "left", "layout": "split", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "FAQ", "props": { "items": [ { "question": "[MOCK] ¿Pregunta sobre el producto?", "answer": "[MOCK] Respuesta de prueba." } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] Turu CRM — Producto de prueba",
+        "metaDescription": "[MOCK] Texto de prueba de la página de producto.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Turu CRM",
+        "ogDescription": "[MOCK] Producto de prueba.",
+        "ogImage": "med-product-turu",
+        "robots": "index,follow",
+        "schemaType": "Product"
+      }
+    },
+    {
+      "id": "pg-sec-industria",
+      "title": "[MOCK] Sector Industria — página de prueba",
+      "slug": "sectores/industria",
+      "universe": null,
+      "template": "SECTOR",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Industria", "subtitle": "[MOCK] Subtítulo de prueba del sector.", "layout": "default", "theme": "core", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CaseStudy", "props": { "title": "[MOCK] Caso destacado del sector", "sector": "[MOCK] Industria", "summary": "[MOCK] Resumen de prueba.", "gallery": [ { "id": "med-editorial-01", "type": "image", "altText": "[MOCK MEDIA] Imagen editorial 01" } ], "results": [ { "label": "[MOCK] Métrica de prueba", "value": "−38%" } ], "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CTA", "props": { "title": "[MOCK] Soluciones para tu planta", "description": "[MOCK] Descripción de prueba.", "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Contactar (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] Industria — Página de prueba",
+        "metaDescription": "[MOCK] Texto de prueba de la página de sector.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Industria",
+        "ogDescription": "[MOCK] Sector de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    },
+    {
+      "id": "pg-case-mock-manufacturing",
+      "title": "[MOCK] Caso Mock Manufacturing Co. — página de prueba",
+      "slug": "casos/mock-manufacturing-co",
+      "universe": "unv-create",
+      "template": "CASE_STUDY",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Mock Manufacturing Co.", "subtitle": "[MOCK] Subtítulo de prueba del caso.", "layout": "default", "theme": "tech", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "Testimonial", "props": { "quote": "[MOCK] Cita de prueba con consentimiento simulado.", "authorName": "Demo Person (MOCK)", "authorRole": "[MOCK] Gerente de operaciones", "company": "Mock Manufacturing Co.", "consent": true, "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CTA", "props": { "title": "[MOCK] ¿Un caso similar al tuyo?", "description": "[MOCK] Descripción de prueba.", "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Contactar (MOCK)", "url": "/contacto", "style": "primary" }], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] Caso Mock Manufacturing Co.",
+        "metaDescription": "[MOCK] Texto de prueba de la página de caso.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Caso Mock Manufacturing Co.",
+        "ogDescription": "[MOCK] Caso de prueba.",
+        "ogImage": "med-editorial-01",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    },
+    {
+      "id": "pg-ins-mock",
+      "title": "[MOCK] Insight — página de prueba (estructura de landing de artículo)",
+      "slug": "insights/tecnologia/mock-transformacion-digital-en-plantas",
+      "universe": "unv-create",
+      "template": "INSIGHT",
+      "blocks": [
+        { "type": "HeroCore", "props": { "title": "[MOCK] Digitalización en plantas", "subtitle": "[MOCK] Bajada de prueba del artículo.", "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "ImageTextSplit", "props": { "title": "[MOCK] Punto clave del artículo", "body": "[MOCK] Cuerpo de prueba. El cuerpo completo del insight vive en Insight.content (bloques estructurados), no en la Page.", "image": { "id": "med-editorial-02", "type": "image", "altText": "[MOCK MEDIA] Imagen editorial 02" }, "mediaSide": "right", "layout": "split", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [], "responsive": { "hideOn": [] } } },
+        { "type": "CTA", "props": { "title": "[MOCK] Sigue leyendo", "description": "[MOCK] Descripción de prueba.", "layout": "default", "theme": "inherit", "background": "solid", "animation": "fade-rise", "alignment": "left", "spacing": "lg", "cta": [{ "label": "Leer insight (MOCK)", "url": "/insights", "style": "ghost" }], "responsive": { "hideOn": [] } } }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["slug"],
+      "contentRequiredFields": ["title", "blocks"],
+      "seo": {
+        "metaTitle": "[MOCK] Digitalización en plantas — Insight",
+        "metaDescription": "[MOCK] Texto de prueba de la página de insight.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Digitalización en plantas",
+        "ogDescription": "[MOCK] Insight de prueba.",
+        "ogImage": "med-editorial-01",
+        "robots": "index,follow",
+        "schemaType": "Article"
+      }
+    }
+  ]
+}

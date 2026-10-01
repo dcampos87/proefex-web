@@ -1,0 +1,84 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. CTAs reutilizables de prueba (catálogo). Ningún label/URL es copy oficial de PROEFEX.",
+  "entity": "CTA",
+  "records": [
+    {
+      "id": "cta-contacto",
+      "label": "Contactar (MOCK)",
+      "url": "/contacto",
+      "type": "contact",
+      "variant": "primary",
+      "trackingId": "cta_contact_mock_v1",
+      "universe": null,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    },
+    {
+      "id": "cta-solicitar-info",
+      "label": "Solicitar información (MOCK)",
+      "url": "/contacto",
+      "type": "form",
+      "variant": "primary",
+      "trackingId": "cta_request_info_mock_v1",
+      "universe": null,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    },
+    {
+      "id": "cta-conocer-solucion",
+      "label": "Conocer la solución (MOCK)",
+      "url": "/solutions/turu-crm",
+      "type": "product",
+      "variant": "primary",
+      "trackingId": "cta_know_solution_mock_v1",
+      "universe": "unv-solve",
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    },
+    {
+      "id": "cta-ver-caso",
+      "label": "Ver caso (MOCK)",
+      "url": "/casos/mock-manufacturing-co",
+      "type": "internal",
+      "variant": "secondary",
+      "trackingId": "cta_view_case_mock_v1",
+      "universe": null,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    },
+    {
+      "id": "cta-leer-insight",
+      "label": "Leer insight (MOCK)",
+      "url": "/insights/tecnologia/mock-transformacion-digital-en-plantas",
+      "type": "internal",
+      "variant": "ghost",
+      "trackingId": "cta_read_insight_mock_v1",
+      "universe": null,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    },
+    {
+      "id": "cta-ver-servicio",
+      "label": "Ver servicio (MOCK)",
+      "url": "/tech/desarrollo-de-software",
+      "type": "internal",
+      "variant": "secondary",
+      "trackingId": "cta_view_service_mock_v1",
+      "universe": "unv-create",
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["label"]
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. LeadForm + Consent. Destino (Turu CRM) y los 10 campos son CONFIRMED (D17). Textos y consentimientos: LEGAL MOCK. Las listas de Servicio/Sector se consumen dinámicamente del CMS, no hardcodeadas. Integración Turu CRM: DEFERRED (sin credenciales ni endpoints aquí).",
+  "entity": "LeadForm + Consent",
+  "record": {
+    "id": "leadform-contacto",
+    "name": "[MOCK] Formulario de contacto principal",
+    "destination": "Turu CRM",
+    "destinationConfirmed": true,
+    "integrationStatus": "DEFERRED",
+    "integrationNote": "Información técnica de integración pendiente (endpoint, autenticación como secretos de entorno de proefex-api, mapeo de campos, retención). Ver business-content-decisions.md §7.",
+    "fields": [
+      { "name": "nombre", "label": "Nombre", "type": "text", "required": true, "confirmed": true },
+      { "name": "apellidos", "label": "Apellidos", "type": "text", "required": true, "confirmed": true },
+      { "name": "empresa", "label": "Empresa", "type": "text", "required": true, "confirmed": true },
+      { "name": "cargo", "label": "Cargo", "type": "text", "required": false, "confirmed": true },
+      { "name": "email", "label": "Email", "type": "email", "required": true, "confirmed": true },
+      { "name": "telefono", "label": "Teléfono", "type": "tel", "required": true, "confirmed": true },
+      { "name": "codigo_pais", "label": "Código de país", "type": "select-country", "required": true, "confirmed": true },
+      { "name": "servicio", "label": "Servicio", "type": "select", "required": true, "confirmed": true, "source": "CMS:Service (dinámico, no hardcodeado)" },
+      { "name": "sector", "label": "Sector", "type": "select", "required": true, "confirmed": true, "source": "CMS:Sector (dinámico, no hardcodeado)" },
+      { "name": "mensaje", "label": "Mensaje", "type": "textarea", "required": false, "confirmed": true }
+    ],
+    "title": "[MOCK] Hablemos de tu proyecto",
+    "description": "[MOCK] Descripción de prueba del formulario. Reemplazar con copy oficial.",
+    "successMessage": "[MOCK] Mensaje de éxito de prueba. Reemplazar con copy oficial.",
+    "cta": "cta-contacto",
+    "consents": [
+      {
+        "type": "privacy",
+        "required": true,
+        "version": 1,
+        "textRef": "legal-privacidad",
+        "status": "draft",
+        "note": "LEGAL MOCK — REPLACE BEFORE PRODUCTION. Sin privacy concedido el formulario no se envía (governance §7)."
+      },
+      {
+        "type": "analytics",
+        "required": false,
+        "version": 1,
+        "textRef": "legal-cookies",
+        "status": "draft",
+        "note": "LEGAL MOCK. GA4 (D18) no se activa sin este consentimiento."
+      },
+      {
+        "type": "marketing",
+        "required": false,
+        "version": 1,
+        "textRef": "legal-tratamiento-datos",
+        "status": "draft",
+        "note": "LEGAL MOCK. Opt-in explícito, checkbox separado."
+      }
+    ],
+    "status": "draft",
+    "contentSource": "MOCK",
+    "confirmedFields": ["destination", "fields", "destinationConfirmed"],
+    "contentRequiredFields": ["title", "description", "successMessage"]
+  }
+}

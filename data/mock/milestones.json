@@ -1,0 +1,48 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Hitos 12+ años: DEMO MILESTONE explícitos. NO son historia real de PROEFEX; el claim real 12+ solo se publica cuando PROEFEX confirme año y evidencia (D43, business-content-decisions §10). Todos en draft.",
+  "entity": "Milestone",
+  "records": [
+    {
+      "id": "ms-01",
+      "year": 2014,
+      "yearMock": true,
+      "title": "DEMO MILESTONE — Inicio de operaciones",
+      "description": "[MOCK] Hito de prueba para validar el modelo Timeline 12+ años. El año es ficticio: el año real de inicio sigue CONTENT_REQUIRED.",
+      "evidence": null,
+      "media": null,
+      "order": 1,
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["year", "title", "description", "evidence", "media"]
+    },
+    {
+      "id": "ms-02",
+      "year": 2018,
+      "yearMock": true,
+      "title": "DEMO MILESTONE — Lanzamiento de producto",
+      "description": "[MOCK] Hito de prueba: lanzamiento de un producto. Sin referencia a productos reales de PROEFEX.",
+      "evidence": null,
+      "media": null,
+      "order": 2,
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["year", "title", "description", "evidence", "media"]
+    },
+    {
+      "id": "ms-03",
+      "year": 2022,
+      "yearMock": true,
+      "title": "DEMO MILESTONE — Alianza o certificación",
+      "description": "[MOCK] Hito de prueba: alianza o certificación publicable. Sin referencia a partners o certificaciones reales.",
+      "evidence": null,
+      "media": null,
+      "order": 3,
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["year", "title", "description", "evidence", "media"]
+    }
+  ]
+}

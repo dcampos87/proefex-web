@@ -144,3 +144,26 @@ Lectura:
 - `BLOCKED` (Media) = F2.4/D45: sin fotografía/video/logo real de PROEFEX en el repositorio; el sistema de media (D41) está listo para integrarlos.
 - `CONTENT_REQUIRED` = PROEFEX debe proveer; no se inventa.
 - `IN_REVIEW` = estructura y copy conceptual aprobado como dirección (D12); falta copy comercial definitivo.
+
+---
+
+## Clasificación CONFIRMED / MOCK / CONTENT_REQUIRED — F3.1.2
+
+Dataset MOCK estructural: `data/mock/` (19 archivos, 108 registros) + validador `npm run validate:mock`. Estrategia completa: `docs/fase-3/content-mock-strategy.md`. Reglas: las tres clases **nunca se mezclan**; todo registro MOCK lleva `contentSource: "MOCK"`; los campos oficiales se declaran en `confirmedFields`.
+
+CONFIRMED (oficial de PROEFEX): los 5 pilares (marca/frase/código), los 8 sectores, los nombres y slugs de los 6 productos, destino de leads (Turu CRM) y sus 10 campos, claim "Certmind = Partner Oficial", estructura de navegación aprobada (D26/D35).
+
+MOCK (solo prueba estructural, nunca presentable como oficial): taglines/descripciones de universos, copy de servicios, features/beneficios de productos, clientes y métricas de casos (`Mock Manufacturing Co.`, `Demo Retail Group`, `Example Health Organization`), autores (`Demo Author`, `Mock Editorial Team`), insights, páginas y bloques, CTAs, hitos (`DEMO MILESTONE`), media (`MOCK MEDIA`), textos legales (`LEGAL MOCK — REPLACE BEFORE PRODUCTION`).
+
+CONTENT_REQUIRED (solo lo llena PROEFEX): datos de contacto, textos legales definitivos, URLs de productos, media real, features confirmadas, autores y personas RBAC reales, datos 12+ años, casos autorizables.
+
+Ejemplo de clasificación por campo:
+
+```text
+Turu CRM
+name: CONFIRMED
+description: MOCK
+features: MOCK
+URL: CONTENT_REQUIRED
+media: CONTENT_REQUIRED
+```

@@ -1,0 +1,70 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. SiteSettings (singleton). Datos de contacto, sociales y GA4: CONTENT_REQUIRED/NULL — no se inventan direcciones, teléfonos, emails ni IDs reales. NUNCA se almacenan secretos ni API keys.",
+  "entity": "SiteSettings",
+  "record": {
+    "id": "settings-1",
+    "siteName": "PROEFEX",
+    "description": "[MOCK] Descripción del sitio de prueba. Reemplazar con copy oficial.",
+    "logo": "med-logo-proefex",
+    "favicon": "med-favicon",
+    "contact": {
+      "email": null,
+      "phone": null,
+      "address": null,
+      "schedule": null,
+      "note": "CONTENT_REQUIRED — datos reales pendientes de PROEFEX (F3.1.1 §6); schema LocalBusiness solo con datos verificados (gate G6)."
+    },
+    "socialLinks": [],
+    "analytics": {
+      "provider": "GA4",
+      "measurementId": "CONTENT_REQUIRED",
+      "consentRequired": true,
+      "note": "D18: GA4 aprobado; tracking no se activa sin consentimiento/configuración definida. Solo el ID de medición vive en el CMS, nunca secretos."
+    },
+    "defaultSeo": {
+      "metaTitle": "[MOCK] PROEFEX — Tecnología, marketing y soluciones",
+      "metaDescription": "[MOCK] Meta description por defecto de prueba.",
+      "ogImage": "med-og-default",
+      "robots": "index,follow"
+    },
+    "footer": {
+      "columns": [
+        {
+          "title": "[MOCK] Universos",
+          "links": [
+            { "label": "PROEFEX TECH", "href": "/tech" },
+            { "label": "Grow Up", "href": "/grow-up" },
+            { "label": "PROEFEX LEARNS", "href": "/learns" },
+            { "label": "PROEFEX EQUIP", "href": "/equip" },
+            { "label": "PROEFEX Solutions", "href": "/solutions" }
+          ]
+        },
+        {
+          "title": "[MOCK] Transversal",
+          "links": [
+            { "label": "Sectores", "href": "/sectores" },
+            { "label": "Casos", "href": "/casos" },
+            { "label": "Insights", "href": "/insights" },
+            { "label": "Contacto", "href": "/contacto" }
+          ]
+        }
+      ]
+    },
+    "legalLinks": [
+      { "label": "Política de privacidad (LEGAL MOCK)", "href": "/legal/privacidad" },
+      { "label": "Política de cookies (LEGAL MOCK)", "href": "/legal/cookies" },
+      { "label": "Términos y condiciones (LEGAL MOCK)", "href": "/legal/terminos" },
+      { "label": "Tratamiento de datos (LEGAL MOCK)", "href": "/legal/tratamiento-datos" }
+    ],
+    "globalAnnouncement": {
+      "enabled": false,
+      "message": null,
+      "validFrom": null,
+      "validUntil": null
+    },
+    "status": "published",
+    "contentSource": "MOCK",
+    "confirmedFields": ["siteName"],
+    "contentRequiredFields": ["description", "logo", "favicon", "contact", "socialLinks", "analytics.measurementId"]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Textos legales de PRUEBA, marcados LEGAL MOCK — REPLACE BEFORE PRODUCTION. Nunca publicables como documentos legales definitivos (todos en draft). El CMS debe permitir reemplazarlos sin cambiar código.",
+  "entity": "LegalDocument",
+  "records": [
+    {
+      "id": "legal-privacidad",
+      "type": "privacy-policy",
+      "title": "Política de Privacidad",
+      "slug": "legal/privacidad",
+      "version": 1,
+      "body": "LEGAL MOCK — REPLACE BEFORE PRODUCTION. Texto de prueba de política de privacidad; no constituye un documento legal válido ni definitivo.",
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["body"],
+      "seo": {
+        "metaTitle": "[LEGAL MOCK] Política de Privacidad",
+        "metaDescription": "[LEGAL MOCK] Texto de prueba.",
+        "canonicalUrl": null,
+        "ogTitle": "[LEGAL MOCK] Política de Privacidad",
+        "ogDescription": "[LEGAL MOCK] Texto de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    },
+    {
+      "id": "legal-cookies",
+      "type": "cookie-policy",
+      "title": "Política de Cookies",
+      "slug": "legal/cookies",
+      "version": 1,
+      "body": "LEGAL MOCK — REPLACE BEFORE PRODUCTION. Texto de prueba de política de cookies; ligada a GA4/D18 y al consentimiento analytics.",
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["body"],
+      "seo": {
+        "metaTitle": "[LEGAL MOCK] Política de Cookies",
+        "metaDescription": "[LEGAL MOCK] Texto de prueba.",
+        "canonicalUrl": null,
+        "ogTitle": "[LEGAL MOCK] Política de Cookies",
+        "ogDescription": "[LEGAL MOCK] Texto de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    },
+    {
+      "id": "legal-terminos",
+      "type": "terms-and-conditions",
+      "title": "Términos y Condiciones",
+      "slug": "legal/terminos",
+      "version": 1,
+      "body": "LEGAL MOCK — REPLACE BEFORE PRODUCTION. Texto de prueba de términos y condiciones.",
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["body"],
+      "seo": {
+        "metaTitle": "[LEGAL MOCK] Términos y Condiciones",
+        "metaDescription": "[LEGAL MOCK] Texto de prueba.",
+        "canonicalUrl": null,
+        "ogTitle": "[LEGAL MOCK] Términos y Condiciones",
+        "ogDescription": "[LEGAL MOCK] Texto de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    },
+    {
+      "id": "legal-tratamiento-datos",
+      "type": "data-processing-policy",
+      "title": "Política de Tratamiento de Datos Personales",
+      "slug": "legal/tratamiento-datos",
+      "version": 1,
+      "body": "LEGAL MOCK — REPLACE BEFORE PRODUCTION. Texto de prueba de política de tratamiento de datos personales; base legal, finalidad y retención de form_submissions antes de conectar Turu CRM.",
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["body"],
+      "seo": {
+        "metaTitle": "[LEGAL MOCK] Tratamiento de Datos Personales",
+        "metaDescription": "[LEGAL MOCK] Texto de prueba.",
+        "canonicalUrl": null,
+        "ogTitle": "[LEGAL MOCK] Tratamiento de Datos Personales",
+        "ogDescription": "[LEGAL MOCK] Texto de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    }
+  ]
+}

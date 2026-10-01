@@ -1,0 +1,419 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Servicios representativos de prueba: los nombres/eslóganes reflejan rutas conceptuales F2 pero NINGÚN texto es copy comercial definitivo de PROEFEX (contentSource: MOCK). Prueban relaciones 1:N y N:M.",
+  "entity": "Service",
+  "records": [
+    {
+      "id": "svc-software",
+      "universe": "unv-create",
+      "name": "Desarrollo de software",
+      "slug": "desarrollo-de-software",
+      "shortDescription": "[MOCK] Servicio de prueba para validar el modelo Service en el universo CREATE.",
+      "description": "[MOCK] Descripción extendida de prueba: ciclo de desarrollo, arquitectura y entrega de software a medida. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: procesos manuales y sistemas dispersos.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad A", "description": "[MOCK] Descripción de capacidad de prueba." },
+        { "title": "[MOCK] Capacidad B", "description": "[MOCK] Descripción de capacidad de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Entender", "description": "[MOCK] Paso de prueba." },
+        { "index": "02", "title": "[MOCK] Diseñar", "description": "[MOCK] Paso de prueba." },
+        { "index": "03", "title": "[MOCK] Integrar", "description": "[MOCK] Paso de prueba." },
+        { "index": "04", "title": "[MOCK] Evolucionar", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-industria", "sec-mineria", "sec-servicios"],
+      "relatedProducts": ["prd-proefact"],
+      "relatedCases": ["case-mock-manufacturing"],
+      "relatedInsights": ["ins-01"],
+      "media": ["med-editorial-01"],
+      "cta": "cta-ver-servicio",
+      "featured": true,
+      "order": 1,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Desarrollo de software — PROEFEX TECH",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Desarrollo de software para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Desarrollo de software",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-ia",
+      "universe": "unv-create",
+      "name": "IA empresarial",
+      "slug": "ia-empresarial",
+      "shortDescription": "[MOCK] Servicio de prueba de IA aplicada a procesos de negocio.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: decisiones sin datos.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad IA", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Diagnóstico", "description": "[MOCK] Paso de prueba." },
+        { "index": "02", "title": "[MOCK] Pilotaje", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-banca-seguros", "sec-salud"],
+      "relatedProducts": [],
+      "relatedCases": [],
+      "relatedInsights": ["ins-05"],
+      "media": ["med-editorial-02"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 2,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] IA empresarial — PROEFEX TECH",
+        "metaDescription": "[MOCK] Texto de prueba del servicio IA empresarial para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] IA empresarial",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-automatizacion",
+      "universe": "unv-create",
+      "name": "Automatización de procesos",
+      "slug": "automatizacion",
+      "shortDescription": "[MOCK] Servicio de prueba de automatización de procesos.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: tareas repetitivas.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad RPA", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Mapeo", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-industria", "sec-banca-seguros"],
+      "relatedProducts": ["prd-proefact"],
+      "relatedCases": ["case-mock-manufacturing"],
+      "relatedInsights": [],
+      "media": ["med-editorial-01"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 3,
+      "status": "in_review",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Automatización de procesos — PROEFEX TECH",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Automatización para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Automatización",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-transformacion",
+      "universe": "unv-create",
+      "name": "Transformación digital",
+      "slug": "transformacion-digital",
+      "shortDescription": "[MOCK] Servicio de prueba de transformación digital.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: madurez digital desigual.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad roadmap", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Evaluación", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-servicios"],
+      "relatedProducts": [],
+      "relatedCases": [],
+      "relatedInsights": ["ins-01"],
+      "media": ["med-editorial-02"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 4,
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Transformación digital — PROEFEX TECH",
+        "metaDescription": null,
+        "canonicalUrl": null,
+        "ogTitle": null,
+        "ogDescription": null,
+        "ogImage": null,
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-marketing-bpo",
+      "universe": "unv-grow",
+      "name": "Marketing BPO",
+      "slug": "marketing-bpo",
+      "shortDescription": "[MOCK] Servicio de prueba de operación de marketing externalizado.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: equipos de marketing sobrecargados.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad operación", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Onboarding", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-retail", "sec-restaurantes"],
+      "relatedProducts": [],
+      "relatedCases": ["case-demo-retail"],
+      "relatedInsights": ["ins-02"],
+      "media": ["med-growup-hero"],
+      "cta": "cta-solicitar-info",
+      "featured": true,
+      "order": 5,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Marketing BPO — Grow Up",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Marketing BPO para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Marketing BPO",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-growup-hero",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-growth",
+      "universe": "unv-grow",
+      "name": "Growth marketing",
+      "slug": "growth-marketing",
+      "shortDescription": "[MOCK] Servicio de prueba de growth marketing.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: adquisición sin experimentación.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad experimentos", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Hipótesis", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-retail", "sec-educacion"],
+      "relatedProducts": [],
+      "relatedCases": ["case-demo-retail"],
+      "relatedInsights": ["ins-02"],
+      "media": ["med-growup-hero"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 6,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Growth marketing — Grow Up",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Growth marketing para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Growth marketing",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-growup-hero",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-consultoria",
+      "universe": "unv-grow",
+      "name": "Consultoría de marketing",
+      "slug": "consultoria",
+      "shortDescription": "[MOCK] Servicio de prueba de consultoría estratégica.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: estrategia sin ejecución.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad estrategia", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Auditoría", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-servicios"],
+      "relatedProducts": [],
+      "relatedCases": [],
+      "relatedInsights": [],
+      "media": ["med-growup-hero"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 7,
+      "status": "in_review",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Consultoría de marketing — Grow Up",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Consultoría para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Consultoría",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-growup-hero",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-formacion",
+      "universe": "unv-learn",
+      "name": "Programas de formación",
+      "slug": "programas-de-formacion",
+      "shortDescription": "[MOCK] Servicio de prueba de programas formativos (Certmind = Partner Oficial, D16).",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial. No constituye certificación propia.",
+      "problem": "[MOCK] Problema de prueba: brecha de habilidades.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad currícula", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Nivelación", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-educacion", "sec-servicios"],
+      "relatedProducts": [],
+      "relatedCases": [],
+      "relatedInsights": ["ins-03"],
+      "media": ["med-editorial-01"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 8,
+      "status": "scheduled",
+      "publishedAt": "2026-11-15T09:00:00Z",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Programas de formación — PROEFEX LEARNS",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Programas de formación para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Programas de formación",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-alquiler",
+      "universe": "unv-experience",
+      "name": "Alquiler de equipos",
+      "slug": "alquiler-de-equipos",
+      "shortDescription": "[MOCK] Servicio de prueba de alquiler de equipamiento tecnológico.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: CAPEX eventuales.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad flota", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Cotización", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-educacion", "sec-restaurantes", "sec-servicios"],
+      "relatedProducts": [],
+      "relatedCases": ["case-example-health"],
+      "relatedInsights": ["ins-04"],
+      "media": ["med-editorial-02"],
+      "cta": "cta-solicitar-info",
+      "featured": true,
+      "order": 9,
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Alquiler de equipos — PROEFEX EQUIP",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Alquiler de equipos para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Alquiler de equipos",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-implementacion-equip",
+      "universe": "unv-experience",
+      "name": "Implementación de equipamiento",
+      "slug": "implementacion-de-equipamiento",
+      "shortDescription": "[MOCK] Servicio de prueba de instalación y puesta en marcha.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: implementaciones sin soporte.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad instalación", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Site survey", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-educacion", "sec-industria"],
+      "relatedProducts": [],
+      "relatedCases": [],
+      "relatedInsights": [],
+      "media": ["med-editorial-01"],
+      "cta": "cta-solicitar-info",
+      "featured": false,
+      "order": 10,
+      "status": "draft",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Implementación de equipamiento — PROEFEX EQUIP",
+        "metaDescription": null,
+        "canonicalUrl": null,
+        "ogTitle": null,
+        "ogDescription": null,
+        "ogImage": null,
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    },
+    {
+      "id": "svc-adopcion",
+      "universe": "unv-solve",
+      "name": "Adopción de soluciones",
+      "slug": "adopcion-de-soluciones",
+      "shortDescription": "[MOCK] Servicio de prueba de implementación y adopción de productos SOLVE.",
+      "description": "[MOCK] Descripción extendida de prueba. Reemplazar con copy oficial.",
+      "problem": "[MOCK] Problema de prueba: software comprado y no adoptado.",
+      "capabilities": [
+        { "title": "[MOCK] Capacidad onboarding", "description": "[MOCK] Descripción de prueba." }
+      ],
+      "process": [
+        { "index": "01", "title": "[MOCK] Configuración", "description": "[MOCK] Paso de prueba." }
+      ],
+      "sectors": ["sec-salud", "sec-restaurantes"],
+      "relatedProducts": ["prd-turu-crm", "prd-my-bpass"],
+      "relatedCases": ["case-example-health"],
+      "relatedInsights": ["ins-05"],
+      "media": ["med-product-turu"],
+      "cta": "cta-conocer-solucion",
+      "featured": false,
+      "order": 11,
+      "status": "in_review",
+      "contentSource": "MOCK",
+      "confirmedFields": ["universe"],
+      "contentRequiredFields": ["shortDescription", "description", "problem", "capabilities", "process"],
+      "seo": {
+        "metaTitle": "[MOCK] Adopción de soluciones — PROEFEX Solutions",
+        "metaDescription": "[MOCK] Texto de prueba del servicio Adopción de soluciones para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Adopción de soluciones",
+        "ogDescription": "[MOCK] Servicio de prueba.",
+        "ogImage": "med-og-default",
+        "robots": "index,follow",
+        "schemaType": "Service"
+      }
+    }
+  ]
+}

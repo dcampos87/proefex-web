@@ -1,0 +1,22 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Redirects de prueba: patrón de migración de rutas antiguas (/saas/, /blog) a las rutas aprobadas (D24).",
+  "entity": "Redirect",
+  "records": [
+    {
+      "id": "red-01",
+      "source": "/saas/turu-crm",
+      "destination": "/solutions/turu-crm",
+      "statusCode": 301,
+      "active": true,
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "red-02",
+      "source": "/blog",
+      "destination": "/insights",
+      "statusCode": 301,
+      "active": true,
+      "contentSource": "MOCK"
+    }
+  ]
+}

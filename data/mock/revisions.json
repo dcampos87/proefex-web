@@ -1,0 +1,84 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Revisiones de prueba (versionado/rollback): ejemplo con múltiples revisiones por entidad (ins-01 y case-mock-manufacturing). Modelo content_revisions de F3.1 intacto (cms-schema §5.2).",
+  "entity": "ContentRevision",
+  "records": [
+    {
+      "id": "rev-01",
+      "entity": "Insight",
+      "entityId": "ins-01",
+      "revisionNumber": 1,
+      "action": "create",
+      "previousStatus": null,
+      "newStatus": "draft",
+      "actor": "usr-demo-author",
+      "timestamp": "2026-08-15T10:00:00Z",
+      "snapshotSummary": "[MOCK] Borrador inicial del insight de prueba.",
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "rev-02",
+      "entity": "Insight",
+      "entityId": "ins-01",
+      "revisionNumber": 2,
+      "action": "submit_review",
+      "previousStatus": "draft",
+      "newStatus": "in_review",
+      "actor": "usr-demo-author",
+      "timestamp": "2026-08-18T12:30:00Z",
+      "snapshotSummary": "[MOCK] Envío a revisión con SEO completo.",
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "rev-03",
+      "entity": "Insight",
+      "entityId": "ins-01",
+      "revisionNumber": 3,
+      "action": "publish",
+      "previousStatus": "in_review",
+      "newStatus": "published",
+      "actor": "usr-demo-editor",
+      "timestamp": "2026-08-20T09:00:00Z",
+      "snapshotSummary": "[MOCK] Publicación aprobada por editor (rol con content.publish).",
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "rev-04",
+      "entity": "Insight",
+      "entityId": "ins-01",
+      "revisionNumber": 4,
+      "action": "update",
+      "previousStatus": "published",
+      "newStatus": "published",
+      "actor": "usr-demo-author",
+      "timestamp": "2026-09-10T09:00:00Z",
+      "snapshotSummary": "[MOCK] Edición de entidad publicada: nuevo borrador sobre revisión congelada y republicación.",
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "rev-05",
+      "entity": "CaseStudy",
+      "entityId": "case-mock-manufacturing",
+      "revisionNumber": 1,
+      "action": "create",
+      "previousStatus": null,
+      "newStatus": "draft",
+      "actor": "usr-demo-editor",
+      "timestamp": "2026-08-25T08:00:00Z",
+      "snapshotSummary": "[MOCK] Alta del caso de prueba.",
+      "contentSource": "MOCK"
+    },
+    {
+      "id": "rev-06",
+      "entity": "CaseStudy",
+      "entityId": "case-mock-manufacturing",
+      "revisionNumber": 2,
+      "action": "rollback",
+      "previousStatus": "published",
+      "newStatus": "draft",
+      "actor": "usr-demo-admin",
+      "timestamp": "2026-09-02T15:00:00Z",
+      "snapshotSummary": "[MOCK] Rollback a versión anterior: demuestra recuperabilidad (governance §1.4).",
+      "contentSource": "MOCK"
+    }
+  ]
+}

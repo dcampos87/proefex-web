@@ -1,0 +1,139 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Clientes y resultados inequívocamente ficticios (Mock Company A / Demo / Example). Métricas marcadas mock:true: NUNCA se presentan como resultados reales de PROEFEX ni de clientes reales.",
+  "entity": "CaseStudy",
+  "records": [
+    {
+      "id": "case-mock-manufacturing",
+      "title": "[MOCK] Modernización de planta — Mock Manufacturing Co.",
+      "slug": "mock-manufacturing-co",
+      "client": "Mock Manufacturing Co.",
+      "clientVisibility": "public",
+      "clientVisibilityNote": "[MOCK] Visibilidad pública simulada; en contenido real requiere autorización explícita (gate G4).",
+      "sector": "sec-industria",
+      "universe": "unv-create",
+      "summary": "[MOCK] Resumen de prueba de un caso de automatización industrial.",
+      "challenge": "[MOCK] Desafío de prueba: procesos manuales en planta.",
+      "solution": "[MOCK] Solución de prueba: integración de sistemas y automatización.",
+      "process": "[MOCK] Proceso de prueba en 4 fases.",
+      "results": [
+        { "label": "[MOCK] Reducción de tiempos de proceso", "value": "−38%", "mock": true },
+        { "label": "[MOCK] Trazabilidad de lotes", "value": "100%", "mock": true }
+      ],
+      "technologies": ["[MOCK] Tecnología de prueba A", "[MOCK] Tecnología de prueba B"],
+      "testimonial": {
+        "quote": "[MOCK] Cita de prueba para validar el bloque Testimonial.",
+        "authorName": "Demo Person (MOCK)",
+        "authorRole": "[MOCK] Gerente de operaciones",
+        "company": "Mock Manufacturing Co.",
+        "consent": true
+      },
+      "heroMedia": "med-editorial-01",
+      "gallery": ["med-editorial-02"],
+      "videos": [],
+      "relatedServices": ["svc-software", "svc-automatizacion"],
+      "relatedProducts": ["prd-proefact"],
+      "cta": "cta-ver-caso",
+      "publishedAt": "2026-09-01T09:00:00Z",
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["summary", "challenge", "solution", "results", "heroMedia"],
+      "seo": {
+        "metaTitle": "[MOCK] Caso Mock Manufacturing Co. — PROEFEX",
+        "metaDescription": "[MOCK] Texto de prueba del caso de industria para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Caso Mock Manufacturing Co.",
+        "ogDescription": "[MOCK] Caso de prueba.",
+        "ogImage": "med-editorial-01",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    },
+    {
+      "id": "case-demo-retail",
+      "title": "[MOCK] Growth en retail — Demo Retail Group",
+      "slug": "demo-retail-group",
+      "client": "Demo Retail Group",
+      "clientVisibility": "anonymous",
+      "clientVisibilityNote": "[MOCK] Cliente anónimo: demuestra que el modelo soporta casos sin nombre público.",
+      "sector": "sec-retail",
+      "universe": "unv-grow",
+      "summary": "[MOCK] Resumen de prueba de un caso de growth marketing.",
+      "challenge": "[MOCK] Desafío de prueba: adquisición costosa.",
+      "solution": "[MOCK] Solución de prueba: programa de experimentación.",
+      "process": "[MOCK] Proceso de prueba.",
+      "results": [
+        { "label": "[MOCK] Incremento de conversión", "value": "+24%", "mock": true }
+      ],
+      "technologies": ["[MOCK] Tecnología de prueba C"],
+      "testimonial": {
+        "quote": "[MOCK] Cita de prueba SIN consentimiento: sirve para validar el gate G7 (no publicable).",
+        "authorName": "Demo Person 2 (MOCK)",
+        "authorRole": "[MOCK] Gerente comercial",
+        "company": "Demo Retail Group",
+        "consent": false
+      },
+      "heroMedia": "med-growup-hero",
+      "gallery": [],
+      "videos": [],
+      "relatedServices": ["svc-growth", "svc-marketing-bpo"],
+      "relatedProducts": [],
+      "cta": "cta-ver-caso",
+      "publishedAt": null,
+      "status": "in_review",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["summary", "challenge", "solution", "results", "heroMedia"],
+      "seo": {
+        "metaTitle": "[MOCK] Caso Demo Retail Group — PROEFEX",
+        "metaDescription": "[MOCK] Texto de prueba del caso de retail para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Caso Demo Retail Group",
+        "ogDescription": "[MOCK] Caso de prueba.",
+        "ogImage": "med-growup-hero",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    },
+    {
+      "id": "case-example-health",
+      "title": "[MOCK] Digitalización de atención — Example Health Organization",
+      "slug": "example-health-organization",
+      "client": "Example Health Organization",
+      "clientVisibility": "public",
+      "clientVisibilityNote": "[MOCK] Visibilidad pública simulada; requiere autorización explícita en contenido real (gate G4).",
+      "sector": "sec-salud",
+      "universe": "unv-solve",
+      "summary": "[MOCK] Resumen de prueba de un caso de digitalización de atención al paciente.",
+      "challenge": "[MOCK] Desafío de prueba: agendamiento manual.",
+      "solution": "[MOCK] Solución de prueba: producto SaaS de gestión.",
+      "process": "[MOCK] Proceso de prueba.",
+      "results": [
+        { "label": "[MOCK] Tiempo de agendamiento", "value": "−52%", "mock": true }
+      ],
+      "technologies": ["[MOCK] Tecnología de prueba D"],
+      "testimonial": null,
+      "heroMedia": "med-editorial-02",
+      "gallery": ["med-editorial-01"],
+      "videos": [],
+      "relatedServices": ["svc-adopcion", "svc-alquiler"],
+      "relatedProducts": ["prd-my-bpass", "prd-turu-crm"],
+      "cta": "cta-ver-caso",
+      "publishedAt": "2026-10-15T09:00:00Z",
+      "status": "scheduled",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["summary", "challenge", "solution", "results", "heroMedia"],
+      "seo": {
+        "metaTitle": "[MOCK] Caso Example Health Organization — PROEFEX",
+        "metaDescription": "[MOCK] Texto de prueba del caso de salud para validar SEO.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Caso Example Health Organization",
+        "ogDescription": "[MOCK] Caso de prueba.",
+        "ogImage": "med-editorial-02",
+        "robots": "index,follow",
+        "schemaType": "WebPage"
+      }
+    }
+  ]
+}

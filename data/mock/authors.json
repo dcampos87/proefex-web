@@ -1,0 +1,54 @@
+{
+  "_comment": "MOCK dataset — Fase 3.1.2. Autores inequívocamente ficticios (Demo Author / Mock Editorial Team). No representan trabajadores de PROEFEX. Reemplazables por autores reales sin cambiar schema ni frontend.",
+  "entity": "Author",
+  "records": [
+    {
+      "id": "aut-demo-author",
+      "name": "Demo Author",
+      "slug": "demo-author",
+      "role": "[MOCK] Editora técnica de demostración",
+      "bio": "[MOCK] Bio de prueba para validar authorship GEO: nombre, cargo, bio y foto reemplazables por datos reales de PROEFEX.",
+      "photo": "med-autor-demo",
+      "socialLinks": [
+        { "platform": "linkedin", "url": "https://example.com/demo-author" }
+      ],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["role", "bio", "photo", "socialLinks"],
+      "seo": {
+        "metaTitle": "[MOCK] Demo Author — PROEFEX Insights",
+        "metaDescription": "[MOCK] Perfil de autor de demostración para validar authorship.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Demo Author",
+        "ogDescription": "[MOCK] Perfil de autor de demostración.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    },
+    {
+      "id": "aut-mock-editorial-team",
+      "name": "Mock Editorial Team",
+      "slug": "mock-editorial-team",
+      "role": "[MOCK] Equipo editorial de demostración",
+      "bio": "[MOCK] Bio de prueba del equipo editorial. Reemplazar por autores reales cuando PROEFEX los entregue.",
+      "photo": "med-autor-demo",
+      "socialLinks": [],
+      "status": "published",
+      "contentSource": "MOCK",
+      "confirmedFields": [],
+      "contentRequiredFields": ["role", "bio", "photo", "socialLinks"],
+      "seo": {
+        "metaTitle": "[MOCK] Mock Editorial Team — PROEFEX Insights",
+        "metaDescription": "[MOCK] Perfil de equipo editorial de demostración.",
+        "canonicalUrl": null,
+        "ogTitle": "[MOCK] Mock Editorial Team",
+        "ogDescription": "[MOCK] Perfil de equipo editorial de demostración.",
+        "ogImage": "med-og-default",
+        "robots": "noindex,follow",
+        "schemaType": null
+      }
+    }
+  ]
+}

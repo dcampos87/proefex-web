@@ -107,6 +107,15 @@ Matriz completa: `docs/fase-3/business-content-decisions.md`. Alcance F3.1.1: so
 | D56 | Registro de Klyra sin dominio confirmado | Klyra queda registrado en la matriz Solutions (6/6 productos) aunque aún no tenga dominio; su URL se marca "Sin dominio confirmado" | Mandato F3.1.1 §4 | `PROPOSED` (pendiente validación de datos del producto) | Bajo — completitud de la matriz D15 | D15 |
 | D57 | Clasificación de prioridades P0/P1/P2 del contenido | P0: Home, 5 universos, servicios principales, Solutions, contacto, legal, SEO básico, media principal. P1: sectores, casos, insights, autores. P2: contenido adicional, casos adicionales, traducción EN, contenido avanzado. Explícitamente revisable por PROEFEX | Mandato F3.1.1 §16 | `PROPOSED` (revisable; no congela prioridades) | Medio — orden de entrega de contenido y desbloqueo por fases | Respuestas PROEFEX (matriz Solutions, media, legal, autores) |
 
+## Decisiones nuevas de Fase 3.1.2 (content mock & CMS readiness)
+
+Dataset y estrategia: `data/mock/` + `docs/fase-3/content-mock-strategy.md` + `docs/fase-3/cms-readiness-checklist.md`. Alcance F3.1.2: dataset MOCK + validador + documentación — sin F3.2, sin migraciones, sin CMS UI, sin API, sin cambios de frontend. Estado: `PHASE_3_1_2_CONTENT_MOCK_READY — REQUIRES_PROEFEX_APPROVAL`. No se cierran D5/D13/D15/D17/D45/D55/D56/D57.
+
+| ID | Título | Decisión | Contexto | Estado | Impacto | Dependencia |
+|---|---|---|---|---|---|---|
+| D58 | Dataset MOCK estructural como instrumento de validación del modelo CMS | Dataset en `data/mock/` (19 archivos, 108 registros, 266 relaciones) cubriendo las 17 entidades del modelo, los 5 estados del workflow y variantes SEO, con marcado obligatorio MOCK/DEMO/LEGAL MOCK y validador `npm run validate:mock` (sin dependencias nuevas). No se importa desde el frontend; el reemplazo por contenido real es solo de datos | Mandato F3.1.2; criterio de éxito §32 respondido YES | `APPROVED` (mandato F3.1.2) | Alto — valida el modelo antes de construir el CMS | Modelo F3.1 (D46–D52); matrices F3.1.1 |
+| D59 | Atributo `content_source` (MOCK/PROEFEX/IMPORTED) en entidades de contenido | Añadir `content_source` a las entidades de contenido del schema para distinguir contenido de prueba, oficial e importado. En F3.1.2 vive solo en el dataset MOCK (`contentSource` por registro); **requiere modificación del schema de F3.1**, por lo que NO se implementa silenciosamente y se detiene antes de migraciones | Mandato F3.1.2 §23 | `PROPOSED` — requiere aprobación y migración en F3.2 | Medio — trazabilidad de origen y gates de publicación | Aprobación PROEFEX; F3.2 |
+
 ## Decisiones arquitectónicas confirmadas
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |
