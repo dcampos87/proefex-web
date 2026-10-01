@@ -151,7 +151,15 @@ export function SiteHeader() {
                   style={{ color: "var(--text)", fontSize: "var(--text-caption)", fontWeight: 500, background: "none", border: "none", cursor: "pointer", font: "inherit", padding: 0 }}
                   aria-expanded={megaOpen}
                   aria-controls="mega-ecosistema"
-                  onClick={() => setMegaOpen((v) => !v)}
+                  onClick={(e) => {
+                    const next = !megaOpen;
+                    setMegaOpen(next);
+                    // Apertura con teclado (detail=0): mover el foco al primer
+                    // enlace del panel (patrón disclosure WAI-ARIA).
+                    if (next && e.detail === 0) {
+                      requestAnimationFrame(() => megaPanelRef.current?.querySelector<HTMLElement>("a")?.focus());
+                    }
+                  }}
                 >
                   Ecosistema
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true" style={{ transform: megaOpen ? "rotate(180deg)" : undefined, transition: "transform var(--motion-fast) var(--ease-out)" }}>

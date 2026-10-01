@@ -70,7 +70,7 @@ export function HeroCreative({
             </Reveal>
           ) : null}
 
-          <Reveal variant="reveal-lines" as="h2" id="hero-growup-title" className="mt-4" style={{ maxWidth: "100%" }}>
+          <Reveal variant="reveal-lines" as="h1" id="hero-growup-title" className="mt-4" style={{ maxWidth: "100%" }}>
             <span className="line" style={{ ["--reveal-delay" as string]: "0ms" }}>
               <span
                 style={{

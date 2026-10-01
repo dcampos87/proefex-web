@@ -52,7 +52,7 @@ export function HeroTech({
               </Reveal>
             ) : null}
 
-            <Reveal variant="reveal-lines" as="h2" id="hero-tech-title" className="mt-4">
+            <Reveal variant="reveal-lines" as="h1" id="hero-tech-title" className="mt-4">
               {title.split("\n").map((line, i) => (
                 <span key={i} className="line" style={{ ["--reveal-delay" as string]: `${i * 70}ms` }}>
                   <span
