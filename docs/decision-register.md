@@ -95,6 +95,18 @@ Arquitectura de contenido documentada en `docs/fase-3/` (content-architecture / 
 
 Nuevas entradas requeridas a PROEFEX (`REQUIRES_PROEFEX_INPUT`, no cierran F3.1): lista final de categorías de insights (`/insights/[categoria]/[slug]`, D3), autores reales para `Author` (authorship GEO), personas por rol RBAC (D14). Heredadas: D13 (crítica), D15, D5, D17 (legal/contacto), D45 (media).
 
+## Decisiones nuevas de Fase 3.1.1 (matriz de decisiones de negocio)
+
+Matriz completa: `docs/fase-3/business-content-decisions.md`. Alcance F3.1.1: solo estructura y validación de decisiones de negocio — sin F3.2, sin cambios de schema/API/frontend/diseño. Estado de la fase: `PHASE_3_1_1_BUSINESS_CONTENT_MATRIX_COMPLETE — REQUIRES_PROEFEX_INPUT`.
+
+| ID | Título | Decisión | Contexto | Estado | Impacto | Dependencia |
+|---|---|---|---|---|---|---|
+| D53 | Cinco pilares como registro confirmado de negocio | Los 5 universos (CREATE/PROEFEX TECH, GROW/Grow Up, LEARN/PROEFEX LEARNS, EXPERIENCE/PROEFEX EQUIP, SOLVE/PROEFEX Solutions) con sus frases y códigos se registran como información confirmada, sin modificaciones | Mandato F3.1.1 §3; coincide con la entidad `Universe` (D47) | `APPROVED` (mandato F3.1.1) | Alto — base de toda la matriz de negocio | D26, D47 |
+| D54 | Ocho sectores como lista cerrada inicial | Industria, Salud, Retail, Educación, Servicios, Minería, Restaurantes, Banca y Seguros; sin noveno sector ni sectores nuevos | Mandato F3.1.1 §14; coincide con `Sector` (content-architecture §3.2) | `APPROVED` (mandato F3.1.1) | Medio — desbloquea descripciones y slugs por sector (F3.2) | D54 → slugs en F3.2 |
+| D55 | Propuesta semilla de categorías de Insights | 6 categorías `PROPOSED` (5 alineadas a pilar + 1 transversal `empresa`), slugs URL-safe verificados contra `/insights/[categoria]/[slug]` (D3) y sin colisión con rutas existentes | Mandato F3.1.1 §5: no crear categorías definitivas automáticamente; la lista final es decisión de PROEFEX | `PROPOSED` | Alto — requisito para crear el enum de categorías y el routing del blog (bloquea parte de F3.2) | D3; aprobación PROEFEX |
+| D56 | Registro de Klyra sin dominio confirmado | Klyra queda registrado en la matriz Solutions (6/6 productos) aunque aún no tenga dominio; su URL se marca "Sin dominio confirmado" | Mandato F3.1.1 §4 | `PROPOSED` (pendiente validación de datos del producto) | Bajo — completitud de la matriz D15 | D15 |
+| D57 | Clasificación de prioridades P0/P1/P2 del contenido | P0: Home, 5 universos, servicios principales, Solutions, contacto, legal, SEO básico, media principal. P1: sectores, casos, insights, autores. P2: contenido adicional, casos adicionales, traducción EN, contenido avanzado. Explícitamente revisable por PROEFEX | Mandato F3.1.1 §16 | `PROPOSED` (revisable; no congela prioridades) | Medio — orden de entrega de contenido y desbloqueo por fases | Respuestas PROEFEX (matriz Solutions, media, legal, autores) |
+
 ## Decisiones arquitectónicas confirmadas
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |

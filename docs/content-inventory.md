@@ -120,19 +120,27 @@
 
 ---
 
-## Matriz de contenido por entidad — Fase 3.1
+## Matriz de contenido por entidad — Fase 3.1 / 3.1.1
 
-Estado de disponibilidad de contenido por entidad del modelo CMS (`docs/fase-3/content-architecture.md`). Gobernanza y detalle: `docs/fase-3/content-governance.md` §8. Sin contenido inventado para completar la matriz.
+Estado de disponibilidad de contenido por entidad del modelo CMS (`docs/fase-3/content-architecture.md`). Gobernanza y detalle: `docs/fase-3/content-governance.md` §8. Matrices de negocio: `docs/fase-3/business-content-decisions.md` (F3.1.1). Sin contenido inventado para completar la matriz.
 
-| Entidad | Contenido disponible | Estado |
-|---|---|---|
-| Home | Parcial | IN_REVIEW |
-| TECH | Parcial | IN_REVIEW |
-| Grow Up | Parcial | IN_REVIEW |
-| Learns | CONTENT_REQUIRED | DRAFT |
-| Equip | CONTENT_REQUIRED | DRAFT |
-| Solutions | Parcial | IN_REVIEW |
-| Sectors | Parcial | DRAFT |
-| Cases | CONTENT_REQUIRED | DRAFT |
-| Insights | CONTENT_REQUIRED | DRAFT |
-| Media | CONTENT_REQUIRED | BLOCKED |
+Estados: `READY` · `CONTENT_REQUIRED` · `IN_REVIEW` · `BLOCKED` (mandato F3.1.1 §15). Prioridad: P0 = imprescindible para lanzamiento · P1 = lanzamiento ampliado · P2 = evolución (revisable por PROEFEX).
+
+| Entidad | Responsable | Contenido disponible | Media disponible | Estado | Prioridad |
+|---|---|---|---|---|---|
+| Home | PROEFEX (copy final) · Agent Master (estructura) | Parcial (copy conceptual D12) | `CONTENT_REQUIRED` (hero video/poster, editoriales — D45) | IN_REVIEW | P0 |
+| TECH | PROEFEX (copy final) · Agent Master (estructura) | Parcial (copy conceptual D12) | `CONTENT_REQUIRED` (fotografía, video, drones, IoT, software — D45) | IN_REVIEW | P0 |
+| Grow Up | PROEFEX (copy final) · Agent Master (estructura) | Parcial (copy conceptual D12) | `CONTENT_REQUIRED` (campañas, fotografía, video, piezas — D45) | IN_REVIEW | P0 |
+| Learns | PROEFEX | `CONTENT_REQUIRED` (catálogo Certmind referencial, claim "Partner Oficial" D16) | `CONTENT_REQUIRED` | `CONTENT_REQUIRED` | P0 |
+| Equip | PROEFEX | `CONTENT_REQUIRED` (fichas, marcas, condiciones) | `CONTENT_REQUIRED` (product shots) | `CONTENT_REQUIRED` | P0 |
+| Solutions | PROEFEX (matriz §2 de business-content-decisions, D15) | `CONTENT_REQUIRED` (6 productos por validar) | `CONTENT_REQUIRED` (logos, screenshots, mockups, videos) | `CONTENT_REQUIRED` | P0 |
+| Sectors | PROEFEX | Parcial (8 sectores confirmados, sin descripciones) | `CONTENT_REQUIRED` | `CONTENT_REQUIRED` | P1 |
+| Cases | PROEFEX (con autorización de cliente, gate G4) | `CONTENT_REQUIRED` (sin casos registrados) | `CONTENT_REQUIRED` (+ permisos de publicación) | `CONTENT_REQUIRED` | P1 |
+| Insights | PROEFEX (categorías §3, autores §4 de business-content-decisions) | `CONTENT_REQUIRED` (categorías PROPOSED, autores pendientes) | `CONTENT_REQUIRED` | `CONTENT_REQUIRED` | P1 |
+| Media | PROEFEX (entrega) · Agent Master (integración vía CMS) | `CONTENT_REQUIRED` | `CONTENT_REQUIRED` (checklist completo en business-content-decisions §8) | BLOCKED | P0 |
+
+Lectura:
+
+- `BLOCKED` (Media) = F2.4/D45: sin fotografía/video/logo real de PROEFEX en el repositorio; el sistema de media (D41) está listo para integrarlos.
+- `CONTENT_REQUIRED` = PROEFEX debe proveer; no se inventa.
+- `IN_REVIEW` = estructura y copy conceptual aprobado como dirección (D12); falta copy comercial definitivo.
