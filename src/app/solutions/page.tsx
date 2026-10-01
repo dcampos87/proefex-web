@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { SubNav } from "@/components/nav/SubNav";
 import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
@@ -69,30 +69,18 @@ export default function SolutionsPage() {
       <section data-universe="solve" className="section-sm" aria-labelledby="solutions-catalog">
         <div className="container-pfx flex flex-col gap-8">
           <SectionHeader kicker="CATÁLOGO" title="Cada producto, con su propia página." />
-          <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3" role="list">
-            {PRODUCTS.map((prod, i) => (
-              <Reveal as="li" key={prod.label} delay={i * 60}>
-                <Link
-                  href={PILLARS[4].children[i].href}
-                  className="card flex h-full flex-col gap-3 p-6 no-underline hover:-translate-y-1 hover:shadow-[var(--shadow-lift)]"
-                >
-                  <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-heading)", color: "var(--text)" }}>
-                    {prod.label}
-                  </h3>
-                  <span className="content-required w-fit">CONTENT_REQUIRED — descripción</span>
-                  {prod.domain ? (
-                    <p style={{ marginTop: "auto", fontFamily: "var(--font-mono)", fontSize: "0.8125rem", color: "var(--text-muted)" }}>
-                      {prod.domain}
-                    </p>
-                  ) : (
-                    <p className="badge w-fit" style={{ marginTop: "auto", fontSize: "0.75rem" }}>
-                      Producto reservado
-                    </p>
-                  )}
-                </Link>
-              </Reveal>
-            ))}
-          </ul>
+          <EditorialRows
+            ariaLabel="Productos PROEFEX SOLUTIONS"
+            items={PRODUCTS.map((prod, i) => ({
+              index: `0${i + 1}`,
+              label: prod.label,
+              desc: prod.domain
+                ? `${prod.domain} · Descripción: CONTENT_REQUIRED (Fase 3).`
+                : "Producto reservado, en desarrollo.",
+              href: PILLARS[4].children[i].href,
+              badge: prod.domain ? undefined : "F3",
+            }))}
+          />
         </div>
       </section>
 

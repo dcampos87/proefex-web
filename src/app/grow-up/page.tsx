@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { HeroCreative } from "@/components/heroes/HeroCreative";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceGrid } from "@/components/blocks/ServiceGrid";
 import { Marquee } from "@/components/blocks/Marquee";
 import { SubNav } from "@/components/nav/SubNav";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
@@ -53,13 +53,14 @@ export default function GrowUpPage() {
             title="El marketing que se nota, operado como sistema."
             intro="Cada servicio tiene página propia con propuesta, método y resultados cuando existan."
           />
-          <ServiceGrid
-            variant="growup"
+          <EditorialRows
+            ariaLabel="Servicios Grow Up"
             items={PILLARS[1].children.map((c, i) => ({
               index: `0${i + 1}`,
-              title: c.label,
-              description: "Propuesta de valor y método: CONTENT_REQUIRED (Fase 3).",
+              label: c.label,
+              desc: c.desc ?? "Propuesta de valor y método: CONTENT_REQUIRED (Fase 3).",
               href: c.href,
+              badge: c.built ? undefined : "F3",
             }))}
           />
         </div>

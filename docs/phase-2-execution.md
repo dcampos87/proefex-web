@@ -79,3 +79,22 @@ Ninguno fuera de alcance. Desviaciones documentadas como decisiones D19–D23 en
 **NO hecho (conforme a la autorización):** sin CMS, sin contenido definitivo, sin Turu CRM, sin GA4 productivo, sin LMS, sin blog real, sin DNS/despliegue. Pendiente de decisión humana: mapa de URLs (conflicto D24 vs Doc 04).
 
 **Fase 3 requeriría:** resolución D24, contenido (D13/D15/D17), CMS + API, integraciones.
+
+---
+
+# Recalibración visual de Fase 2 — premium editorial
+
+> Documento autoritativo: **[`fase-2/recalibracion-visual.md`](fase-2/recalibracion-visual.md)** (análisis benchmark weevolveit.com §29, entregables, validación). Resumen:
+
+| Entregable | Estado | Detalle |
+|---|---|---|
+| Lenguaje premium editorial (D28) | ✅ | Tipografía protagonista (`display-xl`, `kicker-line`), filas editoriales numeradas (D30), espacio negativo, hairlines |
+| Megamenú premium | ✅ | Descripciones por ítem + bloque DESTACADO por pilar + rail transversal + panel translúcido con blur |
+| Home premium (§7) | ✅ | 7 secciones: Hero → Ecosistema (filas 01–05) → Capacidad destacada → Experiencia destacada (`CONTENT_REQUIRED`) → Cómo trabajamos (D29) → Insights → CTA |
+| Landings con personalidad | ✅ | 5 landings con filas editoriales; conservan hero y universo propios |
+| Índices editoriales nuevos | ✅ | `/casos`, `/insights` (+4 categorías stub), `/sectores` (+8 sectores stub) — 50 rutas totales |
+| Mega-footer (§27) | ✅ | Wordmark gigante + 6 columnas (core + 5 pilares) + legal (`CONTENT_REQUIRED`) |
+| Page transitions (§19) | ✅ | Page reveal nativo CSS (420ms), anulado en reduced-motion; sin SPA-ficación (SSR/URLs reales intactas) |
+| QA | ✅ | Build 50/50; First Load JS 103 kB (sin cambios); overflow 320px = 0 en 14 rutas; megamenú/drawer a11y verificado |
+
+**Decisiones nuevas:** D28 (lenguaje visual premium), D29 (metodología propuesta), D30 (filas editoriales) — todas `PROPOSED` en `decision-register.md`.

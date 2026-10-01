@@ -56,6 +56,9 @@ Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 | D25 | Grow Up: nueva paleta #22272E (grafito) + #00FFE6 (cian) reemplaza coral/amarillo | `APPROVED` (mandato de recalibración) · `IMPLEMENTED` | PROEFEX | Alto — identidad Grow Up | Contrastes AA verificados (`recalibracion-multipage.md` §C/§F) |
 | D26 | Modelo de navegación de 3 niveles (PROEFEX → 5 pilares → servicios/productos) + megamenú desktop + drawer móvil; 5 líneas como estrategia de marca; Core = capa transversal | `APPROVED` (mandato de recalibración) · `IMPLEMENTED` | PROEFEX | Alto | Fuente única: `nav-data.ts` |
 | D27 | Header universo-aware: hereda tokens `[data-universe]` por ruta (`usePathname`) para contraste sobre héroes oscuros | `PROPOSED` (implementado; fix de QA) | Agent Master | Bajo (a11y) | |
+| D28 | Recalibración visual premium editorial (benchmark weevolveit.com, **sin copia**): tipografía protagonista, filas editoriales numeradas en lugar de grids de cards, page reveal nativo, mega-footer con wordmark, megamenú con descripciones por ítem y destacados | `PROPOSED` — lenguaje y nivel; identidad PROEFEX intacta (universos/paletas D25–D26 vigentes) | Agent Master → PROEFEX | Medio (dirección visual) | Ver `fase-2/recalibracion-visual.md` §29 |
+| D29 | Metodología PROEFEX propuesta: Entender → Diseñar → Integrar → Evolucionar (propia, no la del benchmark) | `PROPOSED` — requiere aprobación de contenido | Agent Master → PROEFEX | Medio (contenido) | |
+| D30 | Filas editoriales (`EditorialRows`) como patrón de jerarquía de servicios en landings e índices (casos/insights/sectores); cards solo para comparación puntual | `PROPOSED` (implementado en 5 landings + 3 índices) | Agent Master | Bajo | |
 
 ## Decisiones arquitectónicas confirmadas
 

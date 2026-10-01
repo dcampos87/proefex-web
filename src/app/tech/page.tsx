@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { HeroTech } from "@/components/heroes/HeroTech";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceGrid } from "@/components/blocks/ServiceGrid";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { SubNav } from "@/components/nav/SubNav";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
@@ -45,13 +45,14 @@ export default function TechPage() {
             title="Desarrollo y digitalización, con criterio de ingeniería."
             intro="Cada capacidad tiene página propia con su propuesta, método y casos cuando existan."
           />
-          <ServiceGrid
-            variant="tech"
+          <EditorialRows
+            ariaLabel="Capacidades TECH"
             items={PILLARS[0].children.map((c, i) => ({
-              index: `0${i + 1} / ${c.label.toUpperCase()}`,
-              title: c.label,
-              description: "Propuesta de valor y método: CONTENT_REQUIRED (Fase 3).",
+              index: `0${i + 1}`,
+              label: c.label,
+              desc: c.desc ?? "Propuesta de valor y método: CONTENT_REQUIRED (Fase 3).",
               href: c.href,
+              badge: c.built ? undefined : "F3",
             }))}
           />
         </div>

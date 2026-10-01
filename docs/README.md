@@ -44,6 +44,7 @@ Dominio principal: **proefexperu.com**
  — | Fase 2 — especificación responsive | [fase-2/responsive-spec.md](fase-2/responsive-spec.md) |
  — | Fase 2 — validación (QA) | [fase-2/phase-2-validation.md](fase-2/phase-2-validation.md) |
  — | **Fase 2 — recalibración multipágina (megamenú + 5 líneas)** | [fase-2/recalibracion-multipage.md](fase-2/recalibracion-multipage.md) |
+ — | **Fase 2 — recalibración visual premium (benchmark weevolveit)** | [fase-2/recalibracion-visual.md](fase-2/recalibracion-visual.md) |
 
 ## Lectura sugerida
 
@@ -53,4 +54,4 @@ Dominio principal: **proefexperu.com**
 
 ## Estado
 
-**FASE 2 RECALIBRADA** — `PHASE_2_RECALIBRATED — REQUIRES_PROEFEX_APPROVAL`. Fase 2 original (design system, componentes, motion) recalibrada a **experiencia multipágina**: 5 líneas de negocio (CREATE/GROW/LEARN/EXPERIENCE/SOLVE), megamenú, subnav, breadcrumbs, Home como entry point, 6 universos visuales, 38 rutas. Ver [fase-2/recalibracion-multipage.md](fase-2/recalibracion-multipage.md) y [phase-2-execution.md](phase-2-execution.md). Fases 3–7 `NOT_AUTHORIZED`.
+**FASE 2 RECALIBRADA** — `PHASE_2_RECALIBRATED — REQUIRES_PROEFEX_APPROVAL`. Fase 2 recalibrada dos veces: (1) a **experiencia multipágina** — 5 líneas (CREATE/GROW/LEARN/EXPERIENCE/SOLVE), megamenú, subnav, breadcrumbs, 6 universos, [recalibracion-multipage.md](fase-2/recalibracion-multipage.md); (2) a **lenguaje visual premium editorial** (benchmark weevolveit.com, sin copia) — tipografía protagonista, filas editoriales, page reveal, mega-footer, [recalibracion-visual.md](fase-2/recalibracion-visual.md). 50 rutas. Fases 3–7 `NOT_AUTHORIZED`.

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceGrid } from "@/components/blocks/ServiceGrid";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { SubNav } from "@/components/nav/SubNav";
 import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
@@ -64,12 +64,14 @@ export default function EquipPage() {
             title="Equipamiento, con página propia por categoría."
             intro="Categorías según arquitectura aprobada; catálogo y especificaciones llegan con el inventario de contenido."
           />
-          <ServiceGrid
+          <EditorialRows
+            ariaLabel="Categorías EQUIP"
             items={PILLARS[3].children.map((c, i) => ({
-              index: `0${i + 1} / ${c.label.toUpperCase()}`,
-              title: c.label,
-              description: "Catálogo y especificaciones: CONTENT_REQUIRED (Fase 3).",
+              index: `0${i + 1}`,
+              label: c.label,
+              desc: c.desc ?? "Catálogo y especificaciones: CONTENT_REQUIRED (Fase 3).",
               href: c.href,
+              badge: "F3",
             }))}
           />
         </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ServiceGrid } from "@/components/blocks/ServiceGrid";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { SubNav } from "@/components/nav/SubNav";
 import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
 import { Reveal } from "@/components/motion/Reveal";
@@ -63,19 +63,22 @@ export default function LearnsPage() {
             kicker="RUTAS DE APRENDIZAJE"
             title="Cursos y certificación, con página propia."
           />
-          <ServiceGrid
+          <EditorialRows
+            ariaLabel="Rutas de aprendizaje"
             items={[
               {
-                index: "01 / CURSOS",
-                title: "Cursos",
-                description: "Catálogo definido por el negocio: CONTENT_REQUIRED (Fase 3). No se inventan cursos, precios ni modalidades (D16).",
+                index: "01",
+                label: "Cursos",
+                desc: "Catálogo definido por el negocio: CONTENT_REQUIRED (Fase 3). No se inventan cursos, precios ni modalidades (D16).",
                 href: "/learns/cursos",
+                badge: "F3",
               },
               {
-                index: "02 / CERTIFICACIÓN",
-                title: "Certificación",
-                description: "Rutas de certificación con Certmind: detalle CONTENT_REQUIRED (Fase 3).",
+                index: "02",
+                label: "Certificación",
+                desc: "Rutas de certificación con Certmind: detalle CONTENT_REQUIRED (Fase 3).",
                 href: "/learns/certificacion",
+                badge: "F3",
               },
             ]}
           />

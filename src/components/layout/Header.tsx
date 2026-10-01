@@ -200,10 +200,10 @@ export function SiteHeader() {
         aria-hidden={!megaOpen}
       >
         <div className="container-pfx" style={{ maxWidth: "var(--container-wide)", paddingBlock: "var(--space-6) var(--space-8)" }}>
-          <div className="grid gap-8 lg:grid-cols-[0.9fr_2.6fr]">
+          <div className="grid gap-8 lg:grid-cols-[0.85fr_2.9fr]">
             <div className="flex flex-col gap-3">
-              <p className="label-mono">EL ECOSISTEMA</p>
-              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.15rem", color: "var(--text)" }}>
+              <p className="kicker-line">EL ECOSISTEMA</p>
+              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.3rem", color: "var(--text)", maxWidth: "18ch" }}>
                 Cinco capacidades, una sola propuesta
               </p>
               <p style={{ fontSize: "var(--text-caption)", color: "var(--text-body)", maxWidth: "34ch" }}>
@@ -212,11 +212,22 @@ export function SiteHeader() {
               <Link href={CONTACT_HREF} className="btn btn-secondary btn-sm mt-2 w-fit">
                 Solicitar asesoría
               </Link>
+              <nav aria-label="Transversal PROEFEX" className="mt-4 border-t pt-4" style={{ borderColor: "var(--border)" }}>
+                <ul className="flex flex-col gap-1.5" role="list">
+                  {CORE_LINKS.map((l) => (
+                    <li key={l.href}>
+                      <Link href={l.href} className="mega-link" onClick={() => closeMega()} style={{ fontSize: "var(--text-caption)", color: "var(--text-body)" }}>
+                        {l.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
             </div>
 
             <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" role="list">
               {PILLARS.map((p) => (
-                <li key={p.pillar} className="mega-pillar p-4" style={{ ["--pillar-accent" as string]: p.accent }}>
+                <li key={p.pillar} className="mega-pillar p-4 flex flex-col" style={{ ["--pillar-accent" as string]: p.accent }}>
                   <p className="flex items-center gap-2">
                     <span className="mega-pillar-dot" aria-hidden="true" />
                     <span className="label-mono" style={{ color: p.accent }}>{p.pillar}</span>
@@ -226,18 +237,25 @@ export function SiteHeader() {
                       href={p.href}
                       className="underline-anim"
                       style={{ fontFamily: "var(--font-display)", fontWeight: 600, color: "var(--text)", fontSize: "var(--text-body)" }}
+                      onClick={() => closeMega()}
                     >
                       {p.name}
                     </Link>
+                    <span style={{ display: "block", fontSize: "var(--text-caption)", color: "var(--text-muted)" }}>{p.tagline}</span>
                   </p>
-                  <p style={{ fontSize: "var(--text-caption)", color: "var(--text-muted)" }}>{p.tagline}</p>
                   <ul className="mt-3" role="list">
                     {p.children.map((c) => (
                       <li key={c.href}>
                         <Link href={c.href} className="mega-link" onClick={() => closeMega()}>
+                          {c.featured ? <span aria-hidden="true" style={{ color: p.accent, marginRight: 6 }}>◆</span> : null}
                           {c.label}
                           {!c.built ? <span className="content-required ml-2" style={{ fontSize: "0.6rem" }}>F3</span> : null}
                         </Link>
+                        {c.desc ? (
+                          <span style={{ display: "block", fontSize: "0.72rem", color: "var(--text-muted)", paddingLeft: "var(--space-4)", marginBottom: 2 }}>
+                            {c.desc}
+                          </span>
+                        ) : null}
                         {c.children?.map((g) => (
                           <Link key={g.href} href={g.href} className="mega-link" onClick={() => closeMega()} style={{ paddingLeft: "var(--space-4)" }}>
                             ↳ {g.label}
@@ -246,6 +264,20 @@ export function SiteHeader() {
                       </li>
                     ))}
                   </ul>
+                  {p.children.some((c) => c.featured) ? (
+                    <Link
+                      href={p.children.find((c) => c.featured)!.href}
+                      onClick={() => closeMega()}
+                      className="mega-featured mt-3 flex items-center justify-between gap-2 px-3 py-2 no-underline"
+                      style={{ fontSize: "var(--text-caption)", color: "var(--text)" }}
+                    >
+                      <span>
+                        <span className="label-mono" style={{ color: p.accent, fontSize: "0.6rem" }}>DESTACADO</span>
+                        <span style={{ display: "block", fontWeight: 600 }}>{p.children.find((c) => c.featured)!.label}</span>
+                      </span>
+                      <span aria-hidden="true" style={{ color: p.accent }}>→</span>
+                    </Link>
+                  ) : null}
                 </li>
               ))}
             </ul>

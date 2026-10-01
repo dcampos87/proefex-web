@@ -875,3 +875,173 @@ footer .content-required,
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
 }
+
+/* ============================================================
+   RECALIBRACIÓN VISUAL PREMIUM (benchmark weevolveit — no copia)
+   Lenguaje editorial-technology: tipografía protagonista, filas
+   numeradas con fileos hairline, reveal de página, stat strip.
+   Sin librerías nuevas (D19 vigente); reduced-motion anula todo.
+   ============================================================ */
+
+/* Page reveal: entrada sobria de la página (solo con JS activo) */
+.js main {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: page-reveal 420ms var(--ease-out) 40ms forwards;
+}
+@keyframes page-reveal {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Kicker editorial: fileo + etiqueta mono */
+.kicker-line {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-label-mono);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.kicker-line::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+}
+
+/* Display XXL: tipografía protagonista (héroes y afirmaciones) */
+.display-xl {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.4rem, 5.6vw, 4.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+/* Filas editoriales numeradas: jerarquía por tipografía, no por cards */
+.ed-rows {
+  border-top: 1px solid var(--border);
+}
+.ed-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-2);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition:
+    padding-left var(--motion-base) var(--ease-out),
+    background var(--motion-base) var(--ease-out);
+}
+.ed-row:hover,
+.ed-row:focus-visible {
+  padding-left: var(--space-5);
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+.ed-row-idx {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-mono);
+  color: var(--accent);
+}
+.ed-row-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.25rem, 2.4vw, 1.8rem);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.ed-row-desc {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--text-caption);
+  color: var(--text-body);
+}
+.ed-row-arrow {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent);
+  transition: transform var(--motion-base) var(--ease-out);
+}
+.ed-row:hover .ed-row-arrow,
+.ed-row:focus-visible .ed-row-arrow {
+  transform: translateX(6px);
+}
+@media (max-width: 640px) {
+  .ed-row {
+    grid-template-columns: 2.2rem 1fr auto;
+  }
+}
+
+/* Stat strip: números grandes con fileos (metadatos de empresa) */
+.stat-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-10);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+.stat-strip .num {
+  display: block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: var(--text);
+  line-height: 1.1;
+}
+.stat-strip .cap {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+/* Megamenú premium: profundidad y flotación */
+@media (min-width: 1024px) {
+  .mega-panel {
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    backdrop-filter: blur(18px);
+    border-top: 1px solid var(--border);
+    box-shadow: var(--shadow-lift);
+    transform-origin: top center;
+  }
+  .mega-featured {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  }
+}
+
+/* Mega-footer: wordmark gigante editorial */
+.footer-wordmark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: clamp(3rem, 11vw, 9.5rem);
+  line-height: 0.95;
+  color: var(--pfx-white);
+}
+.footer-wordmark span {
+  color: var(--pfx-orange);
+}
+
+/* Reduced motion: anula reveal y desplazamientos editoriales */
+@media (prefers-reduced-motion: reduce) {
+  .js main {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .ed-row,
+  .ed-row-arrow {
+    transition: none;
+  }
+  .ed-row:hover,
+  .ed-row:focus-visible {
+    padding-left: var(--space-2);
+  }
+}

@@ -17,6 +17,10 @@ export type Universe = "core" | "tech" | "growup" | "learns" | "equip" | "solve"
 export interface NavChild {
   label: string;
   href: string;
+  /** Descripción corta para el megamenú (una línea, sin claims). */
+  desc?: string;
+  /** Ítem destacado del pilar en el megamenú. */
+  featured?: boolean;
   built?: boolean;
   /** Hijo de segundo nivel (solo TECH: Drones/IoT). */
   children?: NavChild[];
@@ -43,17 +47,24 @@ export const PILLARS: Pillar[] = [
     universe: "tech",
     accent: "#F7931E",
     children: [
-      { label: "Desarrollo de software", href: "/tech/desarrollo-de-software", built: true },
-      { label: "Automatización", href: "/tech/automatizacion" },
-      { label: "IA empresarial", href: "/tech/ia-empresarial" },
-      { label: "Transformación digital", href: "/tech/transformacion-digital" },
-      { label: "Implementación de software", href: "/tech/implementacion-de-software" },
+      {
+        label: "Desarrollo de software",
+        href: "/tech/desarrollo-de-software",
+        desc: "Web, apps y software a la medida de su operación.",
+        featured: true,
+        built: true,
+      },
+      { label: "Automatización", href: "/tech/automatizacion", desc: "Procesos que se ejecutan solos, bajo reglas claras." },
+      { label: "IA empresarial", href: "/tech/ia-empresarial", desc: "IA aplicada dentro de sus flujos de negocio." },
+      { label: "Transformación digital", href: "/tech/transformacion-digital", desc: "La operación, reorganizada sobre tecnología." },
+      { label: "Implementación de software", href: "/tech/implementacion-de-software", desc: "Adopción real, no solo instalación." },
       {
         label: "Ingeniería",
         href: "/tech/ingenieria",
+        desc: "El territorio, en datos.",
         children: [
-          { label: "Drones", href: "/tech/ingenieria/drones" },
-          { label: "IoT", href: "/tech/ingenieria/iot" },
+          { label: "Drones", href: "/tech/ingenieria/drones", desc: "Levantamiento y monitoreo aéreo." },
+          { label: "IoT", href: "/tech/ingenieria/iot", desc: "Sensores y conectividad operativa." },
         ],
       },
     ],
@@ -66,9 +77,9 @@ export const PILLARS: Pillar[] = [
     universe: "growup",
     accent: "#00FFE6",
     children: [
-      { label: "Marketing BPO", href: "/grow-up/marketing-bpo" },
-      { label: "Growth Marketing", href: "/grow-up/growth-marketing" },
-      { label: "Consultoría de marketing", href: "/grow-up/consultoria" },
+      { label: "Marketing BPO", href: "/grow-up/marketing-bpo", desc: "Su marketing, operado de forma continua." },
+      { label: "Growth Marketing", href: "/grow-up/growth-marketing", desc: "Experimentación y mejora del embudo.", featured: true },
+      { label: "Consultoría de marketing", href: "/grow-up/consultoria", desc: "Estrategia con criterio, junto a su equipo." },
     ],
   },
   {
@@ -79,9 +90,9 @@ export const PILLARS: Pillar[] = [
     universe: "learns",
     accent: "#0A7A52",
     children: [
-      { label: "Cursos", href: "/learns/cursos" },
-      { label: "Certificación", href: "/learns/certificacion" },
-      { label: "Partner Certmind", href: "/learns/#certmind" },
+      { label: "Cursos", href: "/learns/cursos", desc: "Formación práctica para equipos." },
+      { label: "Certificación", href: "/learns/certificacion", desc: "Respaldo oficial para su equipo.", featured: true },
+      { label: "Partner Certmind", href: "/learns/#certmind", desc: "Partner Oficial de certificación." },
     ],
   },
   {
@@ -92,11 +103,11 @@ export const PILLARS: Pillar[] = [
     universe: "equip",
     accent: "#D64022",
     children: [
-      { label: "Tecnología", href: "/equip/tecnologia" },
-      { label: "Pantallas", href: "/equip/pantallas" },
-      { label: "Interactivas", href: "/equip/interactivas" },
-      { label: "Tótems", href: "/equip/totems" },
-      { label: "Alquiler", href: "/equip/alquiler" },
+      { label: "Tecnología", href: "/equip/tecnologia", desc: "Equipamiento para espacios operativos." },
+      { label: "Pantallas", href: "/equip/pantallas", desc: "Pantallas comerciales y corporativas.", featured: true },
+      { label: "Interactivas", href: "/equip/interactivas", desc: "Pantallas interactivas de experiencia." },
+      { label: "Tótems", href: "/equip/totems", desc: "Información y autoservicio en punto físico." },
+      { label: "Alquiler", href: "/equip/alquiler", desc: "Equipamiento para proyectos y eventos." },
     ],
   },
   {
@@ -107,12 +118,12 @@ export const PILLARS: Pillar[] = [
     universe: "solve",
     accent: "#005A9E",
     children: [
-      { label: "Turu CRM", href: "/solutions/turu-crm", built: true },
-      { label: "PROEFACT", href: "/solutions/proefact" },
-      { label: "My Bpass", href: "/solutions/my-bpass" },
-      { label: "AtendiGo", href: "/solutions/atendigo" },
-      { label: "Eleventto", href: "/solutions/eleventto" },
-      { label: "Klyra — próximamente", href: "/solutions/klyra" },
+      { label: "Turu CRM", href: "/solutions/turu-crm", desc: "CRM: gestión de clientes y leads.", featured: true, built: true },
+      { label: "PROEFACT", href: "/solutions/proefact", desc: "Producto del ecosistema — detalle: CONTENT_REQUIRED." },
+      { label: "My Bpass", href: "/solutions/my-bpass", desc: "Producto del ecosistema — detalle: CONTENT_REQUIRED." },
+      { label: "AtendiGo", href: "/solutions/atendigo", desc: "Producto del ecosistema — detalle: CONTENT_REQUIRED." },
+      { label: "Eleventto", href: "/solutions/eleventto", desc: "Producto del ecosistema — detalle: CONTENT_REQUIRED." },
+      { label: "Klyra — próximamente", href: "/solutions/klyra", desc: "Producto reservado, en desarrollo." },
     ],
   },
 ];

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HeroCore } from "@/components/heroes/HeroCore";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ServiceGrid } from "@/components/blocks/ServiceGrid";
 import { SubNav } from "@/components/nav/SubNav";
 import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
-import { Reveal } from "@/components/motion/Reveal";
+import { EditorialRows } from "@/components/ui/EditorialRows";
 import { PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
@@ -16,24 +15,24 @@ export const metadata: Metadata = {
 };
 
 /**
- * SHOWCASE — recalibración (§25): herramienta de evaluación del sistema
- * multipágina: 6 universos, navegación (megamenú en header real, subnav,
- * breadcrumbs), heroes, primitivas, bloques y estados CONTENT_REQUIRED.
- * noindex.
+ * SHOWCASE — recalibración visual (§28): herramienta de evaluación del
+ * sistema premium editorial: referencia weevolveit (qué tomamos / qué
+ * hacemos diferente), 6 universos, navegación, filas editoriales, heroes,
+ * primitivas y estados CONTENT_REQUIRED. noindex.
  */
 export default function ShowcasePage() {
   return (
     <>
       <section className="section-sm" style={{ paddingTop: "calc(var(--header-h) + 48px)" }}>
         <div className="container-pfx flex flex-col gap-6">
-          <p className="label-mono">SHOWCASE — SISTEMA MULTIPÁGINA (RECALIBRACIÓN)</p>
+          <p className="label-mono">SHOWCASE — EXPERIENCIA PREMIUM EDITORIAL (RECALIBRACIÓN VISUAL)</p>
           <h1 style={{ fontSize: "var(--text-display-lg)" }}>
-            Catálogo de universos y navegación
+            Catálogo de universos, navegación y lenguaje editorial
           </h1>
           <p className="max-w-[65ch]">
             El megamenú vive en el header real de esta página (&quot;Ecosistema&quot;,
-            lg+; drawer en &lt;lg). Este catálogo revisa tokens por universo,
-            navegación contextual y componentes.
+            lg+; drawer en &lt;lg). El reveal de página se aprecia al navegar
+            entre rutas; el drawer móvil en &lt;lg.
           </p>
           <div className="flex flex-wrap gap-3">
             {[
@@ -43,6 +42,9 @@ export default function ShowcasePage() {
               { href: "/learns", label: "Learns" },
               { href: "/equip", label: "Equip" },
               { href: "/solutions", label: "Solutions" },
+              { href: "/casos", label: "Casos" },
+              { href: "/insights", label: "Insights" },
+              { href: "/sectores", label: "Sectores" },
               { href: "/contacto", label: "Contacto" },
               { href: "/tech/desarrollo-de-software", label: "Página de servicio" },
               { href: "/solutions/turu-crm", label: "Página de producto" },
@@ -56,10 +58,37 @@ export default function ShowcasePage() {
         </div>
       </section>
 
-      {/* ===== Navegación contextual ===== */}
+      {/* ===== Referencia: qué tomamos / qué hacemos diferente ===== */}
       <section className="section-sm" style={{ background: "var(--bg-sunken)" }}>
+        <div className="container-pfx grid gap-10 lg:grid-cols-2">
+          <div className="flex min-w-0 flex-col gap-4">
+            <h2 style={{ fontSize: "var(--text-heading)" }}>Referencia weevolveit.com — qué tomamos</h2>
+            <ul className="flex flex-col gap-2" role="list" style={{ fontSize: "var(--text-caption)", color: "var(--text-body)" }}>
+              <li>· Nivel de sofisticación: dark premium y composición editorial.</li>
+              <li>· Tipografía protagonista: titulares grandes, labels mono, metadata.</li>
+              <li>· Megamenú amplio y jerárquico con descripciones cortas por servicio.</li>
+              <li>· Multipage: la Home orienta y deriva; las páginas internas narran.</li>
+              <li>· Método/proceso como sección narrativa propia.</li>
+              <li>· Navegación contextual, casos como prueba, footer amplio.</li>
+            </ul>
+          </div>
+          <div className="flex min-w-0 flex-col gap-4">
+            <h2 style={{ fontSize: "var(--text-heading)" }}>Qué hacemos diferente en PROEFEX</h2>
+            <ul className="flex flex-col gap-2 break-words" role="list" style={{ fontSize: "var(--text-caption)", color: "var(--text-body)" }}>
+              <li>· Identidad propia: cinco pilares (CREATE/GROW/LEARN/EXPERIENCE/SOLVE) con universo visual cada uno; la referencia es una sola marca.</li>
+              <li>· Sin copiar textos, layout, código ni recursos: estructura y lenguaje recalibrados a PROEFEX.</li>
+              <li>· Sin WebGL/Three.js/GSAP: motion nativo CSS + IntersectionObserver (D19), mismo lenguaje con menos peso.</li>
+              <li>· Metodología propia (Entender → Diseñar → Integrar → Evolucionar), no el método de la referencia.</li>
+              <li>· Contenido honesto: CONTENT_REQUIRED en lugar de cifras o clientes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Navegación contextual + filas editoriales ===== */}
+      <section className="section-sm">
         <div className="container-pfx flex flex-col gap-10">
-          <h2 style={{ fontSize: "var(--text-heading)" }}>Navegación contextual</h2>
+          <h2 style={{ fontSize: "var(--text-heading)" }}>Navegación contextual y lenguaje editorial</h2>
           <div className="flex flex-col gap-4">
             <p className="label-mono">SUBNAV (pillars reales en cada landing)</p>
             <SubNav
@@ -79,6 +108,17 @@ export default function ShowcasePage() {
                 { label: "PROEFEX TECH", href: "/tech" },
                 { label: "Ingeniería", href: "/tech/ingenieria" },
                 { label: "Drones" },
+              ]}
+            />
+          </div>
+          <div className="flex flex-col gap-4">
+            <p className="label-mono">FILAS EDITORIALES (jerarquía tipográfica, no cards)</p>
+            <EditorialRows
+              ariaLabel="Demo filas editoriales"
+              items={[
+                { index: "01", label: "Desarrollo de software", desc: "Web, apps y software a la medida de su operación.", href: "/tech/desarrollo-de-software" },
+                { index: "02", label: "Turu CRM", desc: "CRM: gestión de clientes y leads.", href: "/solutions/turu-crm" },
+                { index: "03", label: "Capacidad sin contenido", desc: "Estado CONTENT_REQUIRED visible.", href: "#", badge: "F3" },
               ]}
             />
           </div>

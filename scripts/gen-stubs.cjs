@@ -25,8 +25,20 @@ const stubs = [
   { dir: "src/app/solutions/eleventto", pillar: "SOLVE — PROEFEX SOLUTIONS", title: "Eleventto", crumb: "Eleventto", requires: "detalle del producto (D15)", back: "/solutions", backLabel: "Volver a PROEFEX SOLUTIONS" },
   { dir: "src/app/solutions/klyra", pillar: "SOLVE — PROEFEX SOLUTIONS", title: "Klyra", crumb: "Klyra", requires: "producto reservado/futuro: sin información pública", back: "/solutions", backLabel: "Volver a PROEFEX SOLUTIONS" },
   { dir: "src/app/sectores", pillar: "PROEFEX", title: "Sectores", crumb: "Sectores", requires: "descripciones por sector (dimensión transversal)", back: "/", backLabel: "Volver al inicio" },
+  { dir: "src/app/sectores/industria", pillar: "PROEFEX — SECTORES", title: "Industria", crumb: "Industria", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/salud", pillar: "PROEFEX — SECTORES", title: "Salud", crumb: "Salud", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/retail", pillar: "PROEFEX — SECTORES", title: "Retail", crumb: "Retail", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/educacion", pillar: "PROEFEX — SECTORES", title: "Educación", crumb: "Educación", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/servicios", pillar: "PROEFEX — SECTORES", title: "Servicios", crumb: "Servicios", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/mineria", pillar: "PROEFEX — SECTORES", title: "Minería", crumb: "Minería", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/restaurantes", pillar: "PROEFEX — SECTORES", title: "Restaurantes", crumb: "Restaurantes", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
+  { dir: "src/app/sectores/banca-seguros", pillar: "PROEFEX — SECTORES", title: "Banca y seguros", crumb: "Banca y seguros", requires: "descripción del sector y capacidades aplicables", back: "/sectores", backLabel: "Volver a Sectores" },
   { dir: "src/app/casos", pillar: "PROEFEX", title: "Casos de éxito", crumb: "Casos de éxito", requires: "casos reales autorizados (no se inventan)", back: "/", backLabel: "Volver al inicio" },
   { dir: "src/app/insights", pillar: "PROEFEX", title: "Insights", crumb: "Insights", requires: "artículos (D3: sin CMS en esta etapa)", back: "/", backLabel: "Volver al inicio" },
+  { dir: "src/app/insights/tecnologia", pillar: "PROEFEX — INSIGHTS", title: "Tecnología", crumb: "Tecnología", requires: "artículos de la categoría", back: "/insights", backLabel: "Volver a Insights" },
+  { dir: "src/app/insights/marketing", pillar: "PROEFEX — INSIGHTS", title: "Marketing", crumb: "Marketing", requires: "artículos de la categoría", back: "/insights", backLabel: "Volver a Insights" },
+  { dir: "src/app/insights/innovacion", pillar: "PROEFEX — INSIGHTS", title: "Innovación", crumb: "Innovación", requires: "artículos de la categoría", back: "/insights", backLabel: "Volver a Insights" },
+  { dir: "src/app/insights/formacion", pillar: "PROEFEX — INSIGHTS", title: "Formación", crumb: "Formación", requires: "artículos de la categoría", back: "/insights", backLabel: "Volver a Insights" },
 ];
 
 const template = (s) => `import type { Metadata } from 'next';
