@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/tech"
       backLabel="Volver a PROEFEX TECH"
       universe="tech"
+      variant="service"
     />
   );
 }

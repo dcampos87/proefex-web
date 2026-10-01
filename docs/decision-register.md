@@ -66,6 +66,18 @@ Detalle completo de cada decisión: `docs/19-decisiones-pendientes.md`.
 | D36 | Navegación global con estado activo: `aria-current` + acento en link de sección activo; punto del universo actual junto al trigger "Ecosistema" | `PROPOSED` — implementado (Fase 2.2) | Agent Master → PROEFEX | Bajo (orientación) | Alternativas (underline/chip) en `fase-2/phase-2.2-navigation-tech.md` §12 |
 | D37 | PROEFEX TECH refuerza "Sistema Encendido": línea de estado conceptual en hero (SYSTEM/CREATE · STATUS/ACTIVE · MODE/DIGITAL, ignición secuencial) + editorial rows como índice de ingeniería (mayúsculas + numeración en acento, scoped al universo) | `PROPOSED` — implementado (Fase 2.2), paleta TECH intacta | Agent Master → PROEFEX | Medio (identidad TECH) | |
 
+## Decisiones nuevas de Fase 2.3 (PROPOSED — requieren aprobación de PROEFEX)
+
+| ID | Decisión | Estado | Responsable | Impacto | Notas |
+|---|---|---|---|---|---|
+| D38 | Home como recorrido editorial de 9 actos (hero audiovisual → 12+ → ecosistema → capacidades → industrias → proyectos → productos → insights → CTA); entry point, no catálogo exhaustivo | `PROPOSED` — implementado (Fase 2.3), pendiente aprobación visual | Agent Master → PROEFEX | Alto (experiencia Home) | Ver `fase-2/visual-experience-v4.md` §3 |
+| D39 | Theme system Light/Dark/System: script inline pre-paint lee `localStorage('pfx-theme')` y fija `data-theme` (sin flash, SSR-safe); tokens dark por especificidad para universos core/learns/equip/solve; `ThemeToggle` en header + drawer | `PROPOSED` — implementado (Fase 2.3) | Agent Master → PROEFEX | Alto (preferencia de visualización) | Ver `fase-2/theme-system.md` |
+| D40 | Theme y Universe son sistemas independientes: `data-theme` en `<html>` ≠ `data-universe` en wrappers; TECH y Grow Up NO reciben overrides dark (identidad fija por mandato) | `PROPOSED` — implementado y verificado por computed style | Agent Master → PROEFEX | Alto (identidad de marca) | `/grow-up` dark = #22272E/#00FFE6 intactos |
+| D41 | Sistema de media `MediaFrame` + `MediaHeroVideo`: 6 variantes (hero/wide/editorial/tall/product/case), props CMS (alt, focal, overlay, caption, credit, priority, sizes); video slot autoplay/muted/loop gated por `prefers-reduced-motion` con poster fallback; sin dependencias | `PROPOSED` — implementado (Fase 2.3) | Agent Master → PROEFEX | Alto (lenguaje visual media-first) | Ver `fase-2/media-system.md` |
+| D42 | Placeholders audiovisuales provisionales generados (`public/media/*.webp`, tag "VISUAL PROVISIONAL" en UI); reemplazo directo por media real vía CMS en Fase 3 | `PROPOSED` — implementado; no inventan contenido ni claims | Agent Master → PROEFEX | Medio | Riesgo documentado: evaluar con media real antes del cierre visual |
+| D43 | Trayectoria "12+ años" como acto narrativo central: cifra tipográfica dominante + línea 2012→2026; hitos `CONTENT_REQUIRED` (nada inventado) | `PROPOSED` — implementado (Fase 2.3) | Agent Master → PROEFEX | Medio (narrativa) | Ver `fase-2/12-years-experience.md` |
+| D44 | View Transitions progresivas: `@view-transition { navigation: auto }` nativo, fallback instantáneo, anulado con `prefers-reduced-motion`; sin sistema de transiciones complejo (queda para Fase 3 si se aprueba) | `PROPOSED` — implementado (Fase 2.3) | Agent Master | Bajo (sensación de producto) | |
+
 ## Decisiones arquitectónicas confirmadas
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |

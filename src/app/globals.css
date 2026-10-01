@@ -89,6 +89,45 @@
 }
 
 /* ============================================================
+   TEMA OSCURO (Fase 2.3, D39) — preferencia de visualización,
+   independiente de los universos (D40). Azul-navy profundo de
+   marca, no negro genérico. TECH y Grow Up NO se ven afectados
+   (identidad fija, scopes propios más abajo); core/learns/equip/
+   solve heredan estas superficies conservando sus acentos.
+   ============================================================ */
+html[data-theme="dark"] {
+  --bg: #0b1120;
+  --bg-sunken: #070d19;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.09);
+  --text: #eef3fb;
+  --text-body: rgba(230, 238, 250, 0.8); /* ~12:1 s/ #0B1120 */
+  --text-muted: rgba(230, 238, 250, 0.62); /* ≥7:1 s/ #0B1120 */
+  --accent-contrast: #0b1120;
+  --border: rgba(255, 255, 255, 0.13);
+  --border-strong: rgba(255, 255, 255, 0.3);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 16px -8px rgba(0, 0, 0, 0.5);
+  --shadow-lift: 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
+html[data-theme="dark"] [data-universe="core"],
+html[data-theme="dark"] [data-universe="learns"],
+html[data-theme="dark"] [data-universe="equip"],
+html[data-theme="dark"] [data-universe="solve"] {
+  --bg: #0b1120;
+  --bg-sunken: #070d19;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.09);
+  --text: #eef3fb;
+  --text-body: rgba(230, 238, 250, 0.8);
+  --text-muted: rgba(230, 238, 250, 0.62);
+  --accent-contrast: #0b1120;
+  --border: rgba(255, 255, 255, 0.13);
+  --border-strong: rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================================
    UNIVERSO TECH — D7 dirección A "Sistema Encendido" (Doc 10)
    Fondo profundo por capas; naranja solo como señal.
    ============================================================ */
@@ -1060,7 +1099,9 @@ footer .content-required,
 }
 .ed-row {
   display: grid;
-  grid-template-columns: 3.2rem 1fr auto;
+  /* minmax(0,1fr): permite que la columna central encoja en 320px
+     (min-width:auto de grid impedía shrink y causaba overflow). */
+  grid-template-columns: 3.2rem minmax(0, 1fr) auto;
   align-items: baseline;
   gap: var(--space-4);
   padding: var(--space-5) var(--space-2);
@@ -1114,7 +1155,7 @@ footer .content-required,
 /* Puertas de pilar (Home, Acto 02): número grande + acento del universo */
 .ed-row--door {
   padding-block: var(--space-6);
-  grid-template-columns: 4.6rem 1fr auto;
+  grid-template-columns: 4.6rem minmax(0, 1fr) auto;
 }
 .ed-row--door .ed-row-idx {
   font-size: clamp(1.1rem, 2vw, 1.5rem);
@@ -1130,7 +1171,7 @@ footer .content-required,
 
 /* Metodología (Acto 05): número protagonista y fileo de progresión */
 .method-rows .ed-row {
-  grid-template-columns: 6.5rem 1fr;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
   padding-block: var(--space-6);
 }
 .method-rows .ed-row-idx {
@@ -1171,13 +1212,13 @@ footer .content-required,
 
 @media (max-width: 640px) {
   .ed-row {
-    grid-template-columns: 2.2rem 1fr auto;
+    grid-template-columns: 2.2rem minmax(0, 1fr) auto;
   }
   .ed-row--door {
-    grid-template-columns: 3rem 1fr auto;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
   }
   .method-rows .ed-row {
-    grid-template-columns: 3.6rem 1fr;
+    grid-template-columns: 3.6rem minmax(0, 1fr);
   }
   .ed-row-meta {
     display: none;
@@ -1262,5 +1303,164 @@ footer .content-required,
   .ed-row:hover,
   .ed-row:focus-visible {
     padding-left: var(--space-2);
+  }
+}
+
+/* ============================================================
+   MEDIA SYSTEM (Fase 2.3, D41) — el media es estructural.
+   ============================================================ */
+.media-frame-box {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-sunken);
+}
+.media-frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media-frame-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.media-frame-overlay.overlay-soft {
+  background: linear-gradient(90deg, rgba(4, 10, 24, 0.72) 0%, rgba(4, 10, 24, 0.28) 55%, rgba(4, 10, 24, 0.05) 100%);
+}
+.media-frame-overlay.overlay-strong {
+  background: linear-gradient(180deg, rgba(4, 10, 24, 0.55) 0%, rgba(4, 10, 24, 0.78) 100%);
+}
+.media-frame-tag {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(4, 10, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  backdrop-filter: blur(4px);
+}
+.media-frame-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+.media-frame-credit {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+}
+
+/* Hero audiovisual (Acto 01): media protagonista con contenido encima */
+.home-hero-media {
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+}
+.home-hero-media .media-frame-box {
+  border-radius: 0;
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+}
+.home-hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+/* 12+ años (Acto 02, D42): cifra protagonista + línea de trayectoria */
+.years-figure {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(6rem, 18vw, 15rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.years-figure sup {
+  font-size: 0.35em;
+  color: var(--accent);
+  vertical-align: super;
+}
+.years-caption {
+  font-size: var(--text-caption);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+.timeline {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-5);
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-5) + 0.55em);
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--border-strong);
+}
+.timeline-node {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text);
+  background: var(--bg);
+  padding-right: var(--space-3);
+}
+.timeline-node::after {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  right: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+.timeline-end {
+  padding-right: 0;
+  padding-left: var(--space-3);
+}
+.timeline-end::after {
+  right: auto;
+  left: 0;
+}
+
+/* Theme toggle: estado activo sutil */
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* View Transitions (D44): progresivo; fallback = navegación instantánea.
+   El navegador cruza-fade el root; sin soporte la regla se ignora. */
+@view-transition {
+  navigation: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
   }
 }

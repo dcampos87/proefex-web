@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/learns"
       backLabel="Volver a PROEFEX LEARNS"
       universe="learns"
+      variant="default"
     />
   );
 }

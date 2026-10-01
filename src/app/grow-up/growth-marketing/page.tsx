@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/grow-up"
       backLabel="Volver a Grow Up"
       universe="growup"
+      variant="service"
     />
   );
 }

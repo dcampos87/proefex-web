@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/equip"
       backLabel="Volver a PROEFEX EQUIP"
       universe="equip"
+      variant="default"
     />
   );
 }

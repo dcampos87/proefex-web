@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CORE_LINKS, CONTACT_HREF, PILLARS, universeForPath } from "./nav-data";
+import { ThemeToggle } from "./ThemeToggle";
 
 /**
  * MEGAMENÚ + navegación global (recalibración §11/§12; Fase 2.2 D35/D36).
@@ -190,7 +191,8 @@ export function SiteHeader() {
             </ul>
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <Link href={CONTACT_HREF} className="btn btn-primary btn-sm">
               Solicitar asesoría
             </Link>
@@ -325,8 +327,9 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="nav-item pt-4" style={{ ["--i" as string]: 3 }}>
-          <Link href={CONTACT_HREF} onClick={closeDrawer} className="btn btn-primary w-full">
+        <div className="nav-item flex items-center gap-3 pt-4" style={{ ["--i" as string]: 3 }}>
+          <ThemeToggle compact />
+          <Link href={CONTACT_HREF} onClick={closeDrawer} className="btn btn-primary flex-1">
             Solicitar asesoría
           </Link>
         </div>

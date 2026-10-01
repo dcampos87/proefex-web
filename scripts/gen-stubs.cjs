@@ -61,10 +61,21 @@ export default function Page() {
       backHref="${s.back}"
       backLabel="${s.backLabel}"
       universe="${s.universe}"
+      variant="${s.variant}"
     />
   );
 }
 `;
+
+// Variante de plantilla editorial (Fase 2.3 §19): el tipo de página define
+// su ritmo — servicio, producto o sector. Resto: stub índice simple.
+const variantOf = (dir) => {
+  const d = dir.replace(/\\/g, "/");
+  if (d.startsWith("src/app/tech/") || d.startsWith("src/app/grow-up/")) return "service";
+  if (d.startsWith("src/app/solutions/")) return "product";
+  if (d.startsWith("src/app/sectores/")) return "industry";
+  return "default";
+};
 
 let count = 0;
 for (const s of stubs) {
@@ -74,7 +85,7 @@ for (const s of stubs) {
   const isStub = !fs.existsSync(file) || fs.readFileSync(file, "utf8").includes("RouteStub");
   if (isStub) {
     fs.mkdirSync(s.dir, { recursive: true });
-    fs.writeFileSync(file, template(s));
+    fs.writeFileSync(file, template({ ...s, variant: variantOf(s.dir) }));
     count++;
   }
 }

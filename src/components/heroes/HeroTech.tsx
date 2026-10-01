@@ -47,7 +47,7 @@ export function HeroTech({
             paddingBottom: "clamp(72px, 10vw, 144px)",
           }}
         >
-          <div>
+          <div className="min-w-0">
             {kicker ? (
               <Reveal delay={0}>
                 <p className="label-mono" style={{ color: "var(--accent)" }}>
@@ -115,7 +115,7 @@ export function HeroTech({
           {/* Panel de sistema — módulos que encienden en secuencia (firma TECH) */}
           <Reveal
             variant="ignite"
-            className="tech-panel p-6 sm:p-8"
+            className="tech-panel min-w-0 p-6 sm:p-8"
             aria-hidden="true"
           >
             <p className="label-mono" style={{ color: "var(--text-muted)" }}>
@@ -125,11 +125,11 @@ export function HeroTech({
               {PANEL_ROWS.map((row, i) => (
                 <li
                   key={row.label}
-                  className="ignite flex items-center justify-between gap-4 border px-4 py-3"
+                  className="ignite flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border px-4 py-3"
                   style={{ borderColor: "var(--border)", ["--reveal-delay" as string]: `${300 + i * 120}ms` }}
                 >
                   <span style={{ color: "var(--text-muted)" }}>{row.label}</span>
-                  <span style={{ color: "var(--text)", letterSpacing: "0.08em" }}>{row.name}</span>
+                  <span className="min-w-0" style={{ color: "var(--text)", letterSpacing: "0.08em" }}>{row.name}</span>
                   <span
                     className="flex items-center gap-2"
                     style={{ color: row.state === "ACTIVO" ? "var(--accent)" : "var(--text-muted)" }}

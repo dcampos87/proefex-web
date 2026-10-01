@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/sectores"
       backLabel="Volver a Sectores"
       universe="core"
+      variant="industry"
     />
   );
 }

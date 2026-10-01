@@ -52,15 +52,27 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * Init de tema ANTES del primer paint (Fase 2.3, D39): resuelve
+ * light/dark/system desde localStorage ('pfx-theme') y fija
+ * data-theme en <html>. Inline y sincrónico → sin flash de tema.
+ * El universo (data-universe) es independiente del tema (D40):
+ * TECH y Grow Up conservan su identidad fija; core/learns/equip/
+ * solve adaptan superficies al tema elegido.
+ */
+const themeInit = `(function(){try{var t=localStorage.getItem('pfx-theme')||'system';if(t!=='light'&&t!=='dark')t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme='light'}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="es"
+      data-theme="light"
       className={`${lexend.variable} ${poppins.variable} ${sourceCode.variable}`}
     >
       <body data-universe="core">
+        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script
           // Gate de motion: evita FOUC oculto y garantiza contenido visible sin JS.
           dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}

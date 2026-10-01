@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/solutions"
       backLabel="Volver a PROEFEX SOLUTIONS"
       universe="solve"
+      variant="product"
     />
   );
 }

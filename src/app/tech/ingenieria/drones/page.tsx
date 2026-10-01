@@ -19,6 +19,7 @@ export default function Page() {
       backHref="/tech/ingenieria"
       backLabel="Volver a Ingeniería"
       universe="tech"
+      variant="service"
     />
   );
 }
