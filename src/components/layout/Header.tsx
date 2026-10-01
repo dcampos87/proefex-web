@@ -6,18 +6,24 @@ import { usePathname } from "next/navigation";
 import { CORE_LINKS, CONTACT_HREF, PILLARS, universeForPath } from "./nav-data";
 
 /**
- * MEGAMENÚ + navegación global (recalibración, §11/§12/§23/§31).
+ * MEGAMENÚ + navegación global (recalibración §11/§12; Fase 2.2 D35/D36).
  *
  * Desktop (lg+): links de Nivel 1 + botón "Ecosistema" que abre un panel
- * con las cinco líneas (tarjetas jerárquicas por pilar, acento por universo).
- * sm/md: overlay drawer con jerarquía (acordeones nativos <details>).
+ * editorial: cinco filas-universo (número / código pilar / nombre / tagline
+ * / flecha) con acento por universo en hover, y una zona secundaria
+ * transversal separada (Sectores · Casos · Insights · Nosotros · Contacto).
+ * Jerarquía > cantidad: sin cards, sin sub-links, sin bloques destacados.
+ * sm/md: drawer limpio (fila por universo + navegación secundaria).
  *
  * A11y: aria-expanded/controls, Escape cierra y devuelve el foco, focus
- * trap en el drawer, cierre al navegar o al hacer click fuera (panel).
+ * trap en el drawer, cierre al navegar o al hacer click fuera (panel),
+ * aria-current en la sección activa + punto del universo en "Ecosistema".
  * Motion: apertura 180ms; reduced-motion lo anula (globals.css).
  */
 export function SiteHeader() {
   const pathname = usePathname();
+  const universe = universeForPath(pathname);
+  const activePillar = PILLARS.find((p) => p.universe === universe);
   const [scrolled, setScrolled] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -141,6 +147,7 @@ export function SiteHeader() {
                   style={{ color: "var(--text)", fontSize: "var(--text-caption)", fontWeight: 500, background: "none", border: "none", cursor: "pointer", font: "inherit", padding: 0 }}
                   aria-expanded={megaOpen}
                   aria-controls="mega-ecosistema"
+                  aria-current={activePillar ? "true" : undefined}
                   onClick={(e) => {
                     const next = !megaOpen;
                     setMegaOpen(next);
@@ -151,19 +158,35 @@ export function SiteHeader() {
                     }
                   }}
                 >
+                  {/* Punto del universo activo (D36): indicador sutil de contexto */}
+                  {activePillar ? (
+                    <span
+                      aria-hidden="true"
+                      className="inline-block rounded-full"
+                      style={{ width: 6, height: 6, background: activePillar.accent }}
+                    />
+                  ) : null}
                   Ecosistema
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true" style={{ transform: megaOpen ? "rotate(180deg)" : undefined, transition: "transform var(--motion-fast) var(--ease-out)" }}>
                     <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   </svg>
                 </button>
               </li>
-              {CORE_LINKS.slice(1, 4).map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="underline-anim" style={{ color: "var(--text)", fontSize: "var(--text-caption)", fontWeight: 500 }}>
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              {CORE_LINKS.slice(1, 4).map((l) => {
+                const active = pathname === l.href || pathname.startsWith(`${l.href}/`);
+                return (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      className="underline-anim"
+                      aria-current={active ? "page" : undefined}
+                      style={{ color: active ? "var(--accent)" : "var(--text)", fontSize: "var(--text-caption)", fontWeight: 500 }}
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
@@ -190,96 +213,52 @@ export function SiteHeader() {
         </div>
       </header>
 
-      {/* ===== MEGAMENÚ desktop ===== */}
+      {/* ===== MEGAMENÚ desktop (D35): lista editorial de universos ===== */}
       <div
         id="mega-ecosistema"
         ref={megaPanelRef}
         className={`mega-panel hidden lg:block${megaOpen ? " is-open" : ""}`}
         aria-hidden={!megaOpen}
       >
-        <div className="container-pfx" style={{ maxWidth: "var(--container-wide)", paddingBlock: "var(--space-6) var(--space-8)" }}>
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_2.9fr]">
-            <div className="flex flex-col gap-3">
-              <p className="kicker-line">EL ECOSISTEMA</p>
-              <p style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "1.3rem", color: "var(--text)", maxWidth: "18ch" }}>
-                Cinco capacidades, una sola propuesta
-              </p>
-              <p style={{ fontSize: "var(--text-caption)", color: "var(--text-body)", maxWidth: "34ch" }}>
-                Cada línea tiene su equipo, su método y su experiencia. Juntas funcionan como un sistema.
-              </p>
-              <Link href={CONTACT_HREF} className="btn btn-secondary btn-sm mt-2 w-fit">
-                Solicitar asesoría
-              </Link>
-              <nav aria-label="Transversal PROEFEX" className="mt-4 border-t pt-4" style={{ borderColor: "var(--border)" }}>
-                <ul className="flex flex-col gap-1.5" role="list">
-                  {CORE_LINKS.map((l) => (
-                    <li key={l.href}>
-                      <Link href={l.href} className="mega-link" onClick={() => closeMega()} style={{ fontSize: "var(--text-caption)", color: "var(--text-body)" }}>
-                        {l.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
+        <div className="container-pfx" style={{ maxWidth: "var(--container-wide)", paddingBlock: "var(--space-6) var(--space-7)" }}>
+          <p className="kicker-line">ECOSISTEMA</p>
 
-            <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3" role="list">
-              {PILLARS.map((p) => (
-                <li key={p.pillar} className="mega-pillar p-4 flex flex-col" style={{ ["--pillar-accent" as string]: p.accent }}>
-                  <p className="flex items-center gap-2">
-                    <span className="mega-pillar-dot" aria-hidden="true" />
-                    <span className="label-mono" style={{ color: p.accent }}>{p.pillar}</span>
-                  </p>
-                  <p className="mt-1.5">
-                    <Link
-                      href={p.href}
-                      className="underline-anim"
-                      style={{ fontFamily: "var(--font-display)", fontWeight: 600, color: "var(--text)", fontSize: "var(--text-body)" }}
-                      onClick={() => closeMega()}
-                    >
-                      {p.name}
-                    </Link>
-                    <span style={{ display: "block", fontSize: "var(--text-caption)", color: "var(--text-muted)" }}>{p.tagline}</span>
-                  </p>
-                  <ul className="mt-3" role="list">
-                    {p.children.map((c) => (
-                      <li key={c.href}>
-                        <Link href={c.href} className="mega-link" onClick={() => closeMega()}>
-                          {c.featured ? <span aria-hidden="true" style={{ color: p.accent, marginRight: 6 }}>◆</span> : null}
-                          {c.label}
-                          {!c.built ? <span className="content-required ml-2" style={{ fontSize: "0.6rem" }}>F3</span> : null}
-                        </Link>
-                        {c.desc ? (
-                          <span style={{ display: "block", fontSize: "0.72rem", color: "var(--text-muted)", paddingLeft: "var(--space-4)", marginBottom: 2 }}>
-                            {c.desc}
-                          </span>
-                        ) : null}
-                        {c.children?.map((g) => (
-                          <Link key={g.href} href={g.href} className="mega-link" onClick={() => closeMega()} style={{ paddingLeft: "var(--space-4)" }}>
-                            ↳ {g.label}
-                          </Link>
-                        ))}
-                      </li>
-                    ))}
-                  </ul>
-                  {p.children.some((c) => c.featured) ? (
-                    <Link
-                      href={p.children.find((c) => c.featured)!.href}
-                      onClick={() => closeMega()}
-                      className="mega-featured mt-3 flex items-center justify-between gap-2 px-3 py-2 no-underline"
-                      style={{ fontSize: "var(--text-caption)", color: "var(--text)" }}
-                    >
-                      <span>
-                        <span className="label-mono" style={{ color: p.accent, fontSize: "0.6rem" }}>DESTACADO</span>
-                        <span style={{ display: "block", fontWeight: 600 }}>{p.children.find((c) => c.featured)!.label}</span>
-                      </span>
-                      <span aria-hidden="true" style={{ color: p.accent }}>→</span>
-                    </Link>
-                  ) : null}
+          <nav aria-label="Los cinco universos PROEFEX" className="mt-4">
+            <ul className="mega-rows" role="list">
+              {PILLARS.map((p, i) => (
+                <li key={p.pillar}>
+                  <Link
+                    href={p.href}
+                    className="mega-row"
+                    style={{ ["--pillar-accent" as string]: p.accent }}
+                    onClick={() => closeMega()}
+                    aria-current={activePillar?.pillar === p.pillar ? "true" : undefined}
+                  >
+                    <span className="mega-row-idx" aria-hidden="true">0{i + 1}</span>
+                    <span className="label-mono mega-row-pill" style={{ color: p.accent }}>{p.pillar}</span>
+                    <span className="mega-row-main">
+                      <span className="mega-row-name">{p.name}</span>
+                      <span className="mega-row-tag">{p.tagline}</span>
+                    </span>
+                    <span className="mega-row-arrow" aria-hidden="true">→</span>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
+
+          {/* Zona transversal: secundaria, no compite con los universos */}
+          <nav aria-label="Transversal PROEFEX" className="mega-secondary mt-6 border-t pt-4" style={{ borderColor: "var(--border)" }}>
+            <ul className="flex flex-wrap items-center gap-x-7 gap-y-1.5" role="list">
+              {CORE_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="mega-link" onClick={() => closeMega()} style={{ fontSize: "var(--text-caption)", color: "var(--text-muted)" }}>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
 
@@ -305,33 +284,33 @@ export function SiteHeader() {
         </button>
 
         <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto">
-          <nav aria-label="Ecosistema" className="flex flex-col divide-y" style={{ borderColor: "var(--border)" }}>
-            {PILLARS.map((p) => (
-              <details key={p.pillar} className="pillar-group py-2">
-                <summary>
-                  <span>
-                    <span className="label-mono" style={{ color: p.accent, marginRight: 8 }}>{p.pillar}</span>
-                    {p.name}
-                  </span>
-                  <svg className="chev" width="14" height="14" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                    <path d="M1 3l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </summary>
-                <div className="pillar-links flex flex-col gap-1 pl-1 pt-2">
-                  <Link href={p.href} onClick={closeDrawer} className="mega-link" style={{ fontSize: "var(--text-body)", color: "var(--text)" }}>
-                    Ver {p.name} →
+          <p className="kicker-line nav-item" style={{ ["--i" as string]: 0 }}>ECOSISTEMA</p>
+
+          {/* Fila por universo: un link, sin acordeones (D35) */}
+          <nav aria-label="Ecosistema" className="nav-item" style={{ ["--i" as string]: 1 }}>
+            <ul className="flex flex-col divide-y" role="list" style={{ borderColor: "var(--border)" }}>
+              {PILLARS.map((p) => (
+                <li key={p.pillar}>
+                  <Link
+                    href={p.href}
+                    onClick={closeDrawer}
+                    className="drawer-pillar"
+                    style={{ ["--pillar-accent" as string]: p.accent }}
+                    aria-current={activePillar?.pillar === p.pillar ? "true" : undefined}
+                  >
+                    <span className="label-mono drawer-pillar-code" style={{ color: p.accent }}>{p.pillar}</span>
+                    <span className="drawer-pillar-main">
+                      <span className="drawer-pillar-name">{p.name}</span>
+                      <span className="drawer-pillar-tag">{p.tagline}</span>
+                    </span>
+                    <span aria-hidden="true" className="drawer-pillar-arrow">→</span>
                   </Link>
-                  {p.children.map((c) => (
-                    <Link key={c.href} href={c.href} onClick={closeDrawer} className="mega-link">
-                      {c.label}
-                    </Link>
-                  ))}
-                </div>
-              </details>
-            ))}
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          <nav aria-label="PROEFEX" className="nav-item flex flex-col gap-1" style={{ ["--i" as string]: 5 }}>
+          <nav aria-label="PROEFEX" className="nav-item flex flex-col gap-1" style={{ ["--i" as string]: 2 }}>
             {CORE_LINKS.map((l) => (
               <Link
                 key={l.href}
@@ -346,7 +325,7 @@ export function SiteHeader() {
           </nav>
         </div>
 
-        <div className="nav-item pt-4" style={{ ["--i" as string]: 6 }}>
+        <div className="nav-item pt-4" style={{ ["--i" as string]: 3 }}>
           <Link href={CONTACT_HREF} onClick={closeDrawer} className="btn btn-primary w-full">
             Solicitar asesoría
           </Link>

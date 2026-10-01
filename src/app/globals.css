@@ -729,23 +729,82 @@ footer .content-required,
   transform: none;
   transition-delay: 0s;
 }
-.mega-pillar {
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  transition: border-color var(--motion-fast) var(--ease-out), background var(--motion-fast) var(--ease-out);
+/* Filas editoriales del megamenú (D35): número / código pilar / nombre /
+   tagline / flecha. Hover: línea de acento del universo + desplazamiento
+   sutil. Una sola zona de información, escaneable en segundos. */
+.mega-rows {
+  border-top: 1px solid var(--border);
 }
-.mega-pillar:hover,
-.mega-pillar:focus-within {
-  border-color: var(--pillar-accent, var(--border-strong));
-  background: var(--surface-hover);
+.mega-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.25rem 8rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-4);
+  min-height: 64px;
+  padding: var(--space-2) var(--space-3);
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: background var(--motion-fast) var(--ease-out);
 }
-.mega-pillar-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
+.mega-row::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 2px;
   background: var(--pillar-accent, var(--accent));
+  transform: scaleY(0);
+  transition: transform var(--motion-fast) var(--ease-out);
+}
+.mega-row:hover,
+.mega-row:focus-visible {
+  background: var(--surface);
+}
+.mega-row:hover::before,
+.mega-row:focus-visible::before {
+  transform: scaleY(1);
+}
+.mega-row:hover .mega-row-arrow,
+.mega-row:focus-visible .mega-row-arrow {
+  color: var(--pillar-accent, var(--accent));
+  transform: translateX(4px);
+}
+.mega-row:hover .mega-row-idx,
+.mega-row:focus-visible .mega-row-idx {
+  color: var(--pillar-accent, var(--accent));
+}
+.mega-row-idx {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: color var(--motion-fast) var(--ease-out);
+}
+.mega-row-pill {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+.mega-row-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--text);
+  line-height: 1.25;
+}
+.mega-row-tag {
+  display: block;
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+.mega-row-arrow {
+  justify-self: end;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  transition: color var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+}
+.mega-row[aria-current] .mega-row-idx {
+  color: var(--pillar-accent, var(--accent));
 }
 .mega-link {
   display: block;
@@ -760,29 +819,50 @@ footer .content-required,
   color: var(--pillar-accent, var(--accent));
 }
 
-/* Acordeón de pilares en el drawer móvil (details/summary nativos) */
-.mobile-nav details.pillar-group > summary {
-  display: flex;
+/* Drawer móvil (D35): fila por universo, sin acordeones. Un link por
+   línea, tagline corta, target >=48px para uso con una mano. */
+.drawer-pillar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "code arrow"
+    "main arrow";
   align-items: center;
-  justify-content: space-between;
-  min-height: 48px;
-  cursor: pointer;
-  list-style: none;
+  column-gap: var(--space-3);
+  min-height: 64px;
+  padding: var(--space-2) 0;
+  text-decoration: none;
+}
+.drawer-pillar-code {
+  grid-area: code;
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+}
+.drawer-pillar-main {
+  grid-area: main;
+}
+.drawer-pillar-name {
+  display: block;
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: 1.15rem;
   color: var(--text);
+  line-height: 1.3;
 }
-.mobile-nav details.pillar-group > summary::-webkit-details-marker {
-  display: none;
+.drawer-pillar-tag {
+  display: block;
+  font-size: var(--text-caption);
+  color: var(--text-muted);
 }
-.mobile-nav details.pillar-group > summary .chev {
-  transition: transform var(--motion-fast) var(--ease-current);
+.drawer-pillar-arrow {
+  grid-area: arrow;
+  color: var(--text-muted);
+  transition: color var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
 }
-.mobile-nav details.pillar-group[open] > summary .chev {
-  transform: rotate(180deg);
-}
-.mobile-nav details.pillar-group .pillar-links {
-  padding-bottom: var(--space-3);
+.drawer-pillar:hover .drawer-pillar-arrow,
+.drawer-pillar:focus-visible .drawer-pillar-arrow {
+  color: var(--pillar-accent, var(--accent));
+  transform: translateX(3px);
 }
 
 /* ============================================================
@@ -1113,6 +1193,16 @@ footer .content-required,
   }
 }
 
+/* TECH (D37): filas editoriales como índice de ingeniería — títulos en
+   mayúsculas con tracking, numeración en acento. Scoped al universo. */
+[data-universe="tech"] .ed-row-title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+[data-universe="tech"] .ed-row-idx {
+  color: var(--accent);
+}
+
 /* Stat strip: números grandes con fileos (metadatos de empresa) */
 .stat-strip {
   display: flex;
@@ -1142,11 +1232,6 @@ footer .content-required,
     border-top: 1px solid var(--border);
     box-shadow: var(--shadow-lift);
     transform-origin: top center;
-  }
-  .mega-featured {
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    background: color-mix(in srgb, var(--accent) 6%, var(--surface));
   }
 }
 

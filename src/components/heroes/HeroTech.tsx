@@ -23,6 +23,10 @@ const PANEL_ROWS = [
   { label: "MOD 04", name: "INGENIERÍA / IoT", state: "ACTIVO" },
 ] as const;
 
+/** Línea de estado conceptual del sistema (Fase 2.2 D37): decorativa,
+ * sin datos reales — refuerza "entré a un sistema tecnológico". */
+const SYSTEM_META = ["SYSTEM / CREATE", "STATUS / ACTIVE", "MODE / DIGITAL"] as const;
+
 export function HeroTech({
   kicker = "PROEFEX TECH",
   title,
@@ -51,6 +55,21 @@ export function HeroTech({
                 </p>
               </Reveal>
             ) : null}
+
+            {/* Línea de estado del sistema: ignición secuencial (D37) */}
+            <Reveal variant="ignite" delay={120}>
+              <div
+                className="flex flex-wrap gap-x-5 gap-y-1"
+                aria-hidden="true"
+                style={{ fontFamily: "var(--font-mono)", fontSize: "0.66rem", letterSpacing: "0.16em" }}
+              >
+                {SYSTEM_META.map((m) => (
+                  <span key={m} style={{ color: "var(--text-muted)" }}>
+                    {m}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
 
             <Reveal variant="reveal-lines" as="h1" id="hero-tech-title" className="mt-4">
               {title.split("\n").map((line, i) => (
