@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "proefex-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    { "pattern": "www.proefexperu.com", "custom_domain": true }
+  ]
+  // Sitio 100% SSG (sin ISR/revalidate): no requiere R2, KV, Queue ni Tag Cache.
+  // Sin binding IMAGES (Cloudflare Images queda para la fase de media real,
+  // Doc 13); next/image se sirve unoptimized (ver next.config.ts).
+}

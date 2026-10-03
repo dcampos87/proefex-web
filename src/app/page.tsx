@@ -85,8 +85,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ACTO 02 — EXPERIENCIA: 12+ años como narrativa central (D42) */}
-      <section data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="years-title">
+      {/* ACTO 02 — EXPERIENCIA: 12+ años como narrativa central (D42). id="nosotros": ancla del enlace "Nosotros" del header/footer. */}
+      <section id="nosotros" data-universe="core" className="section-sm" style={{ background: "var(--bg-sunken)" }} aria-labelledby="years-title">
         <div className="container-pfx grid items-end gap-8 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Reveal>
             <p className="years-figure" aria-hidden="true">

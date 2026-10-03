@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/Button";
  * Campos definidos: Nombre, Apellidos, Empresa, Cargo, Email, Teléfono
  * (con selector de código de país), Servicio, Sector, Mensaje.
  *
- * Fase 2: UX completa (validación, errores accesibles, loading, éxito).
- * El envío NO integra Turu CRM todavía (fase posterior): se simula el
- * estado de loading y se resuelve en éxito local para validar la experiencia.
+ * MVP producción: NO existe todavía un canal de recepción de leads
+ * (Turu CRM/API son fase posterior), así que el envío está deshabilitado
+ * de forma honesta: el formulario valida los datos pero al enviar informa
+ * claramente que el mensaje NO fue enviado y señala el canal de contacto
+ * disponible. No simula éxito ni acumula datos.
  */
 
 interface FieldErrors {
@@ -57,7 +59,7 @@ const SECTORS = [
   "Otro",
 ] as const;
 
-type Status = "idle" | "submitting" | "success";
+type Status = "idle" | "unavailable";
 
 const INITIAL = {
   nombres: "",
@@ -118,9 +120,8 @@ export function ContactSection() {
     const nextErrors = validate(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    setStatus("submitting");
-    // Fase 3: POST al endpoint → Turu CRM (D17). Aquí solo se valida la UX.
-    window.setTimeout(() => setStatus("success"), 900);
+    // Sin canal de recepción real: no se envía nada ni se finge éxito.
+    setStatus("unavailable");
   };
 
   const field = (
@@ -177,7 +178,7 @@ export function ContactSection() {
           </Reveal>
 
           <Reveal delay={120}>
-            {status === "success" ? (
+            {status === "unavailable" ? (
               <div
                 className="card flex flex-col items-center gap-3 p-10 text-center"
                 role="status"
@@ -185,30 +186,33 @@ export function ContactSection() {
                 <span
                   aria-hidden="true"
                   className="flex h-12 w-12 items-center justify-center rounded-full"
-                  style={{ background: "var(--accent)", color: "var(--accent-contrast)" }}
+                  style={{ background: "var(--bg-sunken)", color: "var(--accent)" }}
                 >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M5 13l4 4L19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M12 8v5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                    <circle cx="12" cy="16.5" r="1.4" fill="currentColor" />
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" />
                   </svg>
                 </span>
                 <h3 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-heading)" }}>
-                  Mensaje registrado
+                  El envío en línea todavía no está disponible
                 </h3>
-                <p className="max-w-[44ch]" style={{ color: "var(--text-body)" }}>
-                  Gracias por escribirnos. Nuestro equipo te contactará pronto.
+                <p className="max-w-[48ch]" style={{ color: "var(--text-body)" }}>
+                  Tu mensaje <strong>no fue enviado</strong>: este formulario aún
+                  no está conectado a un canal de recepción. No guardamos ni
+                  reutilizamos los datos ingresados.
                 </p>
-                <p style={{ fontSize: "var(--text-caption)", color: "var(--text-muted)" }}>
-                  Vista de validación UX — la entrega a Turu CRM se integra en una fase posterior.
+                <p className="max-w-[48ch]" style={{ color: "var(--text-body)" }}>
+                  Mientras se habilita el canal definitivo, contáctanos por los
+                  canales oficiales de PROEFEX:{" "}
+                  <span className="content-required">DATOS DE CONTACTO — CONTENT_REQUIRED</span>
                 </p>
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => {
-                    setValues(INITIAL);
-                    setStatus("idle");
-                  }}
+                  onClick={() => setStatus("idle")}
                 >
-                  Enviar otro mensaje
+                  Volver al formulario
                 </Button>
               </div>
             ) : (
@@ -286,14 +290,9 @@ export function ContactSection() {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <Button type="submit" variant="primary" className="w-full sm:w-auto" disabled={status === "submitting"}>
-                    {status === "submitting" ? "Enviando…" : "Enviar mensaje"}
+                  <Button type="submit" variant="primary" className="w-full sm:w-auto">
+                    Enviar mensaje
                   </Button>
-                  {status === "submitting" ? (
-                    <span className="sr-only" role="status">
-                      Enviando mensaje
-                    </span>
-                  ) : null}
                 </div>
               </form>
             )}

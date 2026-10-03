@@ -57,7 +57,7 @@ export default function LearnsPage() {
         </div>
       </section>
 
-      <section data-universe="learns" className="section-sm" aria-labelledby="learns-cap">
+      <section id="certmind" data-universe="learns" className="section-sm" aria-labelledby="learns-cap">
         <div className="container-pfx flex flex-col gap-10">
           <SectionHeader
             kicker="RUTAS DE APRENDIZAJE"

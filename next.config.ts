@@ -15,6 +15,17 @@ const nextConfig: NextConfig = {
   images: {
     // Doc 13: AVIF/WebP con fallback; formatos servidos por transform/CDN.
     formats: ["image/avif", "image/webp"],
+    // MVP Cloudflare/OpenNext: sin optimizador en runtime (el binding IMAGES
+    // / Cloudflare Images queda para la fase de media real, Doc 13). La media
+    // actual ya está pre-optimizada (webp local).
+    unoptimized: true,
+  },
+  async redirects() {
+    return [
+      // Redirects históricos reales (mock redirects.json, Fase 3.1.2).
+      { source: "/saas", destination: "/solutions", permanent: true },
+      { source: "/blog", destination: "/insights", permanent: true },
+    ];
   },
   async headers() {
     return [

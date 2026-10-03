@@ -1,0 +1,4 @@
+# Caching de assets estáticos en Cloudflare (opennext.js.org/cloudflare/caching):
+# los chunks de Next son inmutables; el resto se revalida.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
