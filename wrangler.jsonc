@@ -9,6 +9,7 @@
     "binding": "ASSETS"
   },
   "routes": [
+    { "pattern": "proefexperu.com", "custom_domain": true },
     { "pattern": "www.proefexperu.com", "custom_domain": true }
   ]
   // Sitio 100% SSG (sin ISR/revalidate): no requiere R2, KV, Queue ni Tag Cache.
