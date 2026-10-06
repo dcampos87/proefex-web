@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/nav/Breadcrumbs";
+import { ContentSummaryList } from "@/components/content/ContentSummaryList";
 import { EditorialRows } from "@/components/ui/EditorialRows";
 import { Reveal } from "@/components/motion/Reveal";
+import { listContent } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Casos de éxito — PROEFEX",
@@ -11,11 +13,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * ÍNDICE DE CASOS — plantilla editorial (§25). Los casos son evidencia;
- * sin material real se marca CONTENT_REQUIRED y el índice queda noindex
- * hasta Fase 3.
+ * ÍNDICE DE CASOS — plantilla editorial (§25). Los casos son evidencia; el
+ * material publicado se lee del CMS vía `proefex-api` (F3.2). Sin publicaciones
+ * autorizadas el índice conserva el marcador CONTENT_REQUIRED y sigue noindex:
+ * la API no rellena contenido, sólo expone lo ya publicado.
  */
-export default function CasosPage() {
+export default async function CasosPage() {
+  const published = await listContent("cases", { limit: 24 });
+  const cases = published.data?.items ?? [];
+
   return (
     <section data-universe="core" className="section" aria-labelledby="casos-title">
       <div className="container-pfx flex flex-col gap-8">
@@ -29,9 +35,16 @@ export default function CasosPage() {
             Lo que se hizo, cómo se hizo y qué cambió. Sin cifras ni clientes
             inventados: cada caso se publica con material autorizado.
           </p>
-          <p className="content-required w-fit">CONTENT_REQUIRED — casos reales autorizados (Fase 3)</p>
+          {cases.length === 0 ? (
+            <p className="content-required w-fit">CONTENT_REQUIRED — casos reales autorizados (Fase 3)</p>
+          ) : null}
         </Reveal>
-        <Reveal delay={100}>
+        {cases.length > 0 ? (
+          <Reveal delay={100}>
+            <ContentSummaryList items={cases} ariaLabel="Casos publicados en el CMS de PROEFEX" />
+          </Reveal>
+        ) : null}
+        <Reveal delay={120}>
           <EditorialRows
             ariaLabel="Casos por línea de negocio"
             items={[

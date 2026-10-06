@@ -1152,6 +1152,18 @@ footer .content-required,
   transform: translateX(6px);
 }
 
+/* Fila editorial sin destino (F3.2): contenido publicado que todavía no tiene
+   ruta de detalle en el mapa de URLs (D24). Conserva la jerarquía tipográfica
+   pero elimina la affordance de enlace. */
+.ed-row--static {
+  cursor: default;
+}
+.ed-row--static:hover,
+.ed-row--static:focus-visible {
+  padding-left: var(--space-2);
+  background: transparent;
+}
+
 /* Puertas de pilar (Home, Acto 02): número grande + acento del universo */
 .ed-row--door {
   padding-block: var(--space-6);
