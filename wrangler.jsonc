@@ -27,10 +27,7 @@
     {
       "binding": "NEXT_TAG_CACHE_D1",
       "database_name": "proefex-web-tag-cache-production",
-      // PENDIENTE ANTES DEL DEPLOY: sustituir por el UUID real de la base D1
-      // (output `d1_tag_cache_database_id` de Terraform, o `npx wrangler d1 list`).
-      // Un valor no-UUID hace fallar el deploy en la validación de bindings.
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+      "database_id": "01ebc7f5-f0cf-4118-90fe-84fd9908bf0c"
     }
   ],
   "vars": {
