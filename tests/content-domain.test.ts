@@ -105,6 +105,20 @@ test("listContent lee el listado del tipo y devuelve su tag de listado", async (
   assert.equal(calls[0].url, "https://api.example.com/v1/content/cases?limit=24");
 });
 
+test("las lecturas de contenido etiquetan el fetch del API con sus tags A5 (next.tags)", async () => {
+  const list = stubFetch(
+    jsonResponse({ type: "cases", items: [CASE_SUMMARY], page: { limit: 24, count: 1, nextCursor: null } }),
+  );
+  await listContent("cases", { fetchImpl: list.impl, config: ENABLED_CONFIG });
+  const listInit = list.calls[0].init as RequestInit & { next?: { tags: string[] } };
+  assert.deepEqual(listInit.next?.tags, ["content:cases"]);
+
+  const entry = stubFetch(jsonResponse(SECTOR_DETAIL));
+  await getContentEntry("sectors", "industria", { fetchImpl: entry.impl, config: ENABLED_CONFIG });
+  const entryInit = entry.calls[0].init as RequestInit & { next?: { tags: string[] } };
+  assert.deepEqual(entryInit.next?.tags, ["content:sectors", "content:sectors:industria"]);
+});
+
 test("listContent no lanza en 404: informa not-found para que la página decida", async () => {
   const { impl } = stubFetch(jsonResponse({ title: "No existe", status: 404, code: "PROEFEX_NOT_FOUND" }, 404));
 

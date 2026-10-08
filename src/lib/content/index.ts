@@ -18,8 +18,10 @@
  *   `ContentResult` con `outcome` explícito, de modo que una página decide si
  *   degrada a su contenido editorial propio. Un fallo nunca se oculta: se
  *   registra de forma segura (`describeApiError`).
- * - Cada lectura devuelve los `tags` que A5 necesitará para invalidarla, pero
- *   todavía NO se etiquetan las llamadas de `fetch` (A5 sigue bloqueado).
+ * - Cada lectura etiqueta el Data Cache de Next con sus `tags` A5
+ *   (`next: { tags }` en el `fetch` del cliente), de modo que
+ *   `POST /api/revalidate` puede invalidarla con `revalidateTag` cuando el API
+ *   emite la orden firmada.
  */
 
 import { apiGet, type ApiRequestOptions } from "../api/client.ts";
@@ -60,7 +62,7 @@ export type ContentOutcome = "ok" | "not-found" | "unavailable";
 export interface ContentResult<T> {
   readonly outcome: ContentOutcome;
   readonly data: T | null;
-  /** Tags A5 asociados a esta lectura (todavía no aplicados al cache). */
+  /** Tags A5 asociados a esta lectura (aplicados al Data Cache vía `next.tags`). */
   readonly tags: readonly string[];
   /** ETag del API; se conserva para revalidación condicional futura. */
   readonly etag: string | null;
@@ -116,6 +118,7 @@ async function readContent<T>(call: ContentCall<T>): Promise<ContentResult<T>> {
     const response = await apiGet(call.path, call.parse, {
       query: call.query,
       requestId,
+      tags: call.tags,
       timeoutMs: call.options.timeoutMs,
       fetchImpl: call.options.fetchImpl,
       config: call.options.config,

@@ -130,6 +130,18 @@ Implementación: `docs/fase-3/f3.2-data-layer.md`. Alcance F3.2 (Web): capa de d
 
 Pendientes abiertos por esta fase: entorno **staging** del API y binding de media `IMAGES` (`proefex-infrastructure`, D45); publicación de `navigation`/`settings` desde el CMS; aprobación de claves/endpoints para `universes`/`services`/`products` y del mapa de URLs de detalle (D24). D59 (`content_source`) sigue `PROPOSED` y su migración no pertenece al Web.
 
+## Decisiones nuevas de A5 Web (cache y revalidación firmada)
+
+Arquitectura: **Alternativa A** aprobada (`docs/architecture/A5-WEB-REVALIDATION.md`, 2026-10-06) — primitivas nativas de `@opennextjs/cloudflare`. Infraestructura provisionada manualmente (R2 `proefex-web-opennext-cache-production`, D1 `proefex-web-tag-cache-production` con tabla `revalidations`; `proefex-infrastructure` 6b1d39d). Alcance: Web únicamente — sin DO/Queue/KV/cache purge, sin cambios de CMS/API/infraestructura, sin deploy. Estado: `A5_WEB_IMPLEMENTED — REQUIRES_DEPLOY_PREREQUISITES`.
+
+| ID | Título | Decisión | Contexto | Estado | Impacto | Dependencia |
+|---|---|---|---|---|---|---|
+| D65 | Cache nativo OpenNext: R2 (incremental) + D1 (tags) | `open-next.config.ts` usa exclusivamente `r2IncrementalCache` y `d1NextTagCache` de @opennextjs/cloudflare 1.20.8. Bindings declarados en `wrangler.jsonc`: `NEXT_INC_CACHE_R2_BUCKET` (bucket `proefex-web-opennext-cache-production`), `NEXT_TAG_CACHE_D1` (database `proefex-web-tag-cache-production`) y var `NEXT_INC_CACHE_R2_PREFIX=incremental-cache`. Sin cache propio ni modelo de datos adicional; sin queue (revalidación on-demand sin TTL de seguridad) | Auditoría A5 §8.1/§9; A5-PROVISIONING §3 | `APPROVED` (mandato A5 Web) | Alto — habilita ISR/revalidación sin rebuild | `database_id` real de D1 antes del deploy |
+| D66 | Tags A5 activados en las lecturas del API | El data layer (D63) aplica sus tags al Data Cache de Next (`next: { tags }` en el `fetch` del cliente, junto a `force-cache`): cada lectura queda asociada a `content:<type>[:<slug\|home>]` / `content:navigation` / `content:settings`. Sin wildcards, sin tag raíz; catálogo cerrado y determinista compartido entre data layer y endpoint | Mandato A5 Web paso 3; auditoría A5 §3.4/§3.5 | `APPROVED` (mandato A5 Web) | Alto — es lo que la revalidación invalida | D63, D65 |
+| D67 | `POST /api/revalidate` firmado y fail-closed | Contrato espejo del emisor del API (0d3cbee): header `X-Proefex-Signature: t=<unix>, v1=<hex>`, `HMAC-SHA256(REVALIDATION_SECRET, "<t>.<cuerpo_crudo>")` verificado con `crypto.subtle.verify`, ventana anti-replay de 300 s evaluada antes del HMAC, payload `{"tags":[...]}` validado contra el catálogo cerrado (máx 50 tags / 8 KB), deduplicado y ordenado, `revalidateTag` por tag permitido. Respuestas opacas (401/400/413/503 sin motivo interno); logs con requestId/resultado/ts/duración/razón, sin secretos ni HMAC. Sin secret responde 503 y no invalida nada | AGENTS §21; auditoría A5 §3.2/§3.3; contrato `proefex-api/src/lib/signature.ts` | `APPROVED` (mandato A5 Web) | Alto — frontera pública de invalidación | `REVALIDATION_SECRET` en el Worker y en el API antes del deploy |
+
+Pendientes para cerrar A5 (orden §44): completar `database_id` real de `NEXT_TAG_CACHE_D1` en `wrangler.jsonc`; configurar el secret `REVALIDATION_SECRET` en el Worker (`npx wrangler secret put REVALIDATION_SECRET`, ≥ 32 caracteres) y `REVALIDATION_URL`+`REVALIDATION_SECRET` en `proefex-api`; deploy autorizado (que ejecuta `populateCache`); E2E CMS publish → API → Web → contenido actualizado.
+
 ## Decisiones arquitectónicas confirmadas
 
 | ID | Decisión | Estado | Responsable | Impacto | Próxima acción |

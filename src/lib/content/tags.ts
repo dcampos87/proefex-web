@@ -1,7 +1,7 @@
 /**
- * Catálogo determinista de tags de contenido (F3.2).
+ * Catálogo determinista de tags de contenido (F3.2; aplicados al cache en A5).
  *
- * Reproduce EXACTAMENTE la nomenclatura que `proefex-api` deriva y emitirá al
+ * Reproduce EXACTAMENTE la nomenclatura que `proefex-api` deriva y emite al
  * Web en la orden de revalidación (`proefex-api/src/modules/webhooks/cache-tags.ts`
  * + `src/config/constants.ts`, commit `0d3cbee`):
  *
@@ -10,13 +10,11 @@
  *   content:navigation                → árbol de navegación
  *   content:settings                  → configuración pública del sitio
  *
- * ALCANCE: aquí sólo se DERIVAN tags. No se implementa invalidación, ni
- * `revalidateTag`, ni tag cache, ni el endpoint firmado `/api/revalidate`: eso
- * pertenece a A5, que sigue bloqueado hasta que la infraestructura esté
- * aprobada y provisionada (`AGENTS.md` §20/§43). Las funciones de dominio de
- * `src/lib/content` devuelven estos tags en su resultado para que, cuando A5 se
- * habilite, sólo haya que pasarlos a `fetch({ next: { tags } })` y al catálogo
- * cerrado del endpoint, sin rehacer la capa de datos.
+ * ALCANCE (A5): las funciones de dominio de `src/lib/content` devuelven estos
+ * tags y el cliente del API los aplica al Data Cache de Next
+ * (`next: { tags }`). El mismo catálogo cerrado valida el payload de
+ * `POST /api/revalidate` (`src/lib/revalidate/contract.ts`): sin wildcards, sin
+ * tag raíz y sin tags arbitrarios.
  */
 
 import type { ContentType } from "../api/types.ts";

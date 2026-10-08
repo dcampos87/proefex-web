@@ -1,15 +1,19 @@
 /**
- * Cliente HTTP interno de `proefex-api` (F3.2).
+ * Cliente HTTP interno de `proefex-api` (F3.2, tags A5 activados).
  *
  * Único punto del repositorio donde se hacen llamadas HTTP al API: base URL,
- * cabeceras, `X-Request-Id`, ETag, timeout, errores RFC 7807 y validación de la
- * respuesta se resuelven aquí (`AGENTS.md` §3). Ninguna página construye URLs ni
- * llama a `fetch` directamente.
+ * cabeceras, `X-Request-Id`, ETag, timeout, errores RFC 7807, validación de la
+ * respuesta y etiquetado del Data Cache de Next se resuelven aquí
+ * (`AGENTS.md` §3/§16). Ninguna página construye URLs ni llama a `fetch`
+ * directamente.
  *
- * Alcance actual (SSG): las lecturas de contenido se hacen en el servidor con
- * `cache: "force-cache"`, por lo que el HTML se prerenderiza en build y el sitio
- * no depende del API en runtime. El etiquetado de cache y la invalidación por
- * webhook (A5) se añadirán sobre esta capa sin reescribirla.
+ * Alcance (A5): las lecturas de contenido se hacen en el servidor con
+ * `cache: "force-cache"` y `next: { tags }`, de modo que cada entrada del Data
+ * Cache queda asociada a los tags del catálogo cerrado
+ * (`content:<type>[:<slug|home>]`, `content:navigation`, `content:settings`)
+ * y `POST /api/revalidate` puede invalidarlas con `revalidateTag`. En build,
+ * las rutas estáticas registran esos tags y OpenNext (R2 + D1) los consulta en
+ * runtime para servir o regenerar.
  */
 
 import {
@@ -32,6 +36,13 @@ import { parseProblemDetails } from "./validators.ts";
 /** Las lecturas de contenido son cacheables: mantiene las rutas estáticas. */
 export const DEFAULT_CACHE: RequestCache = "force-cache";
 
+/**
+ * Init de `fetch` extendido con la opción `next` de Next.js (Data Cache con
+ * tags). Se declara localmente para no depender de los tipos globales de Next
+ * en pruebas (`node:test` importa este módulo sin framework).
+ */
+type TaggedRequestInit = RequestInit & { next?: { tags: string[] } };
+
 export interface ApiRequestOptions {
   /** Parámetros de query (`undefined` se omite). */
   query?: Readonly<Record<string, string | number | undefined>>;
@@ -41,6 +52,12 @@ export interface ApiRequestOptions {
   ifNoneMatch?: string;
   timeoutMs?: number;
   cache?: RequestCache;
+  /**
+   * Tags A5 del catálogo cerrado que etiquetan esta lectura en el Data Cache
+   * de Next (`next: { tags }`). Solo los asigna la capa de dominio con tags
+   * derivados, nunca valores arbitrarios del llamante.
+   */
+  tags?: readonly string[];
   /** Inyectable en pruebas: evita la red y el parcheo de `fetch` de Next. */
   fetchImpl?: typeof fetch;
   /** Inyectable en pruebas: configuración efectiva del cliente. */
@@ -121,14 +138,19 @@ export async function apiGet<T>(
   const fetchImpl = options.fetchImpl ?? fetch;
   const timeoutMs = options.timeoutMs ?? DEFAULT_API_TIMEOUT_MS;
 
+  const init: TaggedRequestInit = {
+    method: "GET",
+    headers,
+    cache: options.cache ?? DEFAULT_CACHE,
+    signal: AbortSignal.timeout(timeoutMs),
+  };
+  if (options.tags !== undefined && options.tags.length > 0) {
+    init.next = { tags: [...options.tags] };
+  }
+
   let response: Response;
   try {
-    response = await fetchImpl(url, {
-      method: "GET",
-      headers,
-      cache: options.cache ?? DEFAULT_CACHE,
-      signal: AbortSignal.timeout(timeoutMs),
-    });
+    response = await fetchImpl(url, init);
   } catch (cause) {
     throw apiErrorFromTransportError(cause, { path, requestId });
   }
