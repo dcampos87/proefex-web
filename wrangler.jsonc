@@ -11,8 +11,31 @@
   "routes": [
     { "pattern": "proefexperu.com", "custom_domain": true },
     { "pattern": "www.proefexperu.com", "custom_domain": true }
-  ]
-  // Sitio 100% SSG (sin ISR/revalidate): no requiere R2, KV, Queue ni Tag Cache.
+  ],
+  // A5 (Alternativa A aprobada, docs/architecture/A5-WEB-REVALIDATION.md):
+  // cache incremental en R2 + tag cache en D1, con las capacidades nativas de
+  // @opennextjs/cloudflare 1.20.8. Recursos provisionados manualmente en
+  // Cloudflare (proefex-infrastructure 6b1d39d): el bucket R2 es privado y la
+  // tabla `revalidations` ya existe en D1 (migrations/0001_revalidations.sql).
+  "r2_buckets": [
+    {
+      "binding": "NEXT_INC_CACHE_R2_BUCKET",
+      "bucket_name": "proefex-web-opennext-cache-production"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "NEXT_TAG_CACHE_D1",
+      "database_name": "proefex-web-tag-cache-production",
+      "database_id": "01ebc7f5-f0cf-4118-90fe-84fd9908bf0c"
+    }
+  ],
+  "vars": {
+    // Prefijo de las claves del cache incremental en R2 (r2IncrementalCache).
+    "NEXT_INC_CACHE_R2_PREFIX": "incremental-cache"
+  }
+  // Sin DO, Queue, KV ni cache purge en esta fase (decisión A5: revalidación
+  // on-demand sin TTL de seguridad; ver A5-PROVISIONING.md §3).
   // Sin binding IMAGES (Cloudflare Images queda para la fase de media real,
   // Doc 13); next/image se sirve unoptimized (ver next.config.ts).
 }
