@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { RouteStub } from '@/components/pages/RouteStub';
 
 export const metadata: Metadata = {
-  title: 'Política de privacidad — PROEFEX',
+  title: { absolute: 'Política de privacidad — PROEFEX' },
   robots: { index: false, follow: false },
 };
 

@@ -8,10 +8,13 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "Desarrollo de software — PROEFEX TECH",
+  title: { absolute: "Desarrollo de software — PROEFEX TECH" },
   description:
     "Software hecho a la medida de su operación: web, apps y software especializado.",
   alternates: { canonical: "/tech/desarrollo-de-software" },
+  // Sin contenido editorial aprobado (paneles CONTENT_REQUIRED, §13): no
+  // indexable y fuera del sitemap hasta que exista contenido real.
+  robots: { index: false, follow: true },
 };
 
 const SUBNAV = [

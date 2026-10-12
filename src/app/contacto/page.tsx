@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactSection } from "@/components/forms/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Contacto — PROEFEX",
+  title: { absolute: "Contacto — PROEFEX" },
   description:
     "Solicitar asesoría, contactar o cotizar con el equipo correcto del ecosistema PROEFEX.",
   alternates: { canonical: "/contacto" },

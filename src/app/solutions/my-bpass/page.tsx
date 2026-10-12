@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { RouteStub } from '@/components/pages/RouteStub';
 
 export const metadata: Metadata = {
-  title: 'My Bpass — PROEFEX',
+  title: { absolute: 'My Bpass — PROEFEX' },
   robots: { index: false, follow: false },
 };
 

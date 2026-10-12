@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "PROEFEX TECH — Desarrollo y Digitalización",
+  title: { absolute: "PROEFEX TECH — Desarrollo y Digitalización" },
   description:
     "Software a medida, automatización, IA empresarial, transformación digital e ingeniería con drones e IoT.",
   alternates: { canonical: "/tech" },

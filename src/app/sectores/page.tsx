@@ -4,7 +4,7 @@ import { EditorialRows } from "@/components/ui/EditorialRows";
 import { Reveal } from "@/components/motion/Reveal";
 
 export const metadata: Metadata = {
-  title: "Sectores — PROEFEX",
+  title: { absolute: "Sectores — PROEFEX" },
   description: "Sectores atendidos por el ecosistema PROEFEX: dimensión transversal sobre las cinco líneas.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/sectores" },

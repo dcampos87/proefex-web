@@ -5,7 +5,7 @@ import { getContentEntry } from '@/lib/content';
 import type { Crumb } from '@/components/nav/Breadcrumbs';
 
 export const metadata: Metadata = {
-  title: 'Restaurantes — PROEFEX',
+  title: { absolute: 'Restaurantes — PROEFEX' },
   robots: { index: false, follow: false },
 };
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { RouteStub } from '@/components/pages/RouteStub';
 
 export const metadata: Metadata = {
-  title: 'Política de cookies — PROEFEX',
+  title: { absolute: 'Política de cookies — PROEFEX' },
   robots: { index: false, follow: false },
 };
 

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "PROEFEX SOLUTIONS — Productos y soluciones",
+  title: { absolute: "PROEFEX SOLUTIONS — Productos y soluciones" },
   description:
     "Turu CRM, PROEFACT, My Bpass, AtendiGo y Eleventto: software propio del ecosistema PROEFEX.",
   alternates: { canonical: "/solutions" },

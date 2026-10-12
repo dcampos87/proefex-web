@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { listContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Insights — PROEFEX",
+  title: { absolute: "Insights — PROEFEX" },
   description: "Pensamiento del ecosistema PROEFEX: tecnología, marketing, innovación y formación.",
   alternates: { canonical: "/insights" },
 };

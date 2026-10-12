@@ -6,9 +6,12 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "Turu CRM — PROEFEX SOLUTIONS",
+  title: { absolute: "Turu CRM — PROEFEX SOLUTIONS" },
   description: "Producto del ecosistema PROEFEX. Detalle funcional: CONTENT_REQUIRED.",
   alternates: { canonical: "/solutions/turu-crm" },
+  // Sin contenido editorial aprobado (§13): no indexable y fuera del sitemap
+  // hasta que exista contenido real.
+  robots: { index: false, follow: true },
 };
 
 /**

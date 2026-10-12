@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "PROEFEX LEARNS — Formación y Certificación",
+  title: { absolute: "PROEFEX LEARNS — Formación y Certificación" },
   description:
     "Formación dentro del ecosistema PROEFEX. Certmind es Partner Oficial.",
   alternates: { canonical: "/learns" },

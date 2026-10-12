@@ -49,6 +49,19 @@ export const metadata: Metadata = {
     siteName: "PROEFEX",
     locale: "es_PE",
     type: "website",
+    // Imagen por defecto: recurso real del repositorio (1600×896, verificado).
+    images: [
+      {
+        url: "/media/hero-ecosistema.webp",
+        width: 1600,
+        height: 896,
+        alt: "Ecosistema PROEFEX",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/media/hero-ecosistema.webp"],
   },
 };
 

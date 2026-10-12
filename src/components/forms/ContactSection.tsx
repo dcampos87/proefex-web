@@ -3,22 +3,33 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Button } from "@/components/ui/Button";
+import {
+  buildLeadRequest,
+  newLeadIdempotencyKey,
+  resolveLeadFormConfig,
+  resolveLeadsApiBaseUrl,
+  submitLead,
+  validateLeadValues,
+  type LeadFieldErrors,
+  type LeadFormValues,
+} from "@/lib/leads/client";
 
 /**
- * ContactSection — formulario de contacto (D17).
- * Campos definidos: Nombre, Apellidos, Empresa, Cargo, Email, Teléfono
- * (con selector de código de país), Servicio, Sector, Mensaje.
+ * ContactSection — formulario de contacto (D17) conectado al canal real
+ * `POST /v1/leads` de `proefex-api` (Sprint 4), vía `src/lib/leads/client`.
  *
- * MVP producción: NO existe todavía un canal de recepción de leads
- * (Turu CRM/API son fase posterior), así que el envío está deshabilitado
- * de forma honesta: el formulario valida los datos pero al enviar informa
- * claramente que el mensaje NO fue enviado y señala el canal de contacto
- * disponible. No simula éxito ni acumula datos.
+ * Comportamiento:
+ * - Validación de cliente alineada con el esquema del API (incluye el
+ *   consentimiento de privacidad obligatorio del contrato).
+ * - Un solo envío por clic; el botón se deshabilita durante el envío.
+ * - Éxito SOLO tras un 202 real del API. Sin simulación ni almacenamiento
+ *   local de los datos (nada de localStorage).
+ * - Sin reintento automático: un fallo de red es ambiguo; el reintento manual
+ *   reutiliza la misma Idempotency-Key (el API deduplica).
+ * - Honeypot presente para el anti-abuso del API.
+ * - Si el canal no está configurado (falta NEXT_PUBLIC_PROEFEX_LEAD_FORM_ID),
+ *   el envío queda deshabilitado de forma honesta.
  */
-
-interface FieldErrors {
-  [key: string]: string;
-}
 
 const COUNTRY_CODES = [
   { code: "+51", country: "Perú" },
@@ -59,9 +70,9 @@ const SECTORS = [
   "Otro",
 ] as const;
 
-type Status = "idle" | "unavailable";
+type Status = "idle" | "submitting" | "success" | "unavailable";
 
-const INITIAL = {
+const INITIAL: LeadFormValues = {
   nombres: "",
   apellidos: "",
   empresa: "",
@@ -72,25 +83,26 @@ const INITIAL = {
   servicio: "",
   sector: "",
   mensaje: "",
+  consentPrivacidad: false,
+  honeypot: "",
 };
 
-function validate(values: typeof INITIAL): FieldErrors {
-  const errors: FieldErrors = {};
-  if (!values.nombres.trim()) errors.nombres = "Ingresa tu nombre.";
-  if (!values.apellidos.trim()) errors.apellidos = "Ingresa tus apellidos.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = "Ingresa un email válido.";
-  if (!/^\d{6,15}$/.test(values.telefono.replace(/\s/g, "")))
-    errors.telefono = "Ingresa un teléfono válido (solo números).";
-  if (!values.servicio) errors.servicio = "Selecciona un servicio.";
-  if (!values.sector) errors.sector = "Selecciona un sector.";
-  if (values.mensaje.trim().length < 10) errors.mensaje = "Cuéntanos un poco más (mínimo 10 caracteres).";
-  return errors;
-}
-
 export function ContactSection() {
-  const [values, setValues] = useState(INITIAL);
-  const [errors, setErrors] = useState<FieldErrors>({});
-  const [status, setStatus] = useState<Status>("idle");
+  // Resolución de configuración una sola vez (fail closed, sin destinos adivinados).
+  const [channel] = useState(() => {
+    const form = resolveLeadFormConfig(process.env);
+    const baseUrl = resolveLeadsApiBaseUrl();
+    return { form, baseUrl };
+  });
+  const [values, setValues] = useState<LeadFormValues>(INITIAL);
+  const [errors, setErrors] = useState<LeadFieldErrors>({});
+  const [status, setStatus] = useState<Status>(
+    channel.form.enabled && channel.baseUrl !== null ? "idle" : "unavailable",
+  );
+  const [globalError, setGlobalError] = useState<string | null>(null);
+  // La misma clave cubre reintentos manuales del MISMO envío (el API deduplica
+  // si el primer intento llegó); se regenera tras un éxito.
+  const idempotencyKeyRef = useRef<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Al validar con errores, mover el foco al primer campo inválido
@@ -103,10 +115,13 @@ export function ContactSection() {
     }
   }, [errors]);
 
-  const set = (key: keyof typeof INITIAL) => (
+  const set = (key: keyof LeadFormValues) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
   ) => {
-    setValues((v) => ({ ...v, [key]: e.target.value }));
+    const value = e.target instanceof HTMLInputElement && e.target.type === "checkbox"
+      ? e.target.checked
+      : e.target.value;
+    setValues((v) => ({ ...v, [key]: value }));
     setErrors((err) => {
       if (!err[key]) return err;
       const next = { ...err };
@@ -115,17 +130,70 @@ export function ContactSection() {
     });
   };
 
-  const onSubmit = (e: FormEvent) => {
+  const applyFieldErrors = (fieldErrors: LeadFieldErrors) => {
+    setErrors((prev) => ({ ...prev, ...fieldErrors }));
+  };
+
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const nextErrors = validate(values);
+    if (status === "submitting") return;
+    const nextErrors = validateLeadValues(values);
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
-    // Sin canal de recepción real: no se envía nada ni se finge éxito.
-    setStatus("unavailable");
+    if (!channel.form.enabled || channel.baseUrl === null) {
+      setStatus("unavailable");
+      return;
+    }
+
+    idempotencyKeyRef.current ??= newLeadIdempotencyKey();
+    setStatus("submitting");
+    setGlobalError(null);
+
+    const outcome = await submitLead({
+      request: buildLeadRequest(values, channel.form.formId),
+      idempotencyKey: idempotencyKeyRef.current,
+      apiBaseUrl: channel.baseUrl,
+    });
+
+    if (outcome.ok) {
+      idempotencyKeyRef.current = null;
+      setValues(INITIAL);
+      setErrors({});
+      setStatus("success");
+      return;
+    }
+
+    setStatus("idle");
+    if (outcome.kind === "validation") {
+      applyFieldErrors(outcome.fieldErrors);
+      setGlobalError(
+        outcome.detail ??
+          "No pudimos procesar el envío: revisa los datos del formulario e inténtalo de nuevo.",
+      );
+      return;
+    }
+    if (outcome.kind === "rate-limited") {
+      setGlobalError(
+        "Has enviado demasiadas solicitudes. Espera unos minutos antes de intentarlo de nuevo.",
+      );
+      return;
+    }
+    if (outcome.kind === "server") {
+      setGlobalError(
+        `No pudimos procesar tu mensaje en este momento. Inténtalo de nuevo en unos minutos.${
+          outcome.requestId ? ` (Referencia: ${outcome.requestId})` : ""
+        }`,
+      );
+      return;
+    }
+    // network: resultado ambiguo; el reintento manual conserva la misma clave.
+    setGlobalError(
+      "No pudimos conectar con el servidor. Tu mensaje puede no haberse enviado; revisa tu conexión e inténtalo una vez más.",
+    );
   };
 
   const field = (
-    key: keyof typeof INITIAL,
+    key: keyof LeadFormValues,
     label: string,
     input: React.ReactNode,
     { required = true }: { required?: boolean } = {},
@@ -148,16 +216,18 @@ export function ContactSection() {
     );
   };
 
-  const inputProps = (key: keyof typeof INITIAL, type = "text", opts: Record<string, unknown> = {}) => ({
+  const inputProps = (key: keyof LeadFormValues, type = "text", opts: Record<string, unknown> = {}) => ({
     id: key,
     name: key,
-    value: values[key],
+    value: values[key] as string,
     onChange: set(key),
     "aria-invalid": errors[key] ? ("true" as const) : undefined,
     "aria-describedby": errors[key] ? `${key}-error` : undefined,
     ...opts,
     ...(type !== "text" ? { type } : {}),
   });
+
+  const submitting = status === "submitting";
 
   return (
     <section data-universe="core" aria-labelledby="contacto-title">
@@ -178,7 +248,36 @@ export function ContactSection() {
           </Reveal>
 
           <Reveal delay={120}>
-            {status === "unavailable" ? (
+            {status === "success" ? (
+              <div
+                className="card flex flex-col items-center gap-3 p-10 text-center"
+                role="status"
+              >
+                <span
+                  aria-hidden="true"
+                  className="flex h-12 w-12 items-center justify-center rounded-full"
+                  style={{ background: "var(--bg-sunken)", color: "var(--accent)" }}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12.5 10 17.5 19 7" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-heading)" }}>
+                  Tu mensaje fue enviado
+                </h3>
+                <p className="max-w-[48ch]" style={{ color: "var(--text-body)" }}>
+                  Recibimos tu solicitud correctamente. El equipo correspondiente
+                  del ecosistema PROEFEX te responderá a la brevedad.
+                </p>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => setStatus("idle")}
+                >
+                  Enviar otro mensaje
+                </Button>
+              </div>
+            ) : status === "unavailable" ? (
               <div
                 className="card flex flex-col items-center gap-3 p-10 text-center"
                 role="status"
@@ -217,11 +316,11 @@ export function ContactSection() {
               </div>
             ) : (
               <form ref={formRef} onSubmit={onSubmit} noValidate className="grid gap-5 sm:grid-cols-2">
-                {field("nombres", "Nombre", <input className="field-input" {...inputProps("nombres")} autoComplete="given-name" />)}
-                {field("apellidos", "Apellidos", <input className="field-input" {...inputProps("apellidos")} autoComplete="family-name" />)}
-                {field("empresa", "Empresa", <input className="field-input" {...inputProps("empresa")} autoComplete="organization" />, { required: false })}
-                {field("cargo", "Cargo", <input className="field-input" {...inputProps("cargo")} autoComplete="organization-title" />, { required: false })}
-                {field("email", "Email", <input className="field-input" {...inputProps("email", "email")} autoComplete="email" inputMode="email" />)}
+                {field("nombres", "Nombre", <input className="field-input" {...inputProps("nombres")} autoComplete="given-name" maxLength={80} />)}
+                {field("apellidos", "Apellidos", <input className="field-input" {...inputProps("apellidos")} autoComplete="family-name" maxLength={80} />)}
+                {field("empresa", "Empresa", <input className="field-input" {...inputProps("empresa")} autoComplete="organization" maxLength={120} />, { required: false })}
+                {field("cargo", "Cargo", <input className="field-input" {...inputProps("cargo")} autoComplete="organization-title" maxLength={120} />, { required: false })}
+                {field("email", "Email", <input className="field-input" {...inputProps("email", "email")} autoComplete="email" inputMode="email" maxLength={254} />)}
 
                 <div className="field">
                   <label className="field-label" htmlFor="telefono">
@@ -247,6 +346,7 @@ export function ContactSection() {
                       inputMode="tel"
                       autoComplete="tel-national"
                       placeholder="999 999 999"
+                      maxLength={40}
                     />
                   </div>
                   {errors.telefono ? (
@@ -285,13 +385,69 @@ export function ContactSection() {
                   {field(
                     "mensaje",
                     "Mensaje",
-                    <textarea className="field-input" {...inputProps("mensaje")} rows={5} />,
+                    <textarea className="field-input" {...inputProps("mensaje")} rows={5} maxLength={4000} />,
                   )}
                 </div>
 
+                {/* Honeypot: invisible para humanos, los bots lo rellenan.
+                    El API responde como éxito pero NO persiste estos envíos. */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, overflow: "hidden" }}>
+                  <label htmlFor="honeypot">No completar</label>
+                  <input
+                    id="honeypot"
+                    name="honeypot"
+                    value={values.honeypot}
+                    onChange={set("honeypot")}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className="sm:col-span-2 field">
+                  <div className="flex items-start gap-3">
+                    <input
+                      id="consentPrivacidad"
+                      name="consentPrivacidad"
+                      type="checkbox"
+                      checked={values.consentPrivacidad}
+                      onChange={set("consentPrivacidad")}
+                      aria-invalid={errors.consentPrivacidad ? ("true" as const) : undefined}
+                      aria-describedby={errors.consentPrivacidad ? "consentPrivacidad-error" : undefined}
+                      className="mt-1"
+                    />
+                    <label htmlFor="consentPrivacidad" className="field-label" style={{ fontWeight: 400 }}>
+                      He leído y acepto la{" "}
+                      <a href="/legal/privacidad" className="underline">
+                        política de privacidad
+                      </a>{" "}
+                      y autorizo el tratamiento de mis datos para responder a esta solicitud.{" "}
+                      <span aria-hidden="true">*</span>
+                    </label>
+                  </div>
+                  {errors.consentPrivacidad ? (
+                    <p className="field-error" id="consentPrivacidad-error" role="alert">
+                      {errors.consentPrivacidad}
+                    </p>
+                  ) : null}
+                </div>
+
+                {globalError ? (
+                  <div className="sm:col-span-2">
+                    <p className="field-error" role="alert">
+                      {globalError}
+                    </p>
+                  </div>
+                ) : null}
+
                 <div className="sm:col-span-2">
-                  <Button type="submit" variant="primary" className="w-full sm:w-auto">
-                    Enviar mensaje
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    className="w-full sm:w-auto"
+                    disabled={submitting}
+                    aria-busy={submitting}
+                  >
+                    {submitting ? "Enviando…" : "Enviar mensaje"}
                   </Button>
                 </div>
               </form>

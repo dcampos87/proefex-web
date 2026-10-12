@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { CONTACT_HREF, PILLARS } from "@/components/layout/nav-data";
 
 export const metadata: Metadata = {
-  title: "PROEFEX EQUIP — Tecnología y equipamiento",
+  title: { absolute: "PROEFEX EQUIP — Tecnología y equipamiento" },
   description:
     "Pantallas, tótems, equipamiento y alquiler: tecnología física dentro del ecosistema PROEFEX.",
   alternates: { canonical: "/equip" },

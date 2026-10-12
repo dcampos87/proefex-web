@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { RouteStub } from '@/components/pages/RouteStub';
 
 export const metadata: Metadata = {
-  title: 'Growth Marketing — PROEFEX',
+  title: { absolute: 'Growth Marketing — PROEFEX' },
   robots: { index: false, follow: false },
 };
 

@@ -17,7 +17,6 @@ const INDEXABLE_ROUTES = [
   "/equip",
   "/insights",
   "/contacto",
-  "/tech/desarrollo-de-software",
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

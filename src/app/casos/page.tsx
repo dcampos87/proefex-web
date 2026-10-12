@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { listContent } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Casos de éxito — PROEFEX",
+  title: { absolute: "Casos de éxito — PROEFEX" },
   description: "Casos del ecosistema PROEFEX: evidencia real de trabajo, sin resultados inventados.",
   robots: { index: false, follow: true },
   alternates: { canonical: "/casos" },
